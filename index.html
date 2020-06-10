@@ -69,94 +69,35 @@
 								<div class="h5 mb-0 align-self-center">
 									<span class="content_title align-middle">自艦隊</span>
 								</div>
-								<div class="ml-auto round_button align-self-center d-table btn_reset_content" data-toggle="tooltip"
-									title="艦隊全リセット"><i class="fas fa-trash-o d-table-cell align-middle"></i>
-								</div>
-								<div class="ml-2 round_button align-self-center d-table btn_ex_setting" data-toggle="tooltip"
-									title="一括設定"><i class="fas fa-wrench d-table-cell align-middle"></i>
-								</div>
-								<div class="ml-2 round_button align-self-center d-table btn_capture" data-toggle="tooltip"
-									title="艦隊入力情報を画像で保存"><i class="fas fa-camera d-table-cell align-middle"></i>
-								</div>
-								<div class="ml-auto round_button align-self-center d-none btn_commit_trade" data-toggle="tooltip"
-									title="入れ替え終了"><i class="fas fa-check d-table-cell align-middle"></i>
-								</div>
-								<div class="ml-2 round_button align-self-center d-table btn_content_trade" data-toggle="tooltip"
-									title="順序入れ替え"><i class="fas fa-arrows-v d-table-cell align-middle"></i>
-								</div>
-								<div class="ml-2 rounded-circle round_button align-self-center d-table" data-toggle="collapse"
-									data-target="#friendFleet_content"><i class="fas fa-chevron-down d-table-cell align-middle"></i>
-								</div>
-							</div>
-							<div class="collapse show collapse_content" id="friendFleet_content">
-								<div class="border-top"></div>
-								<div class="my-2 d-flex">
-									<div class="ml-1 custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="union_fleet">
-										<label class="custom-control-label" for="union_fleet">連合艦隊</label>
-									</div>
-									<div class="ml-2 align-self-center no_capture">
-										<i class="far fa-question-circle-o cur_help" data-toggle="tooltip" data-offset="140,0"
-											data-html="true"
-											title="<div class='text-left'>第二艦隊を連合艦隊第二艦隊として扱うかどうかを切り替えます。</div><div class='text-left'>チェックが外されている場合、表示されている艦隊のみが計算対象になります。</div>"></i>
-									</div>
-								</div>
-								<div class="my-2">
-									<ul class="nav nav-tabs">
-										<li class="nav-item">
-											<a class="nav-link active" data-toggle="tab" href="#friendFleet_item1">第1艦隊</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" data-toggle="tab" href="#friendFleet_item2">第2艦隊</a>
-										</li>
-									</ul>
-								</div>
-								<div class="tab-content my-1">
-									<div class="tab-pane fade show active friendFleet_tab container-fluid px-0" id="friendFleet_item1">
-										<div class="d-flex">
-											<div class="ml-2 mr-1 align-self-center no_capture">表示隻数：</div>
-											<select class="custom-select custom-select-sm display_ship_count no_capture">
-												<option value="2" selected>2</option>
-												<option value="4">4</option>
-												<option value="6">6</option>
-											</select>
-											<div class="ml-1 mr-2 align-self-center no_capture">隻</div>
-											<div class="ml-2 align-self-center">
-												<span class="font_color_half">艦隊総制空値: </span>
-												<span class="fleet_ap">0</span>
-											</div>
-										</div>
-										<div class="d-flex justify-content-center flex-wrap fleet_tab">
-											<div class="ship_tab general_box mx-1 my-2 flex-grow-1" id="shipNo_1">
-												<div class="pb-1 pl-1 px-1 px-xl-2">
-													<div class="d-flex flex-wrap flex-sm-nowrap mt-2 px-1">
-														<div class="sortable_handle cur_move">
-															<img src="img/ship/0.png" class="ship_img d-none">
-														</div>
-														<div class="ml-1 ship_name_span align-self-center px-1 text-truncate" data-toggle="tooltip"
-															data-placement="right" data-html="true" title="">
-															艦娘を選択</div>
-														<div class="ml-1 align-self-center ship_sumAP font_size_12">
-															<span class="font_color_half">総制空: </span>
-															<span class="ap">0</span>
-														</div>
-														<div class="ml-auto align-self-center custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input ship_disabled" id="disabled_ship_1">
-															<label class="custom-control-label ship_disabled_label" for="disabled_ship_1">無効</label>
-														</div>
-														<div class="ml-1 cur_help pt-1_5 font_color_half font_size_12 no_capture"
-															data-toggle="tooltip" title="艦娘、装備は維持したまま計算対象から省きます。">
-															<i class="far fa-question-circle-o"></i>
-														</div>
-														<div class="ml-3 btn_preset btn_plane_preset btn_icon no_capture" data-toggle="tooltip"
-															title="プリセット" data-delay='{"show": 300, "hide": 0}'>
-															<i class="fas fa-archive"></i>
-														</div>
-														<div class="ml-2_5 btn_reset btn_remove_ship btn_icon no_capture" data-toggle="tooltip"
-															title="艦娘リセット" data-delay='{"show": 300, "hide": 0}'>
-															<i class="fas fa-trash-o"></i>
-														</div>
-													</div>
+								<div class="d-flex justify-content-center flex-wrap fleet_tab">
+									<div class="ship_tab general_box mx-1 my-2 flex-grow-1" id="shipNo_1">
+										<div class="pb-1 pl-1 px-1 px-xl-2">
+											<div class="d-flex flex-wrap flex-sm-nowrap mt-2 px-1">
+												<div class="sortable_handle cur_move">
+													<img src="img/ship/0.png" class="ship_img d-none">
+												</div>
+												<div class="ml-1 ship_name_span align-self-center px-1 text-truncate" data-toggle="tooltip"
+													data-placement="right" data-html="true" title="">
+													艦娘を選択</div>
+												<div class="ml-1 align-self-center ship_sumAP font_size_12">
+													<span class="font_color_half">総制空: </span>
+													<span class="ap">0</span>
+												</div>
+												<div class="ml-auto align-self-center custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input ship_disabled" id="disabled_ship_1">
+													<label class="custom-control-label ship_disabled_label" for="disabled_ship_1">無効</label>
+												</div>
+												<div class="ml-1 cur_help pt-1_5 font_color_half font_size_12 no_capture"
+													data-toggle="tooltip" title="艦娘、装備は維持したまま計算対象から省きます。">
+													<i class="far fa-question-circle-o"></i>
+												</div>
+												<div class="ml-3 btn_preset btn_plane_preset btn_icon no_capture" data-toggle="tooltip"
+													title="プリセット" data-delay='{"show": 300, "hide": 0}'>
+													<i class="fas fa-archive"></i>
+												</div>
+												<div class="ml-2_5 btn_reset btn_remove_ship btn_icon no_capture" data-toggle="tooltip"
+													title="艦娘リセット" data-delay='{"show": 300, "hide": 0}'>
+													<i class="fas fa-trash-o"></i>
 												</div>
 											</div>
 										</div>
