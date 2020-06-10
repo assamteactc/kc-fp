@@ -934,11 +934,6 @@ function initialize(a) {
   }).map(function (a) {
     return a.id
   }));
-  setEnemyType(ENEMY_TYPE.filter(function (a) {
-    return 0 < a.id
-  }).map(function (a) {
-    return a.id
-  }));
   document.getElementById("display_final").checked = setting.visibleFinal;
   document.getElementById("frequent_ship").checked = setting.orderByFrequency;
   $(".lb_tab").each(function (a, b) {
