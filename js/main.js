@@ -1133,25 +1133,6 @@ function initialize(a) {
   a()
 }
 
-function setPlaneType(a, b) {
-  a.innerHTML = "";
-  var c = document.createElement("option");
-  c.value = "0";
-  c.textContent = "全て";
-  a.appendChild(c);
-  isContain(b, [100, 101, 102, 103, 104]) && (c = document.createElement("optgroup"), c.label = "陸上機", c.className = "optg_lb", a.appendChild(c));
-  isContain(b, [1, 2, 3, 4, 9]) && (c = document.createElement("optgroup"), c.label = "艦上機", c.className = "optg_cb", a.appendChild(c));
-  isContain(b, [5, 6, 7, 8]) && (c = document.createElement("optgroup"), c.label = "水上機", c.className = "optg_sp", a.appendChild(c));
-  c = $jscomp.makeIterator(PLANE_TYPE);
-  for (var d = c.next(); !d.done; d = c.next())
-    if (d = d.value, b.includes(d.id)) {
-      var e = document.createElement("option");
-      e.value = d.id;
-      e.textContent = d.name;
-      [1, 2, 3, 4, 9].includes(d.id) ? a.getElementsByClassName("optg_cb")[0].appendChild(e) : [5, 6, 7, 8].includes(d.id) ? a.getElementsByClassName("optg_sp")[0].appendChild(e) : a.getElementsByClassName("optg_lb")[0].appendChild(e)
-    }
-}
-
 function setShipType(a) {
   for (var b = $jscomp.makeIterator(SHIP_TYPE), c = b.next(); !c.done; c = b.next())
     if (c = c.value, a.includes(c.id)) {
