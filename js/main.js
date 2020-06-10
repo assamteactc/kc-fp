@@ -936,41 +936,6 @@ function initialize(a) {
   }));
   document.getElementById("display_final").checked = setting.visibleFinal;
   document.getElementById("frequent_ship").checked = setting.orderByFrequency;
-  $(".lb_tab").each(function (a, b) {
-    var c = a + 1;
-    $(b).attr("id", "lb_item" + c);
-    $(b).find(".baseNo").text("ëÊ" + c + "äÓínçqãÛë‡")
-  });
-  b = document.getElementById("lb_info_table").getElementsByTagName("tbody")[0].innerHTML;
-  for (d = 0; 2 > d; d++) document.getElementById("lb_info_table").getElementsByTagName("tbody")[0].innerHTML += b;
-  b = document.getElementsByClassName("lb_info_tr");
-  for (d = 0; d < b.length; d++) e = b[d], e.classList.add("lb_info_lb_" + (Math.floor(d / 4) + 1)), e = e.getElementsByClassName("info_name"), e.length && (e[0].textContent = "ëÊ" + (Math.floor(d / 4) + 1) + "äÓínçqãÛë‡");
-  b = document.getElementsByClassName("display_ship_count");
-  b = $jscomp.makeIterator(b);
-  for (d = b.next(); !d.done; d = b.next()) d.value.value = 2;
-  b = $("#battle_container").html();
-  for (d = 1; 10 > d; d++) $("#battle_container").append(b);
-  $(".battle_content").each(function (a, b) {
-    $(b).find(".battle_no").text(a + 1);
-    0 < a && $(b).addClass("d-none");
-    $(b).find(".custom-control-input").attr("id", "grand_" + a);
-    $(b).find(".custom-control-label").attr("for", "grand_" + a)
-  });
-  $("#battle_count").val(1);
-  $("#landBase_target").val(1);
-  createMapSelect();
-  createNodeSelect();
-  $("#display_bar").prop("checked", !0);
-  $("#display_land_base_result").prop("checked", !0);
-  $("#display_fleet_result").prop("checked", !0);
-  $("#display_enemy_table").prop("checked", !0);
-  $(".remodel_select").prop("disabled", !0);
-  $(".progress_area").html($(".progress_area:first").html());
-  $(".progress_area").each(function (a, b) {
-    $(b).find(".result_bar").attr("id", "result_bar_" + (a + 1));
-    6 > a && $(b).find(".progress_label").text("äÓín" + (Math.floor(a / 2) + 1) + " " + (a % 2 + 1) + "îgñ⁄");
-    6 === a && $(b).find(".progress_label").text("ñ{ë‡");
-    7 === a && $(b).find(".progress_label").text("ñhãÛ")
   });
   f = e = d = b = "";
   for (g = 1; 10 >= g; g++) b += '<td class="td_battle battle' + g + '">' + g + "êÌñ⁄</td>", d += '<td class="td_battle battle' + g + ' fap"></td>', e += '<td class="td_battle battle' + g + ' eap"></td>', f += '<td class="td_battle battle' + g + ' cond"></td>';
