@@ -929,26 +929,6 @@ function initialize(a) {
     deleteLocalStorage("defaultProf");
     (b = loadLocalStorage("planeStock")) && 0 < b.length && !b[0].num.length && deleteLocalStorage("planeStock")
   }
-  setPlaneType(document.getElementById("plane_type_select"), PLANE_TYPE.filter(function (a) {
-    return 0 < a.id
-  }).map(function (a) {
-    return a.id
-  }));
-  setPlaneType(document.getElementById("stock_type_select"), PLANE_TYPE.filter(function (a) {
-    return 0 < a.id
-  }).map(function (a) {
-    return a.id
-  }));
-  b = document.getElementById("plane_type_select").getElementsByTagName("option");
-  d = {};
-  b = $jscomp.makeIterator(b);
-  for (e = b.next(); !e.done; d = {
-      $jscomp$loop$prop$option$299: d.$jscomp$loop$prop$option$299
-    }, e = b.next()) d.$jscomp$loop$prop$option$299 = e.value, basicSortedPlanes = basicSortedPlanes.concat(PLANE_DATA.filter(function (a) {
-    return function (b) {
-      return Math.abs(b.type) === castInt(a.$jscomp$loop$prop$option$299.value)
-    }
-  }(d)));
   setShipType(SHIP_TYPE.filter(function (a) {
     return 15 > a.id
   }).map(function (a) {
