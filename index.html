@@ -1,9 +1,9 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ja">
 
 <head>
 	<meta charset="utf-8">
-	<title>test</title>
+	<title>テスト</title>
 	<link rel="icon" href="favicon.ico">
 	<link rel="stylesheet" href="./css/jquery-ui.min.css" media="print" onload="this.media='all'">
 	<link rel="stylesheet" href="./css/all.min.css" media="print" onload="this.media='all'">
@@ -37,6 +37,44 @@
 				<div></div>
 			</div>
 		</div>
+
+
+		<div class="ship_tab general_box mx-1 my-2 flex-grow-1 d-none" id="shipNo_12">
+			<div class="pb-1 pl-1 px-1 px-xl-2">
+				<div class="d-flex flex-wrap flex-sm-nowrap mt-2 px-1">
+					<div class="sortable_handle cur_move">
+						<img src="img/ship/0.png" class="ship_img d-none">
+					</div>
+					<div class="ml-1 ship_name_span align-self-center px-1 text-truncate" data-toggle="tooltip"
+						 data-placement="right" data-html="true" title="">
+						艦娘を選択
+					</div>
+					<div class="ml-1 align-self-center ship_sumAP font_size_12">
+						<span class="font_color_half">総制空: </span>
+						<span class="ap">0</span>
+					</div>
+					<div class="ml-auto align-self-center custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input ship_disabled" id="disabled_ship_12">
+						<label class="custom-control-label ship_disabled_label" for="disabled_ship_12">無効</label>
+					</div>
+					<div class="ml-1 cur_help pt-1_5 font_color_half font_size_12 no_capture"
+						 data-toggle="tooltip" title="艦娘、装備は維持したまま計算対象から省きます。">
+						<i class="far fa-question-circle-o"></i>
+					</div>
+					<div class="ml-3 btn_preset btn_plane_preset btn_icon no_capture" data-toggle="tooltip"
+						 title="プリセット" data-delay='{"show": 300, "hide": 0}'>
+						<i class="fas fa-archive"></i>
+					</div>
+					<div class="ml-2_5 btn_reset btn_remove_ship btn_icon no_capture" data-toggle="tooltip"
+						 title="艦娘リセット" data-delay='{"show": 300, "hide": 0}'>
+						<i class="fas fa-trash-o"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
 </body>
 
 </html>
