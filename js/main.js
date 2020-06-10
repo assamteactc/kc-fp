@@ -1123,17 +1123,6 @@ function setShipType(a) {
     }
 }
 
-function setEnemyType(a) {
-  for (var b = $jscomp.makeIterator(ENEMY_TYPE), c = b.next(); !c.done; c = b.next())
-    if (c = c.value, a.includes(c.id)) {
-      var d = document.createElement("option");
-      d.value = c.id;
-      d.textContent = c.name;
-      document.getElementById("enemy_type_select").appendChild(d)
-    }
-  document.getElementById("enemy_type_select").options[1].selected = !0
-}
-
 function clearPlaneDiv(a) {
   a.removeClass(getPlaneCss(a[0].dataset.type));
   a[0].dataset.planeid = "";
