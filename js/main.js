@@ -936,7 +936,6 @@ function initialize(a) {
   }));
   document.getElementById("display_final").checked = setting.visibleFinal;
   document.getElementById("frequent_ship").checked = setting.orderByFrequency;
-  });
   f = e = d = b = "";
   for (g = 1; 10 >= g; g++) b += '<td class="td_battle battle' + g + '">' + g + "í–Ú</td>", d += '<td class="td_battle battle' + g + ' fap"></td>', e += '<td class="td_battle battle' + g + ' eap"></td>', f += '<td class="td_battle battle' + g + ' cond"></td>';
   $("#shoot_down_table").find(".tr_header").append(b + '<td class="td_battle battle_end">oŒ‚Œã</td><td class="td_battle battle_death">‘S–Å—¦</td>');
