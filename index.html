@@ -1,121 +1,137 @@
-﻿<!doctype html>
+﻿
+<!doctype html>
 <html lang="ja">
 
 <head>
 	<meta charset="utf-8">
-	<title>制空権シミュレータ</title>
-	<meta name="description"
-		content="「艦これ」の制空権に関する計算およびシミュレーションを行うサイトです。道中での被撃墜、基地航空隊の制空削りや敵艦隊の対空砲火による撃墜を考慮した制空計算や全滅率の試算、防空時の制空計算に対応しています。" />
+	<title>火力計算機</title>
+	<meta name="description" content="「艦これ」の制空権に関する計算およびシミュレーションを行うサイトです。道中での被撃墜、基地航空隊の制空削りや敵艦隊の対空砲火による撃墜を考慮した制空計算や全滅率の試算、防空時の制空計算に対応しています。" />
 	<meta name="viewport" content="width=device-width" />
 	<meta property="og:title" content="制空権シミュレータ" />
 	<link rel="icon" href="favicon.ico">
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
 	<link rel="stylesheet" href="./css/jquery-ui.min.css" media="print" onload="this.media='all'">
 	<link rel="stylesheet" href="./fonts/style.css" media="print" onload="this.media='all'">
 	<link rel="stylesheet" href="./css/bootstrap.min.css">
-	<link rel="stylesheet" href="./css/main.min.css">
-	<script async src="./js/lz-string.js"></script>
-	<script async src="./js/html2canvas.min.js"></script>
-	<script async src="./js/chart.min.js"></script>
+	<link rel="stylesheet" href="./css/main.css">
+
 	<script defer src="./js/jquery-3.4.1.min.js"></script>
-	<script defer src="./js/jquery-ui.min.js"></script>
-	<script defer src="./js/jquery.ui.touch-punch.js"></script>
+	<!-- <script defer src="./js/jquery-ui.min.js"></script> -->
+	<!-- <script defer src="./js/jquery.ui.touch-punch.js"></script> -->
 	<script defer src="./js/bootstrap.bundle.min.js"></script>
-	<script defer src="./js/data.js"></script>
+	<script defer src="./js/jquery.csv.min.js"></script>
 	<script defer src="./js/main.js"></script>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-152888142-2"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments); }
-		gtag('js', new Date());
-		gtag('config', 'UA-152888142-2');
-
-
-	</script>
+	<script>window.onload = readMyship;</script>
 </head>
 
 <body>
-	<nav class="navbar navbar-dark fixed-top bg-dark1 flex-md-nowrap p-0 shadow justify-content-start">
-		<div class="d-block d-xl-none text-light px-2 pt-3 py-2 cur_pointer" id="smart_menu">
-			<div id="menu-small">
-				<div></div>
-				<div></div>
-				<div></div>
+	<nav class="header">
+		<div>
+			<img src="./img/util/logo.png">&nbsp;<span>火力</span>計算器
+		</div>
+	</nav>
+	<div class=main>
+		<div class="main_frame">
+			<div id="myship">
+				<span class="content_title align-middle"><img src="img/util/myship.png">&nbsp;自艦隊</span>
+				<hr>
+				<div class="kan_list">
+					<!--自艦のリスト 横並びの要素-->
+					<span class="kan_frame">
+						<div class="container">
+							<span>
+								<img src="./img/util/1.png">
+							</span>
+							<span data-toggle="modal" data-target="#ｍodal_myship">
+								<img src="./img/ship/0.png">
+							</span>
+							<div class="block">
+								<div class="block_element">
+									<div class="release-line"></div>
+								</div>
+								<div class="block_element">
+									<div class="weapon_list"></div>
+									<div class="weapon_list"></div>
+									<div class="weapon_list"></div>
+									<div class="weapon_list"></div>
+								</div>
+							</div>
+						</div>
+					</span>
+					<span class="kan_frame">
+						<div class="container">
+							<span>
+								<img src="./img/util/2.png">
+							</span>
+							<span data-toggle="modal" data-target="#ｍodal_myship">
+								<img src="./img/ship/0.png">
+							</span>
+							<div class="block">
+								<div class="block_element">
+									<div class="release-line"></div>
+								</div>
+								<div class="block_element">
+									<div class="weapon_list"></div>
+									<div class="weapon_list"></div>
+									<div class="weapon_list"></div>
+									<div class="weapon_list"></div>
+								</div>
+							</div>
+						</div>
+					</span>
+					<span class="kan_frame">
+						<div class="container">
+							<span>
+								<img src="./img/util/3.png">
+							</span>
+							<span data-toggle="modal" data-target="#ｍodal_myship">
+								<img src="./img/ship/0.png">
+							</span>
+							<div class="block">
+								<div class="block_element">
+									<div class="release-line"></div>
+								</div>
+								<div class="block_element">
+									<div class="weapon_list"></div>
+									<div class="weapon_list"></div>
+									<div class="weapon_list"></div>
+									<div class="weapon_list"></div>
+								</div>
+							</div>
+						</div>
+					</span>
+
+				</div>
 			</div>
 		</div>
-		<a class="d-none d-xl-block navbar-brand col-sm-3 col-md-2" href="#">火力計算機</a>
-	</nav>
-	<div class="container-fluid px-0">
-		<div class="d-flex">
-			<main role="main" class="flex-grow-1 px-2">
-				<div id="main">
-					<div id="main_header">
-						<div class="d-flex pt-3">
-							<h1 class="ml-1" id="main_title">
-								<span>火力計算器</span>
-								<span class="font_size_20 ml-2">
-									v.<span id="latest_version">0.0.0</span>
-								</span>
-							</h1>
-							<div class="ml-auto align-self-center">
-								<button class="btn btn-sm btn-outline-success btn_first_time">初めての方</button>
-							</div>
-							<div class="ml-1 align-self-center">
-								<button class="btn btn-sm btn-outline-info btn_site_manual">ツールの使い方</button>
-							</div>
-						</div>
-					</div>
-					<div id="main_contents">
-						<div class="contents my-4 px-2 py-1 mx-auto mx-xl-1" id="friendFleet">
-							<div class="my-2 d-flex">
-								<div class="h5 mb-0 align-self-center">
-									<span class="content_title align-middle">自艦隊</span>
-								</div>
-							</div>
-							<div class="tab-pane fade show active friendFleet_tab container-fluid px-0" id="friendFleet_item1">
-								<div class="d-flex justify-content-center flex-wrap fleet_tab">
-									<div class="ship_tab general_box mx-1 my-2 flex-grow-1" id="shipNo_1">
-										<div class="pb-1 pl-1 px-1 px-xl-2">
-											<div class="d-flex flex-wrap flex-sm-nowrap mt-2 px-1">
-												<div class="sortable_handle cur_move">
-													<img src="img/ship/0.png" class="ship_img d-none">
-												</div>
-												<div class="ml-1 ship_name_span align-self-center px-1 text-truncate" data-toggle="tooltip"
-													 data-placement="right" data-html="true" title="">
-													 <button type="button" class="close" data-dismiss="modal">
-					 								 	<span aria-hidden="true">&#215;</span><span class="sr-only">艦娘を選択</span>
-				 									</button>
-												</div>
-												<div class="ml-1 align-self-center ship_sumAP font_size_12">
-													<span class="font_color_half">総制空: </span>
-													<span class="ap">0</span>
-												</div>
-												<div class="ml-auto align-self-center custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input ship_disabled" id="disabled_ship_1">
-													<label class="custom-control-label ship_disabled_label" for="disabled_ship_1">無効</label>
-												</div>
-												<div class="ml-1 cur_help pt-1_5 font_color_half font_size_12 no_capture"
-													 data-toggle="tooltip" title="艦娘、装備は維持したまま計算対象から省きます。">
-													<i class="far fa-question-circle-o"></i>
-												</div>
-												<div class="ml-3 btn_preset btn_plane_preset btn_icon no_capture" data-toggle="tooltip"
-													 title="プリセット" data-delay='{"show": 300, "hide": 0}'>
-													<i class="fas fa-archive"></i>
-												</div>
-												<div class="ml-2_5 btn_reset btn_remove_ship btn_icon no_capture" data-toggle="tooltip"
-													 title="艦娘リセット" data-delay='{"show": 300, "hide": 0}'>
-													<i class="fas fa-trash-o"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-          </div>
+	</div>
+	<div class="modal-body">
+		<div id="myship_list"></div>test
+	</div>
+
+
+<div class="modal fade" id="ｍodal_myship" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="Modal">選択</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
-			</main>
+				<div class="modal-body">
+					<!-- <div id="myship_list"></div> -->
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger">取消し</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+				</div>
+			</div>
 		</div>
 	</div>
+
+
+	<!--
 	<div class="modal fade" id="modal_ship_select" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -174,7 +190,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 </body>
 
