@@ -9,7 +9,7 @@ $(window).on("load",function(){
     $(csv).each(function(index){
       itemlist += '<div class="list-item">';
       itemlist += '<span><img source="./img/ship/' + this[0] + '.png"</span>';
-
+      console.log('<span><img source="./img/ship/' + this[0] + '.png"</span>');
       itemlist += '<span>ID:' + this[0]+'</span>';
       itemlist += '<span><a href="' + this[1] + '">' + this[2] + '</a></span>';
       itemlist += '<span>' + this[3] + '</span>';
