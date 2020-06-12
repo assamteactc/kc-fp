@@ -1,15 +1,22 @@
 $(window).on("load",function(){
 
+  console.log('hello world');
+
+
   $.get('./data/MY_SHIP.csv',function(data){
-    var csv = $.csv()(data);
+    var csv = $.csv.toArrays(data);
     var itemlist = '';
     $(csv).each(function(index){
-      itemlist += '<li class="list-item">';
-      itemlist += '<p class="date">' + this[0] + '</p>';
-      itemlist += '<p class="title"><a href="' + this[1] + '">' + this[2] + '</a></p>';
-      itemlist += '<p class="body">' + this[3] + '</p>';
-      itemlist += '</li>';
+      itemlist += '<div class="list-item">';
+      itemlist += '<span><img source="./img/ship/' + this[0] + '.png"</span>';
+
+      itemlist += '<span>ID:' + this[0]+'</span>';
+      itemlist += '<span><a href="' + this[1] + '">' + this[2] + '</a></span>';
+      itemlist += '<span>' + this[3] + '</span>';
+      itemlist += '</div>';
     })
     $("#myship_list").append(itemlist);
   });
+
+
 });
