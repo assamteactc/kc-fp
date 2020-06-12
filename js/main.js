@@ -1,6 +1,6 @@
 $(window).on("load",function(){
 
-  $.get('../data/MY_SHIP.csv',function(data){
+  $.get('./data/MY_SHIP.csv',function(data){
     var csv = $.csv()(data);
     var itemlist = '';
     $(csv).each(function(index){
