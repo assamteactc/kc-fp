@@ -34,7 +34,7 @@
 			<div id="myship">
 				<span class="content_title align-middle"><img src="img/util/myship.png">&nbsp;自艦隊</span>
 				<hr>
-				<div class="kan_list">
+				<div class="flex-container">
 					<!--自艦のリスト 横並びの要素-->
 					<span class="kan_frame">
 						<div class="container">
@@ -99,7 +99,6 @@
 							</div>
 						</div>
 					</span>
-
 				</div>
 			</div>
 		</div>
@@ -114,7 +113,21 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<div id="myship_list"></div>
+					<div class="flex-container">
+						<div id="myship_type"></div>
+						<button type="button" class="btn btn-danger">戦艦<button>
+				 </div>
+				 <hr>
+					<div class="list-group">
+						<li class="list-group-item plain">
+							<div class="list_title flex-container">
+								<div class="width_55p">艦娘名</div>
+								<div class="width_15p">火力</div>
+								<div class="width_15p">雷装</div>
+								<div class="width_15p">対潜</div>
+							</div>
+						</li>
+						<div id="myship_list"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger">取消し</button>
@@ -125,66 +138,6 @@
 	</div>
 
 
-	<!--
-	<div class="modal fade" id="modal_ship_select" tabindex="-1">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">艦娘選択</h5>
-					<p class="close cur_pointer" data-dismiss="modal"><span>&times;</span></p>
-				</div>
-				<div class="modal-body">
-					<div class="d-flex flex-wrap mb-1">
-						<div class="d-flex search_basic">
-							<div class="my-1 input-group input-group-sm">
-								<div class="input-group-prepend">
-									<span class="input-group-text">艦種</span>
-								</div>
-								<select class="custom-select custom-select-sm" id="ship_type_select">
-									<option value="0">全て</option>
-								</select>
-							</div>
-							<div class="my-1 mx-2 input-group input-group-sm">
-								<div class="input-group-prepend"><span class="input-group-text">検索</span></div>
-								<input type="text" class="form-control form-control-sm" id="ship_word" maxlength="30">
-							</div>
-						</div>
-						<div class="d-flex">
-							<div class="align-self-center mr-1 toggle_display_type" data-mode="single">
-								<i class="fas fa-list-ul"></i><span>一列</span>
-							</div>
-							<div class="align-self-center toggle_display_type" data-mode="multi">
-								<i class="fas fa-th"></i><span>複数列</span>
-							</div>
-						</div>
-						<div class="ml-2 custom-control custom-checkbox align-self-center">
-							<input type="checkbox" class="custom-control-input" id="display_final" checked>
-							<label class="custom-control-label" for="display_final">最終改造状態のみ</label>
-						</div>
-						<div class="ml-2 custom-control custom-checkbox align-self-center">
-							<input type="checkbox" class="custom-control-input" id="frequent_ship">
-							<label class="custom-control-label" for="frequent_ship">よく使う艦優先</label>
-						</div>
-					</div>
-					<div class="pb-1 custom_table" id="ship_table">
-						<div class="d-flex scroll_thead">
-							<div class="ml-2 align-self-center">艦娘名</div>
-							<div class="ml-auto ship_td_slot align-self-center">搭載1</div>
-							<div class="ship_td_slot align-self-center">搭載2</div>
-							<div class="ship_td_slot align-self-center">搭載3</div>
-							<div class="ship_td_slot align-self-center">搭載4</div>
-							<div class="ship_td_slot align-self-center">搭載5</div>
-						</div>
-						<div id="ship_tbody"></div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-sm btn-danger btn_remove" disabled>はずす</button>
-					<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">閉じる</button>
-				</div>
-			</div>
-		</div>
-	</div> -->
 
 </body>
 

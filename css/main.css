@@ -59,9 +59,10 @@ body {
   box-shadow: 1px 1px 2px -1px #898989;
 }
 
-.kan_list {
-  display:flex;
-  flex-wrap: wrap;
+.modal-content{
+	width:70%;
+	border:2px solid #aaa;
+	z-index:2;
 }
 
 .weapon_list {
@@ -91,4 +92,67 @@ body {
 }
 .block_element{
   display:table-cell;
+}
+
+
+
+
+/* 共通スタイルシート */
+
+.width_10p{
+  width:10%;
+}
+.width_15p{
+  width:15%;
+}
+.width_40p{
+  width:40%;
+}
+.width_55p{
+  width:55%;
+}
+
+.flex-container{
+  display:flex;
+  flex-wrap: wrap;
+}
+
+.list_title{
+  padding:6px;
+  color:#FFFFFF;
+  border-radius:6px 6px 0px 0px;
+  background-color: #737373;
+}
+
+.plain{
+  padding: 0px;
+  border:0px;
+}
+
+.lists{
+  padding:6px;
+  border-top:0px;
+  border-bottom:0px;
+}
+
+.font-pw{
+  color:#740A00;
+}
+
+.color-th{
+  color:#001A43;
+}
+
+.color-as{
+  color:#7058a3;
+}
+
+/* 艦選択モーダルウィンドウ用スタイルシート */
+
+
+.myship_list_name {
+
+}
+
+.myship_list_param {
 }
