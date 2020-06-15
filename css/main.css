@@ -1,34 +1,37 @@
 .header {
-    font-size: 1.5rem;
-    background-color: #494949;
-    box-shadow: 0px 0px 4px #232323;
+  font-size: 1.5rem;
+  background-color: #494949;
+  box-shadow: 0px 0px 4px #232323;
 }
+
 .header div {
   padding-top: 0.5rem;
-  padding-left:0.5rem;
+  padding-left: 0.5rem;
   padding-bottom: 0.5rem;
-  font-weight:bold;
+  font-weight: bold;
   color: #FBFBF6;
   font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 }
+
 .header span {
   color: #FCD4D5;
 }
+
 .header img {
   vertical-align: middle;
 }
 
 body {
   font-size: 14px;
-  font-family: 'Hiragino Kaku Gothic Pro','ヒラギノ角ゴ Pro W3','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
-  background-color:#FDFCF5;
+  font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+  background-color: #FDFCF5;
 }
 
 .main {
   padding-top: 30px;
-  padding-left:20px;
-  padding-right:20px;
-  padding-bottom:20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
   font-size: 1.5rem;
 }
 
@@ -37,20 +40,23 @@ body {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
-  box-shadow: 2px 2px 4px -2px #898989; 2px 2px 4px #FFFFFF inset;
+  box-shadow: 2px 2px 4px -2px #898989;
+  2px 2px 4px #FFFFFF inset;
   padding-top: 1.0rem;
-  padding-left:0.5rem;
-  padding-right:0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   padding-bottom: 1.0rem;
   background-color: #FFFFFF;
 }
 
 .kan_frame {
-  margin-left:5px;
+  width:320px;
+  height:200px;
+  margin-left: 5px;
   padding-top: 5px;
-  padding-left:5px;
+  padding-left: 5px;
   padding-right: 5px;
-  padding-bottom:5px;
+  padding-bottom: 5px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -59,100 +65,239 @@ body {
   box-shadow: 1px 1px 2px -1px #898989;
 }
 
-.modal-content{
-	width:70%;
-	border:2px solid #aaa;
-	z-index:2;
+.modal-content {
+  width: 70%;
+  border: 2px solid #aaa;
+  z-index: 2;
 }
 
 .weapon_list {
-  margin-left:3px;
-  margin-right:5px;
-  margin-bottom:5px;
-  width:280px;
-  height:24px;
+  margin-left: 3px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  width: 280px;
+  height: 24px;
   background: #FAFAFA;
   box-shadow: 1px 1px 2px #898989 inset;
-  border-radius:12px 4px 4px 12px;
+  border-radius: 12px 4px 4px 12px;
 }
 
 .release-line {
-  margin-left:8px;
-  height:120px;
+  margin-left: 8px;
+  height: 120px;
   border-left: thick solid #BBBCBF;
   padding-left: 4px;
 }
 
 .container {
-  margin:10px 0;
+  margin: 10px 0;
 }
 
-.block{
-  display:table;
-}
-.block_element{
-  display:table-cell;
+.block {
+  display: table;
 }
 
+.block_element {
+  display: table-cell;
+}
 
-
+.modal-dialog-fluid {
+  display: block;
+  max-height: inherit;
+  height: 90%;
+}
 
 /* 共通スタイルシート */
-
-.width_10p{
-  width:10%;
-}
-.width_15p{
-  width:15%;
-}
-.width_40p{
-  width:40%;
-}
-.width_55p{
-  width:55%;
+.width_10p {
+  width: 10%;
 }
 
-.flex-container{
-  display:flex;
-  flex-wrap: wrap;
+.width_12p {
+  width: 12%;
 }
 
-.list_title{
-  padding:6px;
-  color:#FFFFFF;
-  border-radius:6px 6px 0px 0px;
+.width_15p {
+  width: 15%;
+}
+
+.width_40p {
+  width: 40%;
+}
+
+.width_50p {
+  width: 50%;
+}
+
+.width_55p {
+  width: 55%;
+}
+
+.width_56p {
+  width: 56%;
+}
+
+.text_medium {
+  text-align: center;
+}
+
+.flex-around {
+  justify-content: space-around;
+}
+.ship_select {
+  display: flex;
+  height:200px;
+  justify-content:center;
+  align-items: center;
+}
+
+.tag_lists {
+  display: flex;
+  padding-top: 10px;
+  /* align-items:center; */
+  /* justify-content:center; */
+  background-color: #F9F9F9;
+  height: 8em;
+}
+
+.tag_lists hr {
+  margin: 10px;
+}
+
+.list_title {
+  padding: 6px;
+  color: #FFFFFF;
+  border-radius: 6px 6px 0px 0px;
   background-color: #737373;
 }
 
-.plain{
+.plain {
   padding: 0px;
-  border:0px;
+  border: 0px;
 }
 
-.lists{
-  padding:6px;
-  border-top:0px;
-  border-bottom:0px;
+.lists {
+  padding: 6px;
+  border: 0px;
 }
 
-.font-pw{
-  color:#740A00;
+.base-tag {
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-bottom: 1px;
+  margin: 2px;
+  border-radius: 2px 2px 2px 2px;
+  box-shadow: 1px 1px 2px -1px #898989;
 }
 
-.color-th{
-  color:#001A43;
+.init_tag {
+  font-size: 0.9em;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-bottom: 1px;
+  margin: 2px;
+  border-radius: 5px 5px 5px 5px;
 }
 
-.color-as{
-  color:#7058a3;
+.tag {
+  font-size: 0.9em;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-bottom: 1px;
+  margin: 2px;
+  background-color: #FFFFFF;
+  border-radius: 5px 5px 5px 5px;
 }
 
-/* 艦選択モーダルウィンドウ用スタイルシート */
-
-
-.myship_list_name {
-
+.comp_ckeck {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 0px;
 }
 
-.myship_list_param {
+/* 艦選択モーダルウィンドウ　艦娘リストのフォントカラー */
+.font-slot {
+  color: #465D4C;
+}
+
+.font-pw {
+  color: #740A00;
+}
+
+.color-th {
+  color: #001A43;
+}
+
+.color-as {
+  color: #7058a3;
+}
+}
+
+#modal_enemy_select .modal-content, #modal_plane_select .modal-content, #modal_ship_select .modal-content {
+  min-height: 80vh;
+}
+
+.div_srcollbar {
+  height: 60vh;
+  overflow-y: auto;
+}
+
+/* 共通　サイドバーデザイン */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 30px;
+  background: #eee;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 30px;
+  background: #D2D0E8;
+}
+
+.bg-stlype {
+  background-color: #ECECEC;
+  background-image: -webkit-gradient(linear, 0 0, 100% 100%,color-stop(.25, #F9F9F9), color-stop(.25, transparent),color-stop(.5, transparent), color-stop(.5, #F9F9F9),color-stop(.75, #F9F9F9), color-stop(.75, transparent),to(transparent));
+  -webkit-background-size: 12px 12px;
+}
+.select{
+  align-items:center;
+  border: 2px solid #8bcf54;
+  border-radius: 20px;
+  font-size: 1em;
+  padding: 0px;
+  margin-left:40px;
+  width:200px;
+  height:80px;
+  display: inline-block;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+  color: #FFFFFF;
+  background-color: #a9db80;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#a9db80), to(#96c56f));
+  background-image: -webkit-linear-gradient(top, #a9db80, #96c56f);
+  background-image: -moz-linear-gradient(top, #a9db80, #96c56f);
+  background-image: -ms-linear-gradient(top, #a9db80, #96c56f);
+  background-image: -o-linear-gradient(top, #a9db80, #96c56f);
+  background-image: linear-gradient(to bottom, #a9db80, #96c56f);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#a9db80, endColorstr=#96c56f);
+  box-shadow:1px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.ship_list {margin:0px;padding:0px;}
+.ship_list img {margin-top:-15px;margin-left:-2px;}
+
+.select:hover{
+  border: 2px solid #74bf36;
+  background-color: #8ed058;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#8ed058), to(#7bb64b));
+  background-image: -webkit-linear-gradient(top, #8ed058, #7bb64b);
+  background-image: -moz-linear-gradient(top, #8ed058, #7bb64b);
+  background-image: -ms-linear-gradient(top, #8ed058, #7bb64b);
+  background-image: -o-linear-gradient(top, #8ed058, #7bb64b);
+  background-image: linear-gradient(to bottom, #8ed058, #7bb64b);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#8ed058, endColorstr=#7bb64b);
 }

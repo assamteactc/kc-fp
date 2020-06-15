@@ -34,29 +34,11 @@
 			<div id="myship">
 				<span class="content_title align-middle"><img src="img/util/myship.png">&nbsp;自艦隊</span>
 				<hr>
-				<div class="flex-container">
-					<!--自艦のリスト 横並びの要素-->
-					<span class="kan_frame">
-						<div class="container">
-							<span>
-								<img src="./img/util/1.png">
-							</span>
-							<span data-toggle="modal" data-target="#ｍodal_myship">
-								<img src="./img/ship/0.png">
-							</span>
-							<div class="block">
-								<div class="block_element">
-									<div class="release-line"></div>
-								</div>
-								<div class="block_element">
-									<div class="weapon_list"></div>
-									<div class="weapon_list"></div>
-									<div class="weapon_list"></div>
-									<div class="weapon_list"></div>
-								</div>
-							</div>
-						</div>
-					</span>
+				<div class="d-flex">
+					<div class="d-flex kan_frame ship_list bg-stlype " id="ship_1st">
+							<div><img src="./img/util/1.png"></div>
+							<div class="d-flex ship_select"><button class="select" data-toggle="modal" data-target="#ｍodal_myship" data-shipframe="旗艦">+ 艦の選択</button></div>
+					</div>
 					<span class="kan_frame">
 						<div class="container">
 							<span>
@@ -103,41 +85,101 @@
 			</div>
 		</div>
 	</div>
-<div class="modal fade" id="ｍodal_myship" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
+
+	<div class="modal fade" id="ｍodal_myship" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="Modal">選択</h5>
+					<h5 class="modal-title" id="Modal"><span id="get_text"></span>を選択</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<div class="flex-container">
-						<div id="myship_type"></div>
-						<button type="button" class="btn btn-danger">戦艦<button>
-				 </div>
-				 <hr>
-					<div class="list-group">
-						<li class="list-group-item plain">
-							<div class="list_title flex-container">
-								<div class="width_55p">艦娘名</div>
-								<div class="width_15p">火力</div>
-								<div class="width_15p">雷装</div>
-								<div class="width_15p">対潜</div>
+					<!-- Nav tabs -->
+					<div class="custom-control custom-checkbox comp_ckeck">
+					<input class="custom-control-input" type="checkbox" id="complete_check" onchange="filter_complete();" checked>
+					<label class="custom-control-label" for="complete_check">改造済艦のみ表示</label>
+					</div>
+					<ul class="nav nav-tabs" role="tablist">
+						<!-- <div id="myship_category"></div> -->
+						<li class="nav-item"><a class="nav-link" href="#ship-CL" role="tab" data-toggle="tab">軽巡級</a></li>
+						<li class="nav-item"><a class="nav-link active" href="#ship-DD" role="tab" data-toggle="tab">駆逐艦</a></li>
+						<li class="nav-item"><a class="nav-link" href="#ship-DE" role="tab" data-toggle="tab">海防艦</a></li>
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<!-- 軽巡 -->
+						<div class="tab-pane" id="ship-CL" role="tabpanel" aria-labelledby="tab-ship-CL">
+							<div class="tag_lists">
+								<div id="myship_type-CL"></div>
 							</div>
-						</li>
-						<div id="myship_list"></div>
+							<div class="list-group">
+								<li class="list-group-item plain">
+									<div class="list_title d-flex">
+										<div class="width_56p">艦娘名</div>
+										<div class="width_12p text_medium">スロット</div>
+										<div class="width_10p text_medium">火力</div>
+										<div class="width_10p text_medium">雷装</div>
+										<div class="width_12p text_medium">対潜</div>
+									</div>
+								</li>
+								<div class="div_srcollbar">
+									<div id="myship_list-CL"></div>
+								</div>
+							</div>
+						</div>
+						<!-- 駆逐艦 -->
+						<div class="tab-pane active" id="ship-DD" role="tabpanel" aria-labelledby="tab-ship-DD">
+							<div class="tag_lists">
+								<div id="myship_type-DD"></div>
+							</div>
+							<div class="list-group">
+								<li class="list-group-item plain">
+									<div class="list_title d-flex">
+										<div class="width_56p">艦娘名</div>
+										<div class="width_12p text_medium">スロット</div>
+										<div class="width_10p text_medium">火力</div>
+										<div class="width_10p text_medium">雷装</div>
+										<div class="width_12p text_medium">対潜</div>
+									</div>
+								</li>
+									<div class="div_srcollbar">
+										<div id="myship_list-DD"></div>
+									</div>
+							</div>
+						</div>
+						<!-- 海防艦 -->
+						<div class="tab-pane" id="ship-DE" role="tabpanel" aria-labelledby="tab-ship-DE">
+							<div class="tag_lists">
+								<div id="myship_type-DE"></div>
+							</div>
+							<div class="list-group">
+								<li class="list-group-item plain">
+									<div class="list_title d-flex">
+										<div class="width_56p">艦娘名</div>
+										<div class="width_12p text_medium">スロット</div>
+										<div class="width_10p text_medium">火力</div>
+										<div class="width_10p text_medium">雷装</div>
+										<div class="width_12p text_medium">対潜</div>
+									</div>
+								</li>
+								<div class="div_srcollbar">
+									<div id="myship_list-DE"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- </div> -->
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger">取消し</button>
+					<button type="button" class="btn btn-danger">はずす</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
+	</div>
 
 </body>
 
