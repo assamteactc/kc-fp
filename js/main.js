@@ -43,9 +43,9 @@ $(window).on("load", function() {
         switch (this[1]) {
           case "CL":
             if (this[9]=="FALSE"){
-              list1 += '<a href="#" class="list-group-item list-group-item-action lists CL INCOMP ' + this[8] +'">';
+              list1 += '<a href="javascript:ship_open(\'DD:'+ this[0] + ':'+ this[2] +':'+ this[3] + ':'+ this[4] + ':'+ this[5] + ':'+ this[6]+':'+ this[7]+':'+ this[10]+'\');" class="list-group-item list-group-item-action lists CL INCOMP ' + this[8] +'">';
             } else {
-              list1 += '<a href="#" class="list-group-item list-group-item-action lists CL COMP ' + this[8] +'">';
+              list1 += '<a href="javascript:ship_open(\'DD:'+ this[0] + ':'+ this[2] +':'+ this[3] + ':'+ this[4] + ':'+ this[5] + ':'+ this[6]+':'+ this[7]+':'+ this[10]+'\');" class="list-group-item list-group-item-action lists CL COMP ' + this[8] +'">';
             }
             list1 += '<div class="d-flex align_medium">';
             list1 += '<div class="width_56p"><img src="./img/ship/' + this[0] + '.png">&nbsp;' + this[2] + '</div>';
@@ -57,10 +57,10 @@ $(window).on("load", function() {
             break;
           case "DD":
             if (this[9]=="FALSE"){
-              list2 += '<a href="#" class="list-group-item list-group-item-action lists DD INCOMP ' + this[8] +'">';
+              list2 += '<a href="javascript:ship_open(\'DD:'+ this[0] + ':'+ this[2] +':'+ this[3] + ':'+ this[4] + ':'+ this[5] + ':'+ this[6]+':'+ this[7]+':'+ this[10]+'\');" class="list-group-item list-group-item-action lists DD INCOMP ' + this[8] +'">';
             } else {
-              list2 += '<a href="javascript:void(0);" onclick="ship_open();" class="list-group-item list-group-item-action lists DD COMP ' + this[8] +'">';
-              //引数 [艦種,艦ID,スロット数,火力,雷装,対潜初期,対潜最大]
+              list2 += '<a href="javascript:ship_open(\'DD:'+ this[0] + ':'+ this[2] +':'+ this[3] + ':'+ this[4] + ':'+ this[5] + ':'+ this[6]+':'+ this[7]+':'+ this[10]+'\');" class="list-group-item list-group-item-action lists DD COMP ' + this[8] +'">';
+              //引数 [艦種(0),艦ID(1),スロット数(3),火力(4),雷装(5),対潜初期(6),対潜最大(7),射程(8)]
             }
             list2 += '<div class="d-flex">';
             list2 += '<div class="width_56p"><img src="./img/ship/' + this[0] + '.png">&nbsp;' + this[2] + '</div>';
@@ -72,9 +72,9 @@ $(window).on("load", function() {
             break;
           case "DE":
             if (this[9]=="FALSE"){
-              list3 += '<a href="#" class="list-group-item list-group-item-action lists DE INCOMP ' + this[8] +'">';
+              list3 += '<a href="javascript:ship_open(\'DD:'+ this[0] + ':'+ this[2] +':'+ this[3] + ':'+ this[4] + ':'+ this[5] + ':'+ this[6]+':'+ this[7]+':'+ this[10]+'\');" class="list-group-item list-group-item-action lists DE INCOMP ' + this[8] +'">';
             } else {
-              list3 += '<a href="#" class="list-group-item list-group-item-action lists DE COMP ' + this[8] +'">';
+              list3 += '<a href="javascript:ship_open(\'DD:'+ this[0] + ':'+ this[2] +':'+ this[3] + ':'+ this[4] + ':'+ this[5] + ':'+ this[6]+':'+ this[7]+':'+ this[10]+'\');" class="list-group-item list-group-item-action lists DE COMP ' + this[8] +'">';
             }
             list3 += '<div class="d-flex">';
             list3 += '<div class="width_56p"><img src="./img/ship/' + this[0] + '.png">&nbsp;' + this[2] + '</div>';
@@ -108,18 +108,100 @@ $('#ｍodal_myship').on('show.bs.modal', function (event) {
     modal.find('.modal-header span#get_text').text(button.data('shipframe'));
 });
 
-// $("#btn1").on('click', function() {
-//   // モーダル閉じる
-//   $('#sampleModal').modal('hide');
-//   let foodVal = $('#food').val();
-//   $('#re').text(foodVal);
-// });
+function ship_open(param){
+  //引数 [艦種(0),艦ID(1),スロット数(3),火力(4),雷装(5),対潜初期(6),対潜最大(7),射程(8)]
+  let result=param.split(':');
+  let kan_frame="";
 
-function ship_open(){
-  // let result =param.split(':');
-  // alert('test');
-  $('#modal_myship').modal('hide');
+  switch (document.getElementById('get_text').innerHTML) {
+    case "旗艦":kan_frame="1st";break;
+    case "2番艦":kan_frame="2nd";break;
+    case "3番艦":kan_frame="3rd";break;
+    case "4番艦":kan_frame="4th";break;
+    case "5番艦":kan_frame="5th";break;
+    case "6番艦":kan_frame="6th";break;
+  }
+
+  document.getElementById("ship_"+kan_frame+"_face").src="./img/ship/" +result[1]+".png";
+  document.getElementById("ship_"+kan_frame+"_name").innerHTML=result[2];
+  document.getElementById("ship_"+kan_frame+"_pw").innerHTML=result[4];
+  document.getElementById("ship_"+kan_frame+"_th").innerHTML=result[5];
+  document.getElementById("ship_"+kan_frame+"_as").innerHTML=result[6];
+  document.getElementById("ship_"+kan_frame+"_as-min").value=result[6];
+  document.getElementById("ship_"+kan_frame+"_as-max").value=result[7];
+  document.getElementById("ship_"+kan_frame+"_lv").innerHTML="99";
+  document.getElementById("ship_"+kan_frame+"_range").innerHTML=result[8];
+
+  document.getElementById("ship_"+kan_frame+"_basepw").innerHTML=Number(result[4])+5;
+  document.getElementById("ship_"+kan_frame+"_baseth").innerHTML=Number(result[5])+5;
+  let baseas=Math.sqrt(Number(result[6]))+13;
+  document.getElementById("ship_"+kan_frame+"_baseas").innerHTML=baseas.toFixed(3);
+  document.getElementById("ship_"+kan_frame+"_baseairpw").innerHTML=0;
+
+      switch(result[3]){
+        case "2":
+          document.getElementById("ship_"+kan_frame+"_wp3").style.display="none";
+          document.getElementById("ship_"+kan_frame+"_wp4").style.display="none";
+          document.getElementById("ship_"+kan_frame+"_wp5").style.display="none";
+          document.getElementById("ship_"+kan_frame+"_wp3-r").style.display="none";
+          document.getElementById("ship_"+kan_frame+"_wp4-r").style.display="none";
+          document.getElementById("ship_"+kan_frame+"_wp5-r").style.display="none";
+          document.getElementById("ship_"+kan_frame+"_release").style.height="35px";
+          break;
+        case "3":
+          document.getElementById("ship_"+kan_frame+"_wp3").style.display="block";
+          document.getElementById("ship_"+kan_frame+"_wp4").style.display="none";
+          document.getElementById("ship_"+kan_frame+"_wp5").style.display="none";
+          document.getElementById("ship_"+kan_frame+"_wp3-r").style.display="block";
+          document.getElementById("ship_"+kan_frame+"_wp4-r").style.display="none";
+          document.getElementById("ship_"+kan_frame+"_wp5-r").style.display="none";
+          document.getElementById("ship_"+kan_frame+"_release").style.height="60px";
+          break;
+        case "4":
+          document.getElementById("ship_"+kan_frame+"_wp3").style.display="block";
+          document.getElementById("ship_"+kan_frame+"_wp4").style.display="block";
+          document.getElementById("ship_"+kan_frame+"_wp5").style.display="none";
+          document.getElementById("ship_"+kan_frame+"_wp3-r").style.display="block";
+          document.getElementById("ship_"+kan_frame+"_wp4-r").style.display="block";
+          document.getElementById("ship_"+kan_frame+"_wp5-r").style.display="none";
+          document.getElementById("ship_"+kan_frame+"_release").style.height="85px";
+          break;
+      }
+
+  $('#ｍodal_myship').modal('hide');
+
+  document.getElementById("ship_"+kan_frame+"_selected").style.display="block";
+  document.getElementById("ship_"+kan_frame).style.display="none";
+
 }
+
+function ship_discard(){
+  //引数 [艦種(0),艦ID(1),スロット数(3),火力(4),雷装(5),対潜初期(6),対潜最大(7),射程(8)]
+
+  switch (document.getElementById('get_text').innerHTML) {
+    case "旗艦":kan_frame="1st";break;
+    case "2番艦":kan_frame="2nd";break;
+    case "3番艦":kan_frame="3rd";break;
+    case "4番艦":kan_frame="4th";break;
+    case "5番艦":kan_frame="5th";break;
+    case "6番艦":kan_frame="6th";break;
+  }
+  document.getElementById("ship_"+kan_frame+"_face").src="";
+  document.getElementById("ship_"+kan_frame+"_name").innerHTML="";
+  document.getElementById("ship_"+kan_frame+"_pw").innerHTML="";
+  document.getElementById("ship_"+kan_frame+"_th").innerHTML="";
+  document.getElementById("ship_"+kan_frame+"_as").innerHTML="";
+  document.getElementById("ship_"+kan_frame+"_as-min").value="";
+  document.getElementById("ship_"+kan_frame+"_as-max").value="";
+  document.getElementById("ship_"+kan_frame+"_lv").innerHTML="99";
+  document.getElementById("ship_"+kan_frame+"_range").innerHTML="";
+
+  $('#ｍodal_myship').modal('hide');
+
+  document.getElementById("ship_"+kan_frame).style.display="block";
+  document.getElementById("ship_"+kan_frame+"_selected").style.display="none";
+}
+
 //艦娘データのフィルタリング処理(全て表示)
 function show_CL(target) {
   if(document.getElementById("complete_check").checked){   //checkedの場合非改造艦を読み込まない。

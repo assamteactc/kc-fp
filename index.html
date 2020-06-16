@@ -5,19 +5,13 @@
 <head>
 	<meta charset="utf-8">
 	<title>火力計算機</title>
-	<meta name="description" content="「艦これ」の制空権に関する計算およびシミュレーションを行うサイトです。道中での被撃墜、基地航空隊の制空削りや敵艦隊の対空砲火による撃墜を考慮した制空計算や全滅率の試算、防空時の制空計算に対応しています。" />
-	<meta name="viewport" content="width=device-width" />
-	<meta property="og:title" content="制空権シミュレータ" />
 	<link rel="icon" href="favicon.ico">
 	<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
 	<link rel="stylesheet" href="./css/jquery-ui.min.css" media="print" onload="this.media='all'">
 	<link rel="stylesheet" href="./fonts/style.css" media="print" onload="this.media='all'">
 	<link rel="stylesheet" href="./css/bootstrap.min.css">
 	<link rel="stylesheet" href="./css/main.css">
-
 	<script defer src="./js/jquery-3.4.1.min.js"></script>
-	<!-- <script defer src="./js/jquery-ui.min.js"></script> -->
-	<!-- <script defer src="./js/jquery.ui.touch-punch.js"></script> -->
 	<script defer src="./js/bootstrap.bundle.min.js"></script>
 	<script defer src="./js/jquery.csv.min.js"></script>
 	<script defer src="./js/main.js"></script>
@@ -26,7 +20,7 @@
 <body>
 	<nav class="header">
 		<div>
-			<img src="./img/util/logo.png">&nbsp;<span>火力</span>計算器
+			<img src="./img/util/logo.png">&nbsp;<span>練習</span>ページ
 		</div>
 	</nav>
 	<div class=main>
@@ -34,56 +28,329 @@
 			<div id="myship">
 				<span class="content_title align-middle"><img src="img/util/myship.png">&nbsp;自艦隊</span>
 				<hr>
-				<div class="d-flex">
-					<div class="d-flex kan_frame ship_list bg-stlype " id="ship_1st">
-							<div><img src="./img/util/1.png"></div>
+				<div class="d-flex flex-warp">
+					<!-- 艦リスト[旗艦] -->
+					<div id="ship_1st">
+						<div class="d-flex kan_frame ship_list bg-stlype-disable">
+							<div class="kan_frame_tag"><img src="./img/util/1.png"></div>
 							<div class="d-flex ship_select"><button class="select" data-toggle="modal" data-target="#ｍodal_myship" data-shipframe="旗艦">+ 艦の選択</button></div>
+						</div>
 					</div>
-					<span class="kan_frame">
-						<div class="container">
-							<span>
-								<img src="./img/util/2.png">
-							</span>
-							<span data-toggle="modal" data-target="#ｍodal_myship">
-								<img src="./img/ship/0.png">
-							</span>
-							<div class="block">
-								<div class="block_element">
-									<div class="release-line"></div>
+					<div id="ship_1st_selected" style="display:none;">
+						<div class="d-flex flex-column flex-wrap kan_frame_selected ship_list ">
+							<div class="kan_frame_tag" style="width:26px; height:80px;"><img src="./img/util/1.png"></div>
+							<div style="width:26px; height:138px;">
+								<div class="release-line" id="ship_1st_release"></div>
+								<div class="release-all-button"></div>
+							</div>
+							<div class="d-flex flex-column" style="width:327px; height:80px;">
+								<div class="d-flex">
+									<div class="d-flex flex-column">
+										<div style="width:138px;height:27px;">
+											<div style="font-size:0.6em;padding-left:8px;padding-top:4px;"><span id="ship_1st_name"></span></div>
+										</div>
+										<div style="width:120px;height:30px;">
+											<a href="#"><img id="ship_1st_face" data-toggle="modal" data-target="#ｍodal_myship" data-shipframe="旗艦"></a>
+										</div>
+										<div class="d-flex flex-row-reverse" style="font-size:0.7em;width:120px;height:27px;padding-top:2px;">
+											<div class="linkbox">
+												<div>
+													<span style="color:#5AC2D9;">Lv:</span>
+													<span><span id="ship_1st_lv"></span></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div>
+										<div class="d-flex ship_status" style="width:207px;height:80px;">
+											<div>
+												<div class="d-flex flex-column" style="width:68px; height:80px;padding-left:6px;padding-top:4px;font-size:0.5em;">
+													<div class="d-flex">
+														<div style="color:#897845;">火力:</div>
+														<div><span id="ship_1st_pw"></span></div>
+													</div>
+													<div class="d-flex">
+														<div style="color:#897845;">雷装:</div>
+														<div><span id="ship_1st_th"></span></div>
+													</div>
+													<div class="d-flex linkbox">
+														<div class="linkbox">
+															<span style="color:#897845;">対潜:</span><span><span id="ship_1st_as"></span></span>
+														</div>
+														<input id="ship_1st_as-min" type="hidden">
+														<input id="ship_1st_as-max" type="hidden">
+													</div>
+													<div class="d-flex" style="color:black;border:0px;font-size:1em;">
+														<div style="color:#897845;">射程:</div>
+														<div><span id="ship_1st_range"></span></div>
+													</div>
+												</div>
+											</div>
+											<div class="d-flex flex-column" style="width:139px; height:80px;padding-top:4px;font-size:0.5em;">
+												<div class="d-flex">
+													<div style="color:#897845;">砲撃攻撃力:</div>
+													<div><span id="ship_1st_basepw"></span></div>
+												</div>
+												<div class="d-flex">
+													<div style="color:#897845;">雷撃攻撃力:</div>
+													<div><span id="ship_1st_baseth"></span></div>
+												</div>
+												<div class="d-flex">
+													<div style="color:#897845;">対潜攻撃力:</div>
+													<div><span id="ship_1st_baseas"></span></div>
+												</div>
+												<div class="d-flex">
+													<div style="color:#897845;">航空攻撃力:</div>
+													<div><span id="ship_1st_baseairpw"></span></div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
-								<div class="block_element">
-									<div class="weapon_list"></div>
-									<div class="weapon_list"></div>
-									<div class="weapon_list"></div>
-									<div class="weapon_list"></div>
+								<div>
+									<div class="d-flex flex-column" style="width:292px;">
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list"></div>
+											<div class="release-button"></div>
+										</div>
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list"></div>
+											<div class="release-button"></div>
+										</div>
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list" id="ship_1st_wp3"></div>
+											<div class="release-button" id="ship_1st_wp3-r"></div>
+										</div>
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list" id="ship_1st_wp4"></div>
+											<div class="release-button" id="ship_1st_wp4-r"></div>
+										</div>
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list" id="ship_1st_wp5"></div>
+											<div class="release-button" id="ship_1st_wp5-r"></div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</span>
-					<span class="kan_frame">
-						<div class="container">
-							<span>
-								<img src="./img/util/3.png">
-							</span>
-							<span data-toggle="modal" data-target="#ｍodal_myship">
-								<img src="./img/ship/0.png">
-							</span>
-							<div class="block">
-								<div class="block_element">
-									<div class="release-line"></div>
+					</div>
+					<div style="width:8px;"></div>
+					<!-- 艦リスト[2番艦] -->
+					<div id="ship_2nd">
+						<div class="d-flex kan_frame ship_list bg-stlype-disable">
+							<div class="kan_frame_tag"><img src="./img/util/2.png"></div>
+							<div class="d-flex ship_select"><button class="select" data-toggle="modal" data-target="#ｍodal_myship" data-shipframe="2番艦">+ 艦の選択</button></div>
+						</div>
+					</div>
+					<div id="ship_2nd_selected" style="display:none;">
+						<div class="d-flex flex-column flex-wrap kan_frame_selected ship_list ">
+							<div class="kan_frame_tag" style="width:26px; height:80px;"><img src="./img/util/2.png"></div>
+							<div style="width:26px; height:138px;">
+								<div class="release-line" id="ship_2nd_release"></div>
+								<div class="release-all-button"></div>
+							</div>
+							<div class="d-flex flex-column" style="width:327px; height:80px;">
+								<div class="d-flex">
+									<div class="d-flex flex-column">
+										<div style="width:138px;height:27px;">
+											<div style="font-size:0.6em;padding-left:8px;padding-top:4px;"><span id="ship_2nd_name"></span></div>
+										</div>
+										<div style="width:120px;height:30px;">
+											<a href="#"><img id="ship_2nd_face" data-toggle="modal" data-target="#ｍodal_myship" data-shipframe="2番艦"></a>
+										</div>
+										<div class="d-flex flex-row-reverse" style="font-size:0.7em;width:120px;height:27px;padding-top:2px;">
+											<div class="linkbox">
+												<div>
+													<span style="color:#5AC2D9;">Lv:</span>
+													<span><span id="ship_2nd_lv"></span></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div>
+										<div class="d-flex ship_status" style="width:207px;height:80px;">
+											<div>
+												<div class="d-flex flex-column" style="width:68px; height:80px;padding-left:6px;padding-top:4px;font-size:0.5em;">
+													<div class="d-flex">
+														<div style="color:#897845;">火力:</div>
+														<div><span id="ship_2nd_pw"></span></div>
+													</div>
+													<div class="d-flex">
+														<div style="color:#897845;">雷装:</div>
+														<div><span id="ship_2nd_th"></span></div>
+													</div>
+													<div class="d-flex linkbox">
+														<div class="linkbox">
+															<span style="color:#897845;">対潜:</span><span><span id="ship_2nd_as"></span></span>
+														</div>
+														<input id="ship_2nd_as-min" type="hidden">
+														<input id="ship_2nd_as-max" type="hidden">
+													</div>
+													<div class="d-flex" style="color:black;border:0px;font-size:1em;">
+														<div style="color:#897845;">射程:</div>
+														<div><span id="ship_2nd_range"></span></div>
+													</div>
+												</div>
+											</div>
+											<div class="d-flex flex-column" style="width:139px; height:80px;padding-top:4px;font-size:0.5em;">
+												<div class="d-flex">
+													<div style="color:#897845;">砲撃攻撃力:</div>
+													<div><span id="ship_2nd_basepw"></span></div>
+												</div>
+												<div class="d-flex">
+													<div style="color:#897845;">雷撃攻撃力:</div>
+													<div><span id="ship_2nd_baseth"></span></div>
+												</div>
+												<div class="d-flex">
+													<div style="color:#897845;">対潜攻撃力:</div>
+													<div><span id="ship_2nd_baseas"></span></div>
+												</div>
+												<div class="d-flex">
+													<div style="color:#897845;">航空攻撃力:</div>
+													<div><span id="ship_2nd_baseairpw"></span></div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
-								<div class="block_element">
-									<div class="weapon_list"></div>
-									<div class="weapon_list"></div>
-									<div class="weapon_list"></div>
-									<div class="weapon_list"></div>
+								<div>
+									<div class="d-flex flex-column" style="width:292px;">
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list"></div>
+											<div class="release-button"></div>
+										</div>
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list"></div>
+											<div class="release-button"></div>
+										</div>
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list" id="ship_2nd_wp3"></div>
+											<div class="release-button" id="ship_2nd_wp3-r"></div>
+										</div>
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list" id="ship_2nd_wp4"></div>
+											<div class="release-button" id="ship_2nd_wp4-r"></div>
+										</div>
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list" id="ship_2nd_wp5"></div>
+											<div class="release-button" id="ship_2nd_wp5-r"></div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</span>
+					</div>
+					<div style="width:8px;"></div>
+					<!-- 艦リスト[3番艦] -->
+					<div id="ship_3rd">
+						<div class="d-flex kan_frame ship_list bg-stlype-disable">
+							<div class="kan_frame_tag"><img src="./img/util/3.png"></div>
+							<div class="d-flex ship_select"><button class="select" data-toggle="modal" data-target="#ｍodal_myship" data-shipframe="3番艦">+ 艦の選択</button></div>
+						</div>
+					</div>
+					<div id="ship_3rd_selected" style="display:none;">
+						<div class="d-flex flex-column flex-wrap kan_frame_selected ship_list ">
+							<div class="kan_frame_tag" style="width:26px; height:80px;"><img src="./img/util/3.png"></div>
+							<div style="width:26px; height:138px;">
+								<div class="release-line" id="ship_3rd_release"></div>
+								<div class="release-all-button"></div>
+							</div>
+							<div class="d-flex flex-column" style="width:327px; height:80px;">
+								<div class="d-flex">
+									<div class="d-flex flex-column">
+										<div style="width:138px;height:27px;">
+											<div style="font-size:0.6em;padding-left:8px;padding-top:4px;"><span id="ship_3rd_name"></span></div>
+										</div>
+										<div style="width:120px;height:30px;">
+											<a href="#"><img id="ship_3rd_face" data-toggle="modal" data-target="#ｍodal_myship" data-shipframe="3番艦"></a>
+										</div>
+										<div class="d-flex flex-row-reverse" style="font-size:0.7em;width:120px;height:27px;padding-top:2px;">
+											<div class="linkbox">
+												<div>
+													<span style="color:#5AC2D9;">Lv:</span>
+													<span><span id="ship_3rd_lv"></span></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div>
+										<div class="d-flex ship_status" style="width:207px;height:80px;">
+											<div>
+												<div class="d-flex flex-column" style="width:68px; height:80px;padding-left:6px;padding-top:4px;font-size:0.5em;">
+													<div class="d-flex">
+														<div style="color:#897845;">火力:</div>
+														<div><span id="ship_3rd_pw"></span></div>
+													</div>
+													<div class="d-flex">
+														<div style="color:#897845;">雷装:</div>
+														<div><span id="ship_3rd_th"></span></div>
+													</div>
+													<div class="d-flex linkbox">
+														<div class="linkbox">
+															<span style="color:#897845;">対潜:</span><span><span id="ship_3rd_as"></span></span>
+														</div>
+														<input id="ship_3rd_as-min" type="hidden">
+														<input id="ship_3rd_as-max" type="hidden">
+													</div>
+													<div class="d-flex" style="color:black;border:0px;font-size:1em;">
+														<div style="color:#897845;">射程:</div>
+														<div><span id="ship_3rd_range"></span></div>
+													</div>
+												</div>
+											</div>
+											<div class="d-flex flex-column" style="width:139px; height:80px;padding-top:4px;font-size:0.5em;">
+												<div class="d-flex">
+													<div style="color:#897845;">砲撃攻撃力:</div>
+													<div><span id="ship_3rd_basepw"></span></div>
+												</div>
+												<div class="d-flex">
+													<div style="color:#897845;">雷撃攻撃力:</div>
+													<div><span id="ship_3rd_baseth"></span></div>
+												</div>
+												<div class="d-flex">
+													<div style="color:#897845;">対潜攻撃力:</div>
+													<div><span id="ship_3rd_baseas"></span></div>
+												</div>
+												<div class="d-flex">
+													<div style="color:#897845;">航空攻撃力:</div>
+													<div><span id="ship_3rd_baseairpw"></span></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div>
+									<div class="d-flex flex-column" style="width:292px;">
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list"></div>
+											<div class="release-button"></div>
+										</div>
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list"></div>
+											<div class="release-button"></div>
+										</div>
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list" id="ship_3rd_wp3"></div>
+											<div class="release-button" id="ship_3rd_wp3-r"></div>
+										</div>
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list" id="ship_3rd_wp4"></div>
+											<div class="release-button" id="ship_3rd_wp4-r"></div>
+										</div>
+										<div class="d-flex">
+											<div class="btn btn-light weapon_list" id="ship_3rd_wp5"></div>
+											<div class="release-button" id="ship_3rd_wp5-r"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="width:8px;"></div>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<div class="modal fade" id="ｍodal_myship" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
@@ -98,8 +365,8 @@
 				<div class="modal-body">
 					<!-- Nav tabs -->
 					<div class="custom-control custom-checkbox comp_ckeck">
-					<input class="custom-control-input" type="checkbox" id="complete_check" onchange="filter_complete();" checked>
-					<label class="custom-control-label" for="complete_check">改造済艦のみ表示</label>
+						<input class="custom-control-input" type="checkbox" id="complete_check" onchange="filter_complete();" checked>
+						<label class="custom-control-label" for="complete_check">改造済艦のみ表示</label>
 					</div>
 					<ul class="nav nav-tabs" role="tablist">
 						<!-- <div id="myship_category"></div> -->
@@ -144,9 +411,9 @@
 										<div class="width_12p text_medium">対潜</div>
 									</div>
 								</li>
-									<div class="div_srcollbar">
-										<div id="myship_list-DD"></div>
-									</div>
+								<div class="div_srcollbar">
+									<div id="myship_list-DD"></div>
+								</div>
 							</div>
 						</div>
 						<!-- 海防艦 -->
@@ -173,7 +440,7 @@
 					<!-- </div> -->
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger">はずす</button>
+					<button type="button" class="btn btn-danger" onclick="ship_discard()">はずす</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
 				</div>
 			</div>

@@ -24,7 +24,7 @@
 body {
   font-size: 14px;
   font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
-  background-color: #FDFCF5;
+  background-color: #FBFBF6;
 }
 
 .main {
@@ -40,18 +40,17 @@ body {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
-  box-shadow: 2px 2px 4px -2px #898989;
-  2px 2px 4px #FFFFFF inset;
   padding-top: 1.0rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   padding-bottom: 1.0rem;
   background-color: #FFFFFF;
+  box-shadow: 2px 2px 4px 0px #ABABAB;2px 2px 4px #FFFFFF inset;
 }
 
 .kan_frame {
-  width:320px;
-  height:200px;
+  width:355px;
+  height:220px;
   margin-left: 5px;
   padding-top: 5px;
   padding-left: 5px;
@@ -64,29 +63,33 @@ body {
   border: 1px solid #D3DBE2;
   box-shadow: 1px 1px 2px -1px #898989;
 }
+.kan_frame_selected {
+  width:355px;
+  height:220px;
+  margin-left: 5px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 1px solid #D3DBE2;
+  box-shadow: 1px 1px 2px -1px #898989;
+}
+.kan_frame_left{
+width:30px;
+height:60px;
+}
+.kan_frame_tag img{
+  margin-top:-11px;
+}
 
 .modal-content {
   width: 70%;
   border: 2px solid #aaa;
   z-index: 2;
-}
-
-.weapon_list {
-  margin-left: 3px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  width: 280px;
-  height: 24px;
-  background: #FAFAFA;
-  box-shadow: 1px 1px 2px #898989 inset;
-  border-radius: 12px 4px 4px 12px;
-}
-
-.release-line {
-  margin-left: 8px;
-  height: 120px;
-  border-left: thick solid #BBBCBF;
-  padding-left: 4px;
 }
 
 .container {
@@ -107,39 +110,6 @@ body {
   height: 90%;
 }
 
-/* 共通スタイルシート */
-.width_10p {
-  width: 10%;
-}
-
-.width_12p {
-  width: 12%;
-}
-
-.width_15p {
-  width: 15%;
-}
-
-.width_40p {
-  width: 40%;
-}
-
-.width_50p {
-  width: 50%;
-}
-
-.width_55p {
-  width: 55%;
-}
-
-.width_56p {
-  width: 56%;
-}
-
-.text_medium {
-  text-align: center;
-}
-
 .flex-around {
   justify-content: space-around;
 }
@@ -149,7 +119,6 @@ body {
   justify-content:center;
   align-items: center;
 }
-
 .tag_lists {
   display: flex;
   padding-top: 10px;
@@ -216,7 +185,7 @@ body {
   padding: 0px;
 }
 
-/* 艦選択モーダルウィンドウ　艦娘リストのフォントカラー */
+/* 艦娘リストのフォントカラー */
 .font-slot {
   color: #465D4C;
 }
@@ -243,7 +212,7 @@ body {
   overflow-y: auto;
 }
 
-/* 共通　サイドバーデザイン */
+/* モーダルウィンドウ上のサイドバーデザイン */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -258,11 +227,19 @@ body {
   background: #D2D0E8;
 }
 
-.bg-stlype {
+.bg-stlype-disable {
   background-color: #ECECEC;
   background-image: -webkit-gradient(linear, 0 0, 100% 100%,color-stop(.25, #F9F9F9), color-stop(.25, transparent),color-stop(.5, transparent), color-stop(.5, #F9F9F9),color-stop(.75, #F9F9F9), color-stop(.75, transparent),to(transparent));
   -webkit-background-size: 12px 12px;
 }
+.bg-stlype-enable {
+  background-color: #FFFFE0;
+  background-image: -webkit-gradient(linear, 0 0, 100% 100%,color-stop(.25, #F9F9F9), color-stop(.25, transparent),color-stop(.5, transparent), color-stop(.5, #F9F9F9),color-stop(.75, #F9F9F9), color-stop(.75, transparent),to(transparent));
+  -webkit-background-size: 12px 12px;
+}
+
+
+/* 艦フレーム かなり細かく指定 */
 .select{
   align-items:center;
   border: 2px solid #8bcf54;
@@ -286,10 +263,6 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#a9db80, endColorstr=#96c56f);
   box-shadow:1px 2px 0 rgba(0, 0, 0, 0.3);
 }
-
-.ship_list {margin:0px;padding:0px;}
-.ship_list img {margin-top:-15px;margin-left:-2px;}
-
 .select:hover{
   border: 2px solid #74bf36;
   background-color: #8ed058;
@@ -301,3 +274,138 @@ body {
   background-image: linear-gradient(to bottom, #8ed058, #7bb64b);
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#8ed058, endColorstr=#7bb64b);
 }
+.select:focus{
+  outline:0;
+}
+
+.ship_list {
+  margin:0px;
+  padding:0px;
+}
+.ship_list a img{
+  margin-left:2px;
+  margin-top:-10px;
+  padding:0px;
+  transition:.5s;
+  border: solid 2px #FFFFFF;
+}
+.ship_list a:hover img{
+border: solid 2px #71A4D9;
+}
+
+.linkbox div {
+  margin:-1px;
+  text-align:left;
+  border: solid 1px #FFFFFF;
+  transition:.3s;
+}
+.linkbox div:hover {
+  margin:-1px;
+  border: solid 1px #71A4D9;
+  cursor: pointer;
+  cursor: hand;
+}
+
+
+.release-line {
+  margin-left: 12px;
+  margin-top: 6px;
+  border:6px;
+  border-left: solid #D3DBE2;
+  padding-left: 3px;
+}
+.release-all-button {
+  margin-top:2px;
+      margin-left:6px;
+      width: 17px;/*枠の大きさ*/
+      height: 17px;/*枠の大きさ*/
+      position: relative;
+  }
+  .release-all-button::before, .release-all-button::after{
+      content: "";
+      display: block;
+      width: 100%;/*バツ線の長さ*/
+      height: 3px;/*バツ線の太さ*/
+      background: #D3DBE2;
+      transform: rotate(45deg);
+      transform-origin:0% 50%;
+      position: absolute;
+      top: calc(14% - 5px);
+      left: 14%;
+  }
+  .release-all-button::after{
+      transform: rotate(-45deg);
+      transform-origin:100% 50%;
+      left: auto;
+      right: 14%;
+  }
+  .weapon_list {
+    margin-top:1px;
+    width: 260px;
+    height: 24px;
+    border-radius: 12px 4px 4px 12px;
+  box-shadow:1px 1px 0 #D3DBE2 inset;
+  }
+  .release-button {
+        margin-left:0px;
+        margin-top:8px;
+        width: 17px;/*枠の大きさ*/
+        height: 17px;/*枠の大きさ*/
+        position: relative;
+    }
+    .release-button::before, .release-button::after{
+        content: "";
+        display: block;
+        width: 100%;/*バツ線の長さ*/
+        height: 3px;/*バツ線の太さ*/
+        background: #D3DBE2;
+        transform: rotate(45deg);
+        transform-origin:0% 50%;
+        position: absolute;
+        top: calc(14% - 5px);
+        left: 14%;
+    }
+    .release-button::after{
+        transform: rotate(-45deg);
+        transform-origin:100% 50%;
+        left: auto;
+        right: 14%;
+    }
+    .ship_status {
+      margin-top:4px;
+      /* border: 1px solid #D3DBE2; */
+    }
+
+
+    /* 共通スタイルシート */
+    .width_10p {
+      width: 10%;
+    }
+
+    .width_12p {
+      width: 12%;
+    }
+
+    .width_15p {
+      width: 15%;
+    }
+
+    .width_40p {
+      width: 40%;
+    }
+
+    .width_50p {
+      width: 50%;
+    }
+
+    .width_55p {
+      width: 55%;
+    }
+
+    .width_56p {
+      width: 56%;
+    }
+
+    .text_medium {
+      text-align: center;
+    }
