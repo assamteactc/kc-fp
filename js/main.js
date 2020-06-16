@@ -134,7 +134,7 @@ function ship_open(param){
 
   document.getElementById("ship_"+kan_frame+"_basepw").innerHTML=Number(result[4])+5;
   document.getElementById("ship_"+kan_frame+"_baseth").innerHTML=Number(result[5])+5;
-  let baseas=Math.sqrt(Number(result[6]))+13;
+  let baseas=Math.sqrt(Number(result[7]))+13;
   document.getElementById("ship_"+kan_frame+"_baseas").innerHTML=baseas.toFixed(3);
   document.getElementById("ship_"+kan_frame+"_baseairpw").innerHTML=0;
 
