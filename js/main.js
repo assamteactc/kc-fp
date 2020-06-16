@@ -202,32 +202,35 @@ function ship_discard(){
   document.getElementById("ship_"+kan_frame+"_selected").style.display="none";
 }
 
-//艦娘データのフィルタリング処理(全て表示)
+//艦娘データのフィルタリング処理(全て表示タグ選択)
 function show_CL(target) {
+  let listitem="";
   if(document.getElementById("complete_check").checked){   //checkedの場合非改造艦を読み込まない。
-    let listitem = document.getElementsByClassName('CL COMP');
+    listitem = document.getElementsByClassName('CL COMP');
   } else {
-    let listitem = document.getElementsByClassName('CL');
+    listitem = document.getElementsByClassName('CL');
   }
   $(listitem).each(function(index) {
     this.style.display = "block";
   })
 }
 function show_DD(target) {
+  let listitem="";
   if(document.getElementById("complete_check").checked){  //checkedの場合非改造艦を読み込まない。
-    let listitem = document.getElementsByClassName('DD COMP');
+    listitem = document.getElementsByClassName('DD COMP');
   } else {
-    let listitem = document.getElementsByClassName('DD');
+    listitem = document.getElementsByClassName('DD');
   }
   $(listitem).each(function(index) {
     this.style.display = "block";
   })
 }
 function show_DE(target) {
+  let listitem="";
   if(document.getElementById("complete_check").checked){  //checkedの場合非改造艦を読み込まない。
-    let listitem = document.getElementsByClassName('DE COMP');
+    listitem = document.getElementsByClassName('DE COMP');
   } else {
-    let listitem = document.getElementsByClassName('DE');
+    listitem = document.getElementsByClassName('DE');
   }
   $(listitem).each(function(index) {
     this.style.display = "block";
