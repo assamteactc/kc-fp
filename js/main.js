@@ -126,7 +126,7 @@ function ship_open(param){
   document.getElementById("ship_"+kan_frame+"_name").innerHTML=result[2];
   document.getElementById("ship_"+kan_frame+"_pw").innerHTML=result[4];
   document.getElementById("ship_"+kan_frame+"_th").innerHTML=result[5];
-  document.getElementById("ship_"+kan_frame+"_as").innerHTML=result[6];
+  document.getElementById("ship_"+kan_frame+"_as").innerHTML=result[7];
   document.getElementById("ship_"+kan_frame+"_as-min").value=result[6];
   document.getElementById("ship_"+kan_frame+"_as-max").value=result[7];
   document.getElementById("ship_"+kan_frame+"_lv").innerHTML="99";
