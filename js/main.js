@@ -6,21 +6,21 @@ $(window).on("load", function() {
   $.get('./data/MY_SHIPTYPE.csv', function(data) {
     let csv = $.csv.toArrays(data);
     let itemlist = '';
-    let list1 = '<button class="btn btn-primary pl-1 pr-1 init_tag" name="CL" data-toggle="button" onclick=show_CL();>全て表示</button>';
-    let list2 = '<button class="btn btn-primary pl-1 pr-1 init_tag" name="CL" data-toggle="button" onclick=show_DD();>全て表示</button>';
-    let list3 = '<button class="btn btn-primary pl-1 pr-1 init_tag" name="CL" data-toggle="button" onclick=show_DE();>全て表示</button>';
+    let list1 = '<label class="btn btn-primary pl-1 pr-1 init_tag" name="CL" onclick=show_CL();><input type="radio" />全て表示</label>';
+    let list2 = '<label class="btn btn-primary pl-1 pr-1 init_tag" name="CL" onclick=show_DD();><input type="radio" />全て表示</label>';
+    let list3 = '<label class="btn btn-primary pl-1 pr-1 init_tag" name="CL" onclick=show_DE();><input type="radio" />全て表示</label>';
     $(csv).each(function(index) {
       if (this[0] != "id") {
         if (this[1] == "2") {
           switch (this[3]) {
             case "CL":
-              list1 += '<button class="btn btn-outline-dark tag" name="CL" onclick="filter_CL(\''+this[0]+'\');">' + this[2] + '</button>';
+              list1 += '<label class="btn btn-outline-dark tag" name="CL" onclick="filter_CL(\''+this[0]+'\');"><input type="radio" />' + this[2] + '</label>';
               break;
             case "DD":
-              list2 += '<button class="btn btn-outline-dark tag" name="DD" onclick="filter_DD(\''+this[0]+'\');">' + this[2] + '</button>';
+              list2 += '<label class="btn btn-outline-dark tag" name="DD" onclick="filter_DD(\''+this[0]+'\');"><input type="radio" />' + this[2] + '</label>';
               break;
             case "DE":
-              list3 += '<button class="btn btn-outline-dark tag" name="DE" onclick="filter_DE(\''+this[0]+'\');">' + this[2] + '</button>';
+              list3 += '<label class="btn btn-outline-dark tag" name="DE" onclick="filter_DE(\''+this[0]+'\');"><input type="radio" />' + this[2] + '</label>';
               break;
           }
         }
@@ -167,9 +167,7 @@ function ship_open(param){
           document.getElementById("ship_"+kan_frame+"_release").style.height="85px";
           break;
       }
-
   $('#ｍodal_myship').modal('hide');
-
   document.getElementById("ship_"+kan_frame+"_selected").style.display="block";
   document.getElementById("ship_"+kan_frame).style.display="none";
 
@@ -177,7 +175,6 @@ function ship_open(param){
 
 function ship_discard(){
   //引数 [艦種(0),艦ID(1),スロット数(3),火力(4),雷装(5),対潜初期(6),対潜最大(7),射程(8)]
-
   switch (document.getElementById('get_text').innerHTML) {
     case "旗艦":kan_frame="1st";break;
     case "2番艦":kan_frame="2nd";break;
@@ -197,13 +194,12 @@ function ship_discard(){
   document.getElementById("ship_"+kan_frame+"_range").innerHTML="";
 
   $('#ｍodal_myship').modal('hide');
-
   document.getElementById("ship_"+kan_frame).style.display="block";
   document.getElementById("ship_"+kan_frame+"_selected").style.display="none";
 }
 
 //艦娘データのフィルタリング処理(全て表示タグ選択)
-function show_CL(target) {
+function show_CL() {
   let listitem="";
   if(document.getElementById("complete_check").checked){   //checkedの場合非改造艦を読み込まない。
     listitem = document.getElementsByClassName('CL COMP');
@@ -214,7 +210,7 @@ function show_CL(target) {
     this.style.display = "block";
   })
 }
-function show_DD(target) {
+function show_DD() {
   let listitem="";
   if(document.getElementById("complete_check").checked){  //checkedの場合非改造艦を読み込まない。
     listitem = document.getElementsByClassName('DD COMP');
@@ -225,7 +221,7 @@ function show_DD(target) {
     this.style.display = "block";
   })
 }
-function show_DE(target) {
+function show_DE() {
   let listitem="";
   if(document.getElementById("complete_check").checked){  //checkedの場合非改造艦を読み込まない。
     listitem = document.getElementsByClassName('DE COMP');
@@ -239,6 +235,7 @@ function show_DE(target) {
 
 //艦娘データのフィルタリング処理
 function filter_CL(target) {
+//引数 [艦種タイプ(DD-1等)]
   let listitem = document.getElementsByClassName('CL');　//クラスCLを持つ要素を全て読み出し
   $(listitem).each(function(index) {
     this.style.display = "none";
@@ -251,6 +248,7 @@ function filter_CL(target) {
   $(listitem).each(function(index) {
     this.style.display = "block";
   })
+  document.getElementById("modal_ship_type-CL").value=target;
 }
 function filter_DD(target) {
   let listitem = document.getElementsByClassName('DD');　//クラスDDを持つ要素を全て読み出し
@@ -265,6 +263,7 @@ function filter_DD(target) {
   $(listitem).each(function(index) {
     this.style.display = "block";
   })
+  document.getElementById("modal_ship_type-DD").value=target;
 }
 function filter_DE(target) {
   let listitem = document.getElementsByClassName('DE');　//クラスDEを持つ要素を全て読み出し
@@ -279,17 +278,33 @@ function filter_DE(target) {
   $(listitem).each(function(index) {
     this.style.display = "block";
   })
+  document.getElementById("modal_ship_type-DE").value=target;
 }
 function filter_complete() {
+  let listitem="";
   if(document.getElementById("complete_check").checked){
-    let listitem = document.getElementsByClassName('INCOMP');　//クラスINCOMP(未改造艦)を持つ要素を全て読み出し
+    listitem = document.getElementsByClassName('INCOMP');　//クラスINCOMP(未改造艦)を持つ要素を全て読み出し
     $(listitem).each(function(index) {
       this.style.display = "none";
     })
   } else {
-    let listitem = document.getElementsByClassName('INCOMP');　//クラスINCOMP(未改造艦)を持つ要素を全て読み出し
-    $(listitem).each(function(index) {
-      this.style.display = "block";
-    })
+    if(document.getElementById("modal_ship_type-CL").value!=""){
+      listitem = document.getElementsByClassName(document.getElementById("modal_ship_type-CL").value);　//クラスINCOMP(未改造艦)を持つ要素を全て読み出し
+      $(listitem).each(function(index) {
+        this.style.display = "block";
+      })
+    }
+    if(document.getElementById("modal_ship_type-DD").value!=""){
+      listitem = document.getElementsByClassName(document.getElementById("modal_ship_type-DD").value);　//クラスINCOMP(未改造艦)を持つ要素を全て読み出し
+      $(listitem).each(function(index) {
+        this.style.display = "block";
+      })
+    }
+    if(document.getElementById("modal_ship_type-DE").value!=""){
+      listitem = document.getElementsByClassName(document.getElementById("modal_ship_type-DE").value);　//クラスINCOMP(未改造艦)を持つ要素を全て読み出し
+      $(listitem).each(function(index) {
+        this.style.display = "block";
+      })
+    }
   }
 }

@@ -410,3 +410,6 @@ border: solid 2px #71A4D9;
     .text_medium {
       text-align: center;
     }
+    .tag_lists input[type="radio"] {
+      display: none;
+    }

@@ -77,8 +77,8 @@
 														<div class="linkbox">
 															<span style="color:#897845;">対潜:</span><span><span id="ship_1st_as"></span></span>
 														</div>
-														<input id="ship_1st_as-min" type="hidden">
-														<input id="ship_1st_as-max" type="hidden">
+														<input id="ship_1st_as-min" type="hidden" />
+														<input id="ship_1st_as-max" type="hidden" />
 													</div>
 													<div class="d-flex" style="color:black;border:0px;font-size:1em;">
 														<div style="color:#897845;">射程:</div>
@@ -183,8 +183,8 @@
 														<div class="linkbox">
 															<span style="color:#897845;">対潜:</span><span><span id="ship_2nd_as"></span></span>
 														</div>
-														<input id="ship_2nd_as-min" type="hidden">
-														<input id="ship_2nd_as-max" type="hidden">
+														<input id="ship_2nd_as-min" type="hidden" />
+														<input id="ship_2nd_as-max" type="hidden" />
 													</div>
 													<div class="d-flex" style="color:black;border:0px;font-size:1em;">
 														<div style="color:#897845;">射程:</div>
@@ -289,8 +289,8 @@
 														<div class="linkbox">
 															<span style="color:#897845;">対潜:</span><span><span id="ship_3rd_as"></span></span>
 														</div>
-														<input id="ship_3rd_as-min" type="hidden">
-														<input id="ship_3rd_as-max" type="hidden">
+														<input id="ship_3rd_as-min" type="hidden" />
+														<input id="ship_3rd_as-max" type="hidden" />
 													</div>
 													<div class="d-flex" style="color:black;border:0px;font-size:1em;">
 														<div style="color:#897845;">射程:</div>
@@ -352,7 +352,6 @@
 		</div>
 	</div>
 	</div>
-
 	<div class="modal fade" id="ｍodal_myship" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -377,8 +376,9 @@
 					<!-- Tab panes -->
 					<div class="tab-content">
 						<!-- 軽巡 -->
+						<input id="modal_ship_type-CL" type="hidden" />
 						<div class="tab-pane" id="ship-CL" role="tabpanel" aria-labelledby="tab-ship-CL">
-							<div class="tag_lists">
+							<div class="tag_lists" data-toggle="buttons">
 								<div id="myship_type-CL"></div>
 							</div>
 							<div class="list-group">
@@ -397,8 +397,9 @@
 							</div>
 						</div>
 						<!-- 駆逐艦 -->
+						<input id="modal_ship_type-DD" type="hidden" />
 						<div class="tab-pane active" id="ship-DD" role="tabpanel" aria-labelledby="tab-ship-DD">
-							<div class="tag_lists">
+							<div class="tag_lists" data-toggle="buttons">
 								<div id="myship_type-DD"></div>
 							</div>
 							<div class="list-group">
@@ -417,8 +418,9 @@
 							</div>
 						</div>
 						<!-- 海防艦 -->
+						<input id="modal_ship_type-DE" type="hidden" />
 						<div class="tab-pane" id="ship-DE" role="tabpanel" aria-labelledby="tab-ship-DE">
-							<div class="tag_lists">
+							<div class="tag_lists" data-toggle="buttons">
 								<div id="myship_type-DE"></div>
 							</div>
 							<div class="list-group">
