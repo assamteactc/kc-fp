@@ -110,7 +110,7 @@
 								<div>
 									<div class="d-flex flex-column" style="width:292px;">
 										<div class="d-flex">
-											<div class="btn btn-light weapon_list"></div>
+											<div class="btn btn-light weapon_list" data-toggle="modal" data-target="#ｍodal_weapon" data-shipframe="旗艦"></div>
 											<div class="release-button"></div>
 										</div>
 										<div class="d-flex">
@@ -352,6 +352,7 @@
 		</div>
 	</div>
 	</div>
+	<!-- 艦娘選択用モーダルウィンドウ -->
 	<div class="modal fade" id="ｍodal_myship" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -448,6 +449,207 @@
 			</div>
 		</div>
 	</div>
+	</div>
+
+	<!-- 装備選択用モーダルウィンドウ -->
+	<div class="modal fade" id="ｍodal_weapon" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
+		<div class="modal-dialog modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="Modal_wp"><span id="get_text_wp"></span>を選択</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<!-- Nav tabs -->
+					<div class="d-flex justify-content-between wp_improve_frame">
+						<div>
+							<div class="btn-group d-flex"  data-toggle="buttons">
+								<label class="improve_title">装備改修</label>
+								<label class="btn btn-outline-primary wp_improve"><input type="radio" onclick="improve_check('0');" />★0</label>
+								<label class="btn btn-outline-primary wp_improve"><input type="radio" onclick="improve_check('1');" />★1</label>
+								<label class="btn btn-outline-primary wp_improve"><input type="radio" onclick="improve_check('2');" />★2</label>
+								<label class="btn btn-outline-primary wp_improve"><input type="radio" onclick="improve_check('3');" />★3</label>
+								<label class="btn btn-outline-primary wp_improve"><input type="radio" onclick="improve_check('4');" />★4</label>
+								<label class="btn btn-outline-primary wp_improve"><input type="radio" onclick="improve_check('5');" />★5</label>
+								<label class="btn btn-outline-primary wp_improve"><input type="radio" onclick="improve_check('6');" />★6</label>
+								<label class="btn btn-outline-primary wp_improve"><input type="radio" onclick="improve_check('7');" />★7</label>
+								<label class="btn btn-outline-primary wp_improve"><input type="radio" onclick="improve_check('8');" />★8</label>
+								<label class="btn btn-outline-primary wp_improve"><input type="radio" onclick="improve_check('9');" />★9</label>
+								<label class="btn btn-outline-primary wp_improve"><input type="radio" onclick="improve_check('10');" />★10</label>
+							</div>
+						</div>
+							<div class="custom-control custom-checkbox comp_ckeck">
+								<input class="custom-control-input" type="checkbox" id="weapon_check" onchange="filter_priweapon();" checked>
+								<label class="custom-control-label" for="weapon_check">初期装備は表示しない</label>
+							</div>
+					</div>
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="nav-item" id="wp_nav_main" active><a class="nav-link" href="#wp-main" role="tab" data-toggle="tab">主砲</a></li>
+						<li class="nav-item" id="wp_nav_sec"><a class="nav-link" href="#wp-sec" role="tab" data-toggle="tab">副砲/機銃</a></li>
+						<li class="nav-item" id="wp_nav_tor"><a class="nav-link" href="#wp-tor" role="tab" data-toggle="tab">魚雷</a></li>
+						<li class="nav-item" id="wp_nav_as"><a class="nav-link" href="#wp-as" role="tab" data-toggle="tab">対潜</a></li>
+						<li class="nav-item" id="wp_nav_rd"><a class="nav-link" href="#wp-rd" role="tab" data-toggle="tab">電探</a></li>
+						<li class="nav-item" id="wp_nav_ag"><a class="nav-link" href="#wp-ag" role="tab" data-toggle="tab">対地</a></li>
+						<li class="nav-item" id="wp_nav_other"><a class="nav-link" href="#wp-other" role="tab" data-toggle="tab">その他</a></li>
+					</ul>
+					<!-- Tab panes -->
+
+					<div class="tab-content">
+						<!-- 主砲-->
+						<div class="tab-pane active" id="wp-main" role="tabpanel" aria-labelledby="tab-weapon-main">
+							<div class="list-group">
+								<li class="list-group-item plain">
+									<div class="list_title d-flex">
+										<div style="width:52%;">武器名</div>
+										<div style="width:24%;text-align:medium;">火力 (改修効果)</div>
+										<div style="width:24%;text-align:medium;">命中 (改修効果)</div>
+									</div>
+								</li>
+								<div class="div_srcollbar">
+									<div id="wp_1st_3"></div>
+									<div id="wp_1st_2"></div>
+									<div id="wp_1st_1"></div>
+								</div>
+							</div>
+						</div>
+						<!-- 副砲-->
+						<div class="tab-pane" id="wp-sec" role="tabpanel" aria-labelledby="tab-weapon-sec">
+							<div class="list-group">
+								<li class="list-group-item plain">
+									<div class="list_title d-flex">
+										<div class="width_60p">武器名</div>
+										<div class="width_10p text_medium">火力</div>
+										<div class="width_10p text_medium">対空</div>
+										<div class="width_10p text_medium">対潜</div>
+										<div class="width_10p text_medium">射程</div>
+									</div>
+								</li>
+								<div class="div_srcollbar">
+									<div id="wp_1st_4"></div>
+									<div id="wp_1st_21"></div>
+								</div>
+							</div>
+						</div>
+						<!-- 魚雷-->
+						<div class="tab-pane" id="wp-tor" role="tabpanel" aria-labelledby="tab-weapon-tor">
+							<div class="list-group">
+								<li class="list-group-item plain">
+									<div class="list_title d-flex">
+										<div class="width_60p">武器名</div>
+										<div class="width_10p text_medium">火力</div>
+										<div class="width_10p text_medium">対空</div>
+										<div class="width_10p text_medium">対潜</div>
+										<div class="width_10p text_medium">射程</div>
+									</div>
+								</li>
+								<div class="div_srcollbar">
+									<div id="wp_1st_32"></div>
+									<div id="wp_1st_5"></div>
+									<div id="wp_1st_22"></div>
+								</div>
+							</div>
+						</div>
+						<!-- 対潜-->
+						<div class="tab-pane" id="wp-as" role="tabpanel" aria-labelledby="tab-weapon-as">
+							<div class="list-group">
+								<li class="list-group-item plain">
+									<div class="list_title d-flex">
+										<div class="width_60p">武器名</div>
+										<div class="width_10p text_medium">火力</div>
+										<div class="width_10p text_medium">対空</div>
+										<div class="width_10p text_medium">対潜</div>
+										<div class="width_10p text_medium">射程</div>
+									</div>
+								</li>
+								<div class="div_srcollbar">
+									<div id="wp_1st_14"></div>
+									<div id="wp_1st_15"></div>
+								</div>
+							</div>
+						</div>
+						<!-- 電探-->
+						<div class="tab-pane" id="wp-rd" role="tabpanel" aria-labelledby="tab-weapon-rd">
+							<div class="list-group">
+								<li class="list-group-item plain">
+									<div class="list_title d-flex">
+										<div class="width_60p">武器名</div>
+										<div class="width_10p text_medium">火力</div>
+										<div class="width_10p text_medium">対空</div>
+										<div class="width_10p text_medium">対潜</div>
+										<div class="width_10p text_medium">射程</div>
+									</div>
+								</li>
+								<div class="div_srcollbar">
+									<div id="wp_1st_12"></div>
+									<div id="wp_1st_13"></div>
+								</div>
+							</div>
+						</div>
+						<!-- 対地-->
+						<div class="tab-pane" id="wp-ag" role="tabpanel" aria-labelledby="tab-weapon-ag">
+							<div class="list-group">
+								<li class="list-group-item plain">
+									<div class="list_title d-flex">
+										<div class="width_60p">武器名</div>
+										<div class="width_10p text_medium">火力</div>
+										<div class="width_10p text_medium">対空</div>
+										<div class="width_10p text_medium">対潜</div>
+										<div class="width_10p text_medium">射程</div>
+									</div>
+								</li>
+								<div class="div_srcollbar">
+									<div id="wp_1st_24"></div>
+									<div id="wp_1st_37"></div>
+									<div id="wp_1st_46"></div>
+									<div id="wp_1st_47"></div>
+								</div>
+							</div>
+						</div>
+						<!-- その他-->
+						<div class="tab-pane" id="wp-other" role="tabpanel" aria-labelledby="tab-weapon-other">
+							<div class="list-group">
+								<li class="list-group-item plain">
+									<div class="list_title d-flex">
+										<div class="width_60p">武器名</div>
+										<div class="width_10p text_medium">火力</div>
+										<div class="width_10p text_medium">対空</div>
+										<div class="width_10p text_medium">対潜</div>
+										<div class="width_10p text_medium">射程</div>
+									</div>
+								</li>
+								<div class="div_srcollbar">
+									<div id="wp_1st_17"></div>
+									<div id="wp_1st_30"></div>
+									<div id="wp_1st_23"></div>
+									<div id="wp_1st_39"></div>
+									<div id="wp_1st_43"></div>
+									<div id="wp_1st_18"></div>
+									<div id="wp_1st_19"></div>
+									<div id="wp_1st_27"></div>
+									<div id="wp_1st_28"></div>
+									<div id="wp_1st_36"></div>
+									<div id="wp_1st_29"></div>
+									<div id="wp_1st_31"></div>
+									<div id="wp_1st_33"></div>
+									<div id="wp_1st_34"></div>
+									<div id="wp_1st_35"></div>
+									<div id="wp_1st_44"></div>
+									<div id="wp_1st_48"></div>
+									<div id="wp_1st_49"></div>
+									<div id="wp_1st_50"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" onclick="weapon_discard()">はずす</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 </body>
