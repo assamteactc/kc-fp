@@ -1976,6 +1976,5 @@ function screen_shot1(){
   html2canvas($('#screen_shot1_start'),{onrendered:function(canvas){
     let imgData =canvas.toDataURL();
     $('#screen_shot1_result')[0].src=imgData;
-
   }});
 }
