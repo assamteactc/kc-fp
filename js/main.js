@@ -313,15 +313,15 @@ function ship_open(param) {
   document.getElementById("friend_" + friendid + "_base_luck").value = result[14];
 
 
-//命中項計算
-  i = 90+Math.floor(Math.sqrt(99) * 2 + 1.5 * Math.sqrt(Number(result[14]))); //命中項計算
+  //命中項計算
+  i = 90 + Math.floor(Math.sqrt(99) * 2 + 1.5 * Math.sqrt(Number(result[14]))); //命中項計算
   document.getElementById("ship_" + friendid + "_hit").innerHTML = i;
-  content=$('<p>■命中項(昼砲撃) = 90 + 2 × √(レベル) + 1.5 × √(運) + 装備命中値 + 装備改修(命中)<br>　※小数点以下は切り捨て</p><p>■計算結果<br>'+ i + ' = 90 + 2 × √(99) + 1.5 × √('+ result[14] + ') + 0 + 0</p>');
-  $('#ship_' + friendid + '_hit').data('powertipjq',content);
+  content = $('<p>■命中項(昼砲撃) = 90 + 2 × √(レベル) + 1.5 × √(運) + 装備命中値 + 装備改修(命中)<br>　※小数点以下は切り捨て</p><p>■計算結果<br>' + i + ' = 90 + 2 × √(99) + 1.5 × √(' + result[14] + ') + 0 + 0</p>');
+  $('#ship_' + friendid + '_hit').data('powertipjq', content);
   $('#ship_' + friendid + '_hit').powerTip({
-    openEvents:['click'],
-    closeEvents:['click'],
-    placement :'s'
+    openEvents: ['click'],
+    closeEvents: ['click'],
+    placement: 's'
   });
 
   switch (Number(result[16])) {
@@ -339,49 +339,49 @@ function ship_open(param) {
       break;
   }
 
-//火力計算
-  content=$('<p>■計算式(砲撃攻撃力)<br>砲撃攻撃力 = 火力 + 装備改修(砲撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>'+ (Number(result[5]) +5) + ' = '+ result[5] + ' + 0 + 5</p>');
-  $('#ship_' + friendid + '_basefp').data('powertipjq',content);
+  //火力計算
+  content = $('<p>■計算式(砲撃攻撃力)<br>砲撃攻撃力 = 火力 + 装備改修(砲撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>' + (Number(result[5]) + 5) + ' = ' + result[5] + ' + 0 + 5</p>');
+  $('#ship_' + friendid + '_basefp').data('powertipjq', content);
   $('#ship_' + friendid + '_basefp').powerTip({
-    openEvents:['click'],
-    closeEvents:['click'],
-    placement :'s'
+    openEvents: ['click'],
+    closeEvents: ['click'],
+    placement: 's'
   });
   document.getElementById("ship_" + friendid + "_basefp").innerHTML = Number(result[5]) + 5;
 
   //雷撃計算
   if (result[6] == "0") {
     document.getElementById("ship_" + friendid + "_baseth").innerHTML = 0;
-    content=$('<p>■計算式(雷撃攻撃力)<br>雷撃攻撃力 = 雷撃 + 装備改修(雷撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>0 = 0 + 0 + 0</p>');
+    content = $('<p>■計算式(雷撃攻撃力)<br>雷撃攻撃力 = 雷撃 + 装備改修(雷撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>0 = 0 + 0 + 0</p>');
   } else {
     document.getElementById("ship_" + friendid + "_baseth").innerHTML = Number(result[6]) + 5;
-    content=$('<p>■計算式(雷撃攻撃力)<br>雷撃攻撃力 = 雷撃 + 装備改修(雷撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>'+ (Number(result[6]) +5) + ' = '+ result[6] + ' + 0 + 5</p>');
+    content = $('<p>■計算式(雷撃攻撃力)<br>雷撃攻撃力 = 雷撃 + 装備改修(雷撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>' + (Number(result[6]) + 5) + ' = ' + result[6] + ' + 0 + 5</p>');
   }
-  $('#ship_' + friendid + '_baseth').data('powertipjq',content);
+  $('#ship_' + friendid + '_baseth').data('powertipjq', content);
   $('#ship_' + friendid + '_baseth').powerTip({
-    openEvents:['click'],
-    closeEvents:['click'],
-    placement :'s'
+    openEvents: ['click'],
+    closeEvents: ['click'],
+    placement: 's'
   });
 
   //対潜計算
-  i = 2*Math.sqrt(Number(result[9]))+13;
-  content=$('<p>■計算式(対潜攻撃力)<br>対潜攻撃力 = 対潜シナジー補正 × ( √(素対潜) × 2 + 装備対潜 × 1.5 + 装備改修(対潜) + 艦種別定数 )</p><p>■計算結果<br>'+Math.floor(i*100000)/100000+' = 1 × ( √('+result[9]+') × 2 + 0 × 1.5 + 0 + 13 )</p>');
-  $('#ship_' + friendid + '_baseas').data('powertipjq',content);
+  i = 2 * Math.sqrt(Number(result[9])) + 13;
+  content = $('<p>■計算式(対潜攻撃力)<br>対潜攻撃力 = 対潜シナジー補正 × ( √(素対潜) × 2 + 装備対潜 × 1.5 + 装備改修(対潜) + 艦種別定数 )</p><p>■計算結果<br>' + Math.floor(i * 100000) / 100000 + ' = 1 × ( √(' + result[9] + ') × 2 + 0 × 1.5 + 0 + 13 )</p>');
+  $('#ship_' + friendid + '_baseas').data('powertipjq', content);
   $('#ship_' + friendid + '_baseas').powerTip({
-    openEvents:['click'],
-    closeEvents:['click'],
-    placement :'s'
+    openEvents: ['click'],
+    closeEvents: ['click'],
+    placement: 's'
   });
-  document.getElementById("ship_" + friendid + "_baseas").innerHTML = Math.floor(i*100)/100;
+  document.getElementById("ship_" + friendid + "_baseas").innerHTML = Math.floor(i * 100) / 100;
 
   //夜戦計算
-  content=$('<p>■計算式(夜戦攻撃力)<br>夜戦攻撃力 = 火力 + 雷装 + 装備改修(夜戦)　</p><p>■計算結果<br>'+ (Number(result[5]) + Number(result[6])) + ' = '+ result[5] + ' + ' + result[6] + ' + 0 </p>');
-  $('#ship_' + friendid + '_basenp').data('powertipjq',content);
+  content = $('<p>■計算式(夜戦攻撃力)<br>夜戦攻撃力 = 火力 + 雷装 + 装備改修(夜戦)　</p><p>■計算結果<br>' + (Number(result[5]) + Number(result[6])) + ' = ' + result[5] + ' + ' + result[6] + ' + 0 </p>');
+  $('#ship_' + friendid + '_basenp').data('powertipjq', content);
   $('#ship_' + friendid + '_basenp').powerTip({
-    openEvents:['click'],
-    closeEvents:['click'],
-    placement :'s'
+    openEvents: ['click'],
+    closeEvents: ['click'],
+    placement: 's'
   });
   document.getElementById("ship_" + friendid + "_basenp").innerHTML = Number(result[5]) + Number(result[6]);
   document.getElementById("md_" + friendid + "_wp_friend").value = result[1] + ':' + result[0] + ':' + result[2];
@@ -1255,8 +1255,8 @@ function friend_status_update(friendid) {
   let bonus;
   let setbonus;
   let status;
-  let lv=Number(document.getElementById("ship_" + friendid + "_lv").innerHTML);
-  let luck=Number(document.getElementById("ship_" + friendid + "_luck").innerHTML);
+  let lv = Number(document.getElementById("ship_" + friendid + "_lv").innerHTML);
+  let luck = Number(document.getElementById("ship_" + friendid + "_luck").innerHTML);
   let fp;
   let th;
 
@@ -1307,14 +1307,14 @@ function friend_status_update(friendid) {
   param[4] = Number(base[10]) + Number(slot0[8]) + Number(slot0[16]) + Number(slot1[8]) + Number(slot1[16]) + Number(slot2[8]) + Number(slot2[16]) + Number(slot3[8]) + Number(slot3[16]) + Number(slot4[8]) + Number(slot4[16]) + Number(slot5[8]) + Number(slot5[16])
   //命中項計算
   bonus = Math.floor(param[5]) + Number(slot0[9]) + Number(slot1[9]) + Number(slot2[9]) + Number(slot3[9]) + Number(slot4[9]) + Number(slot5[9]);
-  improve=get_hit_improve(slot0[1], slot0[2], slot0[3]) + get_hit_improve(slot1[1], slot1[2], slot1[3]) + get_hit_improve(slot2[1], slot2[2], slot2[3]) + get_hit_improve(slot3[1], slot3[2], slot3[3]) + get_hit_improve(slot4[1], slot4[2], slot4[3]) + get_hit_improve(slot5[1], slot5[2], slot5[3]);
-  param[5] =Math.floor(90+ 2 * Math.sqrt(lv) + 1.5 * Math.sqrt(luck)+bonus+improve);
-  content=$('<p>■命中項(昼砲撃) = 90 + 2 × √(レベル) + 1.5 × √(運) + 装備命中値 + 装備改修(命中)<br>　※小数点以下は切り捨て</p><p>■計算結果<br>'+ param[5] + ' = 90 + 2 × √('+lv+') + 1.5 × √('+ luck + ') + '+ bonus +' + '+Math.floor(improve*10000)/10000+'</p>');
-  $('#ship_' + friendid + '_hit').data('powertipjq',content);
+  improve = get_hit_improve(slot0[1], slot0[2], slot0[3]) + get_hit_improve(slot1[1], slot1[2], slot1[3]) + get_hit_improve(slot2[1], slot2[2], slot2[3]) + get_hit_improve(slot3[1], slot3[2], slot3[3]) + get_hit_improve(slot4[1], slot4[2], slot4[3]) + get_hit_improve(slot5[1], slot5[2], slot5[3]);
+  param[5] = Math.floor(90 + 2 * Math.sqrt(lv) + 1.5 * Math.sqrt(luck) + bonus + improve);
+  content = $('<p>■命中項(昼砲撃) = 90 + 2 × √(レベル) + 1.5 × √(運) + 装備命中値 + 装備改修(命中)<br>　※小数点以下は切り捨て</p><p>■計算結果<br>' + param[5] + ' = 90 + 2 × √(' + lv + ') + 1.5 × √(' + luck + ') + ' + bonus + ' + ' + Math.floor(improve * 10000) / 10000 + '</p>');
+  $('#ship_' + friendid + '_hit').data('powertipjq', content);
   $('#ship_' + friendid + '_hit').powerTip({
-    openEvents:['click'],
-    closeEvents:['click'],
-    placement :'s'
+    openEvents: ['click'],
+    closeEvents: ['click'],
+    placement: 's'
   });
 
   //射程計算
@@ -1322,54 +1322,54 @@ function friend_status_update(friendid) {
   //砲撃攻撃力計算
   param[8] = Number(base[2]) + Number(slot0[4]) + Number(slot1[4]) + Number(slot2[4]) + Number(slot3[4]) + Number(slot4[4]) + Number(slot5[4]) + Number(slot0[12]) + Number(slot1[12]) + Number(slot2[12]) + Number(slot3[12]) + Number(slot4[12]) + Number(slot5[12]);
   fp = param[8];
-  improve=get_fp_improve(slot0[1], slot0[2], slot0[3]) + get_fp_improve(slot1[1], slot1[2], slot1[3]) + get_fp_improve(slot2[1], slot2[2], slot2[3]) + get_fp_improve(slot3[1], slot3[2], slot3[3]) + get_fp_improve(slot4[1], slot4[2], slot4[3]) + get_fp_improve(slot5[1], slot5[2], slot5[3]);
+  improve = get_fp_improve(slot0[1], slot0[2], slot0[3]) + get_fp_improve(slot1[1], slot1[2], slot1[3]) + get_fp_improve(slot2[1], slot2[2], slot2[3]) + get_fp_improve(slot3[1], slot3[2], slot3[3]) + get_fp_improve(slot4[1], slot4[2], slot4[3]) + get_fp_improve(slot5[1], slot5[2], slot5[3]);
   param[8] += 5 + improve;
-  content=$('<p>■計算式(砲撃攻撃力)<br>砲撃攻撃力 = 火力 + 装備改修(砲撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>'+ Math.floor(param[8] * 10000) / 10000 + ' = '+ fp + ' + ' + Math.floor(improve*10000)/10000 + ' + 5</p>');
-  $('#ship_' + friendid + '_basefp').data('powertipjq',content);
+  content = $('<p>■計算式(砲撃攻撃力)<br>砲撃攻撃力 = 火力 + 装備改修(砲撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>' + Math.floor(param[8] * 10000) / 10000 + ' = ' + fp + ' + ' + Math.floor(improve * 10000) / 10000 + ' + 5</p>');
+  $('#ship_' + friendid + '_basefp').data('powertipjq', content);
   $('#ship_' + friendid + '_basefp').powerTip({
-    openEvents:['click'],
-    closeEvents:['click'],
-    placement :'s'
+    openEvents: ['click'],
+    closeEvents: ['click'],
+    placement: 's'
   });
   param[8] = Math.floor(param[8] * 100) / 100;
   //雷装攻撃力計算
   param[9] = Number(base[3]) + Number(slot0[5]) + Number(slot1[5]) + Number(slot2[5]) + Number(slot3[5]) + Number(slot4[5]) + Number(slot5[5]) + Number(slot0[13]) + Number(slot1[13]) + Number(slot2[13]) + Number(slot3[13]) + Number(slot4[13]) + Number(slot5[13]);
   th = param[9];
-  improve=get_th_improve(slot0[1], slot0[2], slot0[3]) + get_th_improve(slot1[1], slot1[2], slot1[3]) + get_th_improve(slot2[1], slot2[2], slot2[3]) + get_th_improve(slot3[1], slot3[2], slot3[3]) + get_th_improve(slot4[1], slot4[2], slot4[3]) + get_th_improve(slot5[1], slot5[2], slot5[3]);
+  improve = get_th_improve(slot0[1], slot0[2], slot0[3]) + get_th_improve(slot1[1], slot1[2], slot1[3]) + get_th_improve(slot2[1], slot2[2], slot2[3]) + get_th_improve(slot3[1], slot3[2], slot3[3]) + get_th_improve(slot4[1], slot4[2], slot4[3]) + get_th_improve(slot5[1], slot5[2], slot5[3]);
   param[9] += 5 + improve;
-  content=$('<p>■計算式(雷撃攻撃力)<br>雷撃攻撃力 = 雷撃 + 装備改修(雷撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>'+ Math.floor(param[9] * 10000) / 10000 + ' = '+ th + ' + ' + Math.floor(improve*10000)/10000 + ' + 5</p>');
-  $('#ship_' + friendid + '_baseth').data('powertipjq',content);
+  content = $('<p>■計算式(雷撃攻撃力)<br>雷撃攻撃力 = 雷撃 + 装備改修(雷撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>' + Math.floor(param[9] * 10000) / 10000 + ' = ' + th + ' + ' + Math.floor(improve * 10000) / 10000 + ' + 5</p>');
+  $('#ship_' + friendid + '_baseth').data('powertipjq', content);
   $('#ship_' + friendid + '_baseth').powerTip({
-    openEvents:['click'],
-    closeEvents:['click'],
-    placement :'s'
+    openEvents: ['click'],
+    closeEvents: ['click'],
+    placement: 's'
   });
   param[9] = Math.floor(param[9] * 100) / 100;
   //対潜攻撃力計算
-  status=Number(as[0]) + Number(as[1]);
-  bonus=get_as(slot1[1], slot1[7]) + get_as(slot2[1], slot2[7]) + get_as(slot3[1], slot3[7]) + get_as(slot4[1], slot4[7]);
-  improve= get_as_improve(slot1[1], slot1[2], slot1[3]) + get_as_improve(slot2[1], slot2[2], slot2[3]) + get_as_improve(slot3[1], slot3[2], slot3[3]) + get_as_improve(slot4[1], slot4[2], slot4[3]);
-  setbonus=get_as_synergy(slot1[0], slot2[0], slot3[0], slot4[0]);
-  param[10] = (13 + 2 * Math.sqrt(status)+bonus*1.5+improve)*setbonus;
-  content=$('<p>■計算式(対潜攻撃力)<br>対潜攻撃力 = 対潜シナジー補正 × ( √(素対潜) × 2 + 装備対潜 × 1.5 + 装備強化値(対潜) + 艦種別定数 )</p><p>■計算結果<br>'+Math.floor(param[10]*10000)/10000+' = '+ setbonus +' × ( √('+status+') × 2 + '+bonus+' × 1.5 + '+Math.floor(improve*10000)/10000+' + 13 )</p>');
-  $('#ship_' + friendid + '_baseas').data('powertipjq',content);
+  status = Number(as[0]) + Number(as[1]);
+  bonus = get_as(slot1[1], slot1[7]) + get_as(slot2[1], slot2[7]) + get_as(slot3[1], slot3[7]) + get_as(slot4[1], slot4[7]);
+  improve = get_as_improve(slot1[1], slot1[2], slot1[3]) + get_as_improve(slot2[1], slot2[2], slot2[3]) + get_as_improve(slot3[1], slot3[2], slot3[3]) + get_as_improve(slot4[1], slot4[2], slot4[3]);
+  setbonus = get_as_synergy(slot1[0], slot2[0], slot3[0], slot4[0]);
+  param[10] = (13 + 2 * Math.sqrt(status) + bonus * 1.5 + improve) * setbonus;
+  content = $('<p>■計算式(対潜攻撃力)<br>対潜攻撃力 = 対潜シナジー補正 × ( √(素対潜) × 2 + 装備対潜 × 1.5 + 装備強化値(対潜) + 艦種別定数 )</p><p>■計算結果<br>' + Math.floor(param[10] * 10000) / 10000 + ' = ' + setbonus + ' × ( √(' + status + ') × 2 + ' + bonus + ' × 1.5 + ' + Math.floor(improve * 10000) / 10000 + ' + 13 )</p>');
+  $('#ship_' + friendid + '_baseas').data('powertipjq', content);
   $('#ship_' + friendid + '_baseas').powerTip({
-    openEvents:['click'],
-    closeEvents:['click'],
-    placement :'s'
+    openEvents: ['click'],
+    closeEvents: ['click'],
+    placement: 's'
   });
-  param[10] =Math.floor(param[10]*100)/100;
+  param[10] = Math.floor(param[10] * 100) / 100;
   //夜戦攻撃力計算
-  improve=get_np_improve(slot0[1], slot0[2], slot0[3]) + get_np_improve(slot1[1], slot1[2], slot1[3]) + get_np_improve(slot2[1], slot2[2], slot2[3]) + get_np_improve(slot3[1], slot3[2], slot3[3]) + get_np_improve(slot4[1], slot4[2], slot4[3]) + get_np_improve(slot5[1], slot5[2], slot5[3]);
-  param[11] =fp+th+improve;
-  content=$('<p>■計算式(夜戦攻撃力)<br>夜戦攻撃力 = 火力 + 雷装 + 改修強化値(夜戦)　</p><p>■計算結果<br>'+Math.floor(param[11]*10000)/10000 + ' = '+ fp + ' + ' + th + ' + ' + Math.floor(improve*10000)/10000+'</p>');
-  $('#ship_' + friendid + '_basenp').data('powertipjq',content);
+  improve = get_np_improve(slot0[1], slot0[2], slot0[3]) + get_np_improve(slot1[1], slot1[2], slot1[3]) + get_np_improve(slot2[1], slot2[2], slot2[3]) + get_np_improve(slot3[1], slot3[2], slot3[3]) + get_np_improve(slot4[1], slot4[2], slot4[3]) + get_np_improve(slot5[1], slot5[2], slot5[3]);
+  param[11] = fp + th + improve;
+  content = $('<p>■計算式(夜戦攻撃力)<br>夜戦攻撃力 = 火力 + 雷装 + 改修強化値(夜戦)　</p><p>■計算結果<br>' + Math.floor(param[11] * 10000) / 10000 + ' = ' + fp + ' + ' + th + ' + ' + Math.floor(improve * 10000) / 10000 + '</p>');
+  $('#ship_' + friendid + '_basenp').data('powertipjq', content);
   $('#ship_' + friendid + '_basenp').powerTip({
-    openEvents:['click'],
-    closeEvents:['click'],
-    placement :'s'
+    openEvents: ['click'],
+    closeEvents: ['click'],
+    placement: 's'
   });
-   param[11]=Math.floor(param[11] * 100) / 100;
+  param[11] = Math.floor(param[11] * 100) / 100;
 
 
   //パラメータ書き出し
@@ -1966,15 +1966,33 @@ function friend_all_close() {
 //////////////////////////////////////////////////////
 //ツールチップ表示用
 $(function() {
-    $('.tool_icons').powerTip({
-      placement :'n'
-    });
+  $('.tool_icons').powerTip({
+    placement: 'n'
+  });
 });
 
 //スクリーンショット
-function screen_shot1(){
-  html2canvas($('#screen_shot1_start'),{onrendered:function(canvas){
-    let imgData =canvas.toDataURL();
-    $('#screen_shot1_result')[0].src=imgData;
-  }});
+function screen_shot1() {
+  html2canvas(document.getElementById("#screen_shot1_start")).then(function(canvas) {
+    downloadImage(canvas.toDataURL());
+  });
+}
+function downloadImage(data) {
+  var fname = "testimage.png";
+  var encdata = atob(data.replace(/^.*,/, ''));
+  var outdata = new Uint8Array(encdata.length);
+  for (var i = 0; i < encdata.length; i++) {
+    outdata[i] = encdata.charCodeAt(i);
+  }
+  var blob = new Blob([outdata], ["image/png"]);
+
+  if (window.navigator.msSaveBlob) {
+    //IE用
+    window.navigator.msSaveOrOpenBlob(blob, fname);
+  } else {
+    //それ以外？
+    document.getElementById("getImage").href = data; //base64そのまま設定
+    document.getElementById("getImage").download = fname; //ダウンロードファイル名設定
+    document.getElementById("getImage").click(); //自動クリック
+  }
 }
