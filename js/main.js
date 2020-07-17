@@ -306,7 +306,7 @@ function ship_open(param) {
   document.getElementById("ship_" + friendid + "_pw").innerHTML = result[5];
   document.getElementById("ship_" + friendid + "_th").innerHTML = result[6];
   document.getElementById("ship_" + friendid + "_aa").innerHTML = result[7];
-  document.getElementById("ship_" + friendid + "_as").value = result[9];
+  document.getElementById("ship_" + friendid + "_as").innerHTML = result[9];
   document.getElementById("friend_" + friendid + "_base_as").value = result[9] + ":0";
   document.getElementById("ship_" + friendid + "_search").innerHTML = result[13];
   document.getElementById("ship_" + friendid + "_luck").innerHTML = result[14];
@@ -1376,7 +1376,7 @@ function friend_status_update(friendid) {
   document.getElementById("ship_" + friendid + "_pw").innerHTML = param[0];
   document.getElementById("ship_" + friendid + "_th").innerHTML = param[1];
   document.getElementById("ship_" + friendid + "_aa").innerHTML = param[2];
-  document.getElementById("ship_" + friendid + "_as").value = param[3];
+  document.getElementById("ship_" + friendid + "_as").innerHTML = param[3];
   document.getElementById("ship_" + friendid + "_search").innerHTML = param[4];
   document.getElementById("ship_" + friendid + "_hit").innerHTML = param[5];
   switch (param[7]) {
@@ -1973,26 +1973,64 @@ $(function() {
 
 //スクリーンショット
 function screen_shot1() {
-  html2canvas(document.getElementById("#screen_shot1_start")).then(function(canvas) {
-    downloadImage(canvas.toDataURL());
-  });
-}
-function downloadImage(data) {
-  var fname = "testimage.png";
-  var encdata = atob(data.replace(/^.*,/, ''));
-  var outdata = new Uint8Array(encdata.length);
-  for (var i = 0; i < encdata.length; i++) {
-    outdata[i] = encdata.charCodeAt(i);
-  }
-  var blob = new Blob([outdata], ["image/png"]);
+  $('.weapon_list').addClass("weapon_list_shot");
+  $('.weapon_list_shot').removeClass("weapon_list");
+  $('.wp_slot_img').addClass("wp_slot_img_shot");
+  $('.wp_slot_img_shot').removeClass("wp_slot_img");
+  $('.wp_release_all').addClass("wp_release_all_shot");
+  $('.wp_release_all_shot').removeClass("wp_release_all");
+  $('.wp_release_line').addClass("wp_release_line_shot");
+  $('.wp_release_line_shot').removeClass("wp_release_line");
+  $('.wp_slot_release').hide();
+  $('.ship_close').hide();
+  $('.ship_list').addClass("ship_list_shot");
+  $('.ship_list_shot').removeClass("ship_list");
+  $('.ship_status').addClass("ship_status_shot");
+  $('.ship_status_shot').removeClass("ship_status");
+  $('.linkbox').addClass("linkbox_shot");
+  $('.linkbox_shot').removeClass("linkbox");
+  $('.kan_frame_selected').addClass("kan_frame_selected_shot");
+  $('.kan_frame_selected_shot').removeClass("kan_frame_selected");
+  $('.kan_frame').addClass("kan_frame_shot");
+  $('.kan_frame_shot').removeClass("kan_frame");
+  $('.select').addClass("select_shot");
+  $('.select_shot').removeClass("select");
+  $('.wp_slot_name').addClass("wp_slot_name_shot");
+  $('.wp_slot_name_shot').removeClass("wp_slot_name");
+  $('.ship_param_label_a').css("padding-top","2px");
+  $('.ship_param_label_b').css("padding-top","2px");
+  $('.ship_param_label_c').css("padding-top","2px");
 
-  if (window.navigator.msSaveBlob) {
-    //IE用
-    window.navigator.msSaveOrOpenBlob(blob, fname);
-  } else {
-    //それ以外？
-    document.getElementById("getImage").href = data; //base64そのまま設定
-    document.getElementById("getImage").download = fname; //ダウンロードファイル名設定
-    document.getElementById("getImage").click(); //自動クリック
-  }
+  html2canvas(document.querySelector("#screen_shot1_start"), {}).then(canvas => {
+    document.body.appendChild(canvas)
+  });
+
+  $('.weapon_list_shot').addClass("weapon_list");
+  $('.weapon_list').removeClass("weapon_list_shot");
+  $('.wp_slot_img_shot').addClass("wp_slot_img");
+  $('.wp_slot_img').removeClass("wp_slot_img_shot");
+  $('.wp_release_all_shot').addClass("wp_release_all");
+  $('.wp_release_all').removeClass("wp_release_all_shot");
+  $('.wp_release_line_shot').addClass("wp_release_line");
+  $('.wp_release_line').removeClass("wp_release_line_shot");
+  $('.wp_slot_release').show();
+  $('.ship_close').show();
+  $('.ship_list_shot').addClass("ship_list");
+  $('.ship_list').removeClass("ship_list_shot");
+  $('.ship_status_shot').addClass("ship_status");
+  $('.ship_status').removeClass("ship_status_shot");
+  $('.linkbox_shot').addClass("linkbox");
+  $('.linkbox').removeClass("linkbox_shot");
+  $('.kan_frame_selected_shot').addClass("kan_frame_selected");
+  $('.kan_frame_selected').removeClass("kan_frame_selected_shot");
+  $('.kan_frame_shot').addClass("kan_frame");
+  $('.kan_frame').removeClass("kan_frame_shot");
+  $('.select_shot').addClass("select");
+  $('.select').removeClass("select_shot");
+  $('.wp_slot_name_shot').addClass("wp_slot_name");
+  $('.wp_slot_name').removeClass("wp_slot_name_shot");
+  $('.ship_param_label_a').css("padding-top","5px");
+  $('.ship_param_label_b').css("padding-top","5px");
+  $('.ship_param_label_c').css("padding-top","5px");
+
 }

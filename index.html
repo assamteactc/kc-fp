@@ -18,6 +18,7 @@
 	<script defer src="./js/bootstrap.bundle.min.js"></script>
 	<script defer src="./js/jquery.csv.min.js"></script>
 	<script defer src="./js/html2canvas.min.js"></script>
+	<script defer src="./js/cdn.polyfill.io/v2/polyfill.min.js"></script>
 	<script defer src="./js/jquery.powertip.min.js"></script>
 	<script defer src="./js/main.js"></script>
 </head>
@@ -29,7 +30,6 @@
 		</div>
 	</nav>
 	<div class=main>
-		<div id="screen_shot1_start">
 			<div class="main_frame">
 				<div id="friend">
 					<div class="d-flex" style="padding:24px 0 0 24px;">
@@ -44,13 +44,14 @@
 								</div>
 							</div>
 							<div>
-								<a id="getImage" href="" style="display:none" download="image.png">
 								<a class="tool_icons" href="javascript:void(0);" onclick="screen_shot1();" title="編成画面の画像を保存する"><img src="./img/util/photo_camera.png"></a>&nbsp;&nbsp;&nbsp;<a class="tool_icons" href="javascript:void(0);" onclick="friend_all_close();" title="艦娘を全て閉じる"><img src="./img/util/delete.png"></a>
+								<a id="screen_shot1_result" href=""  style="display:none;"  download="test-image.png">画像保存</a>
 							</div>
 						</div>
 						<hr>
 					</div>
 					<hr>
+					<div id="screen_shot1_start">
 					<div class="d-flex flex-wrap">
 						<!-- 艦リスト[旗艦] -->
 
@@ -113,7 +114,7 @@
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_a">対潜</div>
-															<div class="ship_param_a"><input type="button" id="ship_1_as"></div>
+															<div class="ship_param_a"><span class="status_result" id="ship_1_as"></span></div>
 														</div>
 													</div>
 												</div>
@@ -169,7 +170,7 @@
 									</div>
 								</div>
 								<div class="d-flex flex-column flex-row-reverse" style="width:26px;height:276px;padding-right:2px;">
-									<div><a href="javascript:void(0);" onclick="ship_release(1);"><img src="./img/util/close.png"></a></div>
+									<div><a class="ship_close" href="javascript:void(0);" onclick="ship_release(1);"><img src="./img/util/close.png"></a></div>
 								</div>
 							</div>
 						</div>
@@ -233,7 +234,7 @@
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_a">対潜</div>
-															<div class="ship_param_a"><input type="button" id="ship_2_as"></div>
+															<div class="ship_param_a"><span class="status_result" id="ship_2_as"></span></div>
 														</div>
 													</div>
 												</div>
@@ -289,7 +290,7 @@
 									</div>
 								</div>
 								<div class="d-flex flex-column flex-row-reverse" style="width:26px;height:276px;padding-right:2px;">
-									<div><a href="javascript:void(0);" onclick="ship_release(2);"><img src="./img/util/close.png"></a></div>
+									<div><a class="ship_close" href="javascript:void(0);" onclick="ship_release(2);"><img src="./img/util/close.png"></a></div>
 								</div>
 							</div>
 						</div>
@@ -354,7 +355,7 @@
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_a">対潜</div>
-															<div class="ship_param_a"><input type="button" id="ship_3_as"></div>
+															<div class="ship_param_a"><span class="status_result" id="ship_3_as"></span></div>
 														</div>
 													</div>
 												</div>
@@ -410,7 +411,7 @@
 									</div>
 								</div>
 								<div class="d-flex flex-column flex-row-reverse" style="width:26px;height:276px;padding-right:2px;">
-									<div><a href="javascript:void(0);" onclick="ship_release(3);"><img src="./img/util/close.png"></a></div>
+									<div><a class="ship_close" href="javascript:void(0);" onclick="ship_release(3);"><img src="./img/util/close.png"></a></div>
 								</div>
 							</div>
 						</div>
@@ -477,7 +478,7 @@
 															</div>
 															<div class="d-flex">
 																<div class="ship_param_label_a">対潜</div>
-																<div class="ship_param_a"><input type="button" id="ship_4_as"></div>
+																<div class="ship_param_a"><span class="status_result" id="ship_4_as"></span></div>
 															</div>
 														</div>
 													</div>
@@ -533,7 +534,7 @@
 										</div>
 									</div>
 									<div class="d-flex flex-column flex-row-reverse" style="width:26px;height:276px;padding-right:2px;">
-										<div><a href="javascript:void(0);" onclick="ship_release(4);"><img src="./img/util/close.png"></a></div>
+										<div><a class="ship_close" href="javascript:void(0);" onclick="ship_release(4);"><img src="./img/util/close.png"></a></div>
 									</div>
 								</div>
 							</div>
@@ -599,7 +600,7 @@
 															</div>
 															<div class="d-flex">
 																<div class="ship_param_label_a">対潜</div>
-																<div class="ship_param_a"><input type="button" id="ship_5_as"></div>
+																<div class="ship_param_a"><span class="status_result" id="ship_5_as"></span></div>
 															</div>
 														</div>
 													</div>
@@ -655,7 +656,7 @@
 										</div>
 									</div>
 									<div class="d-flex flex-column flex-row-reverse" style="width:26px;height:276px;padding-right:2px;">
-										<div><a href="javascript:void(0);" onclick="ship_release(5);"><img src="./img/util/close.png"></a></div>
+										<div><a class="ship_close" href="javascript:void(0);" onclick="ship_release(5);"><img src="./img/util/close.png"></a></div>
 									</div>
 								</div>
 							</div>
@@ -722,7 +723,7 @@
 															</div>
 															<div class="d-flex">
 																<div class="ship_param_label_a">対潜</div>
-																<div class="ship_param_a"><input type="button" id="ship_6_as"></div>
+																<div class="ship_param_a"><span class="status_result" id="ship_6_as"></span></div>
 															</div>
 														</div>
 													</div>
@@ -778,7 +779,7 @@
 										</div>
 									</div>
 									<div class="d-flex flex-column flex-row-reverse" style="width:26px;height:276px;padding-right:2px;">
-										<div><a href="javascript:void(0);" onclick="ship_release(6);"><img src="./img/util/close.png"></a></div>
+										<div><a class="ship_close" href="javascript:void(0);" onclick="ship_release(6);"><img src="./img/util/close.png"></a></div>
 									</div>
 								</div>
 							</div>
@@ -1071,8 +1072,6 @@
 			</div>
 		</div>
 	</div>
-
-	<div id="screen_shot1_result"></div>
 
 </body>
 

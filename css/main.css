@@ -64,6 +64,21 @@ body {
   border: 1px solid #D3DBE2;
   box-shadow: 1px 1px 2px -1px #898989;
 }
+.kan_frame_shot {
+  width: 450px;
+  height: 278px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 1px solid #D3DBE2;
+}
+
+
 
 .kan_frame_selected {
   width: 450px;
@@ -79,6 +94,20 @@ body {
   border: 1px solid #D3DBE2;
   box-shadow: 1px 1px 2px -1px #898989;
 }
+.kan_frame_selected_shot {
+  width: 450px;
+  height: 278px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 1px solid #D3DBE2;
+}
+
 
 #friend_1{
   padding:0 12px 12px 12px;
@@ -323,6 +352,10 @@ text-shadow:0 0 3px #00A5BF;
 .select:focus {
   outline: 0;
 }
+.select_shot{
+  display:none;
+}
+
 .ship_list {
   margin: 0px;
   padding: 0px;
@@ -343,9 +376,15 @@ text-shadow:0 0 3px #00A5BF;
   transition: .5s;
   border: solid 2px #FFFFFF;
 }
-
 .ship_list a:hover img {
   border: solid 2px #5AC2D9;
+}
+
+.shit_list_shot a img {
+  margin-left: 2px;
+  margin-top: -10px;
+  padding: 0px;
+  border: 0;
 }
 
 .linkbox {
@@ -355,13 +394,18 @@ text-shadow:0 0 3px #00A5BF;
   height: 26px;
   border-bottom: solid 1px white;
 }
-
 .linkbox:hover {
   color: #5AC2D9;
   cursor: pointer;
   cursor: hand;
   height: 22px;
   border-bottom: solid 1px #5AC2D9;
+}
+
+.linkbox_shot{
+  /* color: #5AC2D9; */
+  height: 22px;
+  border:0;
 }
 
 #wp_1_slotall_release .wp_release_line {
@@ -558,7 +602,9 @@ text-shadow:0 0 3px #00A5BF;
   border-left: solid #5AC2D9;
 }
 
-
+.wp_release_all_shot{
+  display:none;
+}
 
 .weapon_list {
   margin-top: 0;
@@ -567,6 +613,14 @@ text-shadow:0 0 3px #00A5BF;
   height: 30px;
   border-radius: 15px 5px 5px 15px;
   box-shadow: 1px 1px 0 #D3DBE2 inset;
+}
+.weapon_list_shot {
+  margin-top: 1px;
+  padding: 0;
+  width: 400px;
+  height: 28px;
+  border-radius: 14px 5px 5px 14px;
+  border:1px solid #D3DBE2;
 }
 
 .md_weapon_name {
@@ -581,8 +635,26 @@ text-shadow:0 0 3px #00A5BF;
   padding: 2px;
   box-shadow: 1px 1px 2px #A9A9A9 inset;
 }
+.wp_slot_img_shot {
+  border-radius: 14px;
+  width:28px;
+  padding:1px;
+  margin-left:-1px;
+  /* padding: 2px; */
+  border:1px solid #D3DBE2;
+}
 
 .wp_slot_name {
+  text-align: left;
+  width: 280px;
+  white-space: nowrap;
+  text-overflow: clip;
+  overflow: hidden;
+  margin-left: 3px;
+  font-size: 0.8em;
+}
+.wp_slot_name_shot {
+  padding-bottom:5px;
   text-align: left;
   width: 280px;
   white-space: nowrap;
@@ -687,13 +759,15 @@ text-shadow:0 0 3px #00A5BF;
   color: #5AC2D9;
 }
 
-.wp_slot_release input:disabled {
-  color: #D3DBE2;
+.wp_slot_release_shot  input{
+  display: none;
+  color: white;
+  background:white;
   border: 0;
   margin: 0;
   padding: 0;
-  background: none;
-  font-size: 1.0em;
+  height: 0;
+  vertical-align: middle;
 }
 
 .ship_status {
@@ -702,47 +776,49 @@ text-shadow:0 0 3px #00A5BF;
   border-right: solid 1px #EBE7E1;
   border-bottom: solid 1px #EBE7E1;
   border-radius: 8px 8px 0 0;
-  box-shadow: 1px 1px 2px #F8EED1 inset;
-  line-height:17px;
+  user-select:none;
+}
+
+.ship_status_shot {
+  /* width: 266px; */
+  margin-top: -2px;
+  border-right: solid 1px #EBE7E1;
+  border-bottom: solid 1px #EBE7E1;
+  border-radius: 8px 8px 0 0;
   user-select:none;
 }
 
 .ship_param_label_a {
   width: 30px;
   background:#F9F8E6;
-  /* margin-top: 1px; */
   color: #595455;
   font-size: .55em;
+  margin:0;
   padding-left: 2px;
-  padding-top: 3px;
+  padding-top: 5px;
   border-top: 1px solid #FFFFFE;
-  /* box-shadow: 1px 1px 0 #F8EED1 inset; */
 }
 
 .ship_param_label_b {
   width: 44px;
   background:#F9F8E6;
-  /* margin-top: 1px; */
   font-size: .55em;
   color: #595455;
   margin-left: 3px;
   padding-left: 2px;
-  padding-top: 3px;
+  padding-top: 5px;
   border-top: 1px solid #FFFFFE;
-  /* box-shadow: 1px 1px 0 #FFFFF inset; */
 }
 
 .ship_param_label_c {
   width: 70px;
   background:#F9F8E6;
-  /* margin-top: 1px; */
   font-size: .55em;
   color: #595455;
   margin-left: 3px;
   padding-left: 2px;
-  padding-top: 3px;
+  padding-top: 5px;
   border-top: 1px solid #FFFFFE;
-  /* box-shadow: 1px 1px 0 #F8EED1 inset; */
 }
 
 .ship_param_a {
@@ -754,23 +830,9 @@ text-shadow:0 0 3px #00A5BF;
   padding-top:3px;
   padding-left: 3px;
   background:#FFFFFA;
-  box-shadow:1px 1px 0 #EBE7E1 inset;
+  border-top:1px solid #EBE7E1;
+  /* box-shadow:1px 1px 0 #EBE7E1 inset; */
 }
-.ship_param_a input {
-  /* color: #02BAF1; */
-  border: 0;
-  margin: 0;
-  padding:0;
-  background: none;
-  transition:.8s;
-}
-.ship_param_a:hover input {
-  color: #02BAF1;
-}
-.ship_param_a input:focus {
-  outline: 0;
-}
-
 .ship_param_b {
   font-family: 'Roboto';
   font-size: .6em;
@@ -780,7 +842,8 @@ text-shadow:0 0 3px #00A5BF;
   padding-top:3px;
   padding-left: 3px;
   background:#FFFFFA;
-  box-shadow:1px 1px 0 #EBE7E1 inset;
+  border-top:1px solid #EBE7E1;
+  /* box-shadow:1px 1px 0 #EBE7E1 inset; */
 }
 
 .ship_param_c {
@@ -793,7 +856,8 @@ text-shadow:0 0 3px #00A5BF;
   padding-left: 3px;
   margin-right: 2px;
   background:#FFFFFA;
-  box-shadow:1px 1px 0 #EBE7E1 inset;
+  border-top:1px solid #EBE7E1;
+  /* box-shadow:1px 1px 0 #EBE7E1 inset; */
 }
 
 .ship_name{
