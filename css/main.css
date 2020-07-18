@@ -388,17 +388,19 @@ text-shadow:0 0 3px #00A5BF;
 }
 
 .linkbox {
+  font-family: 'Roboto';
+  font-size:1.1em;
   vertical-align: top;
   text-align: left;
   transition: .8s;
-  height: 26px;
+  height: 29px;
   border-bottom: solid 1px white;
 }
 .linkbox:hover {
   color: #5AC2D9;
   cursor: pointer;
   cursor: hand;
-  height: 22px;
+  height: 25px;
   border-bottom: solid 1px #5AC2D9;
 }
 
@@ -636,9 +638,9 @@ text-shadow:0 0 3px #00A5BF;
   box-shadow: 1px 1px 2px #A9A9A9 inset;
 }
 .wp_slot_img_shot {
-  border-radius: 14px;
-  width:28px;
-  padding:1px;
+  border-radius: 15px;
+  width:30px;
+  padding:2px;
   margin-left:-1px;
   /* padding: 2px; */
   border:1px solid #D3DBE2;
