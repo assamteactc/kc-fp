@@ -2001,8 +2001,15 @@ function screen_shot1() {
   $('.ship_param_label_b').css("padding-top","2px");
   $('.ship_param_label_c').css("padding-top","2px");
 
-  html2canvas(document.querySelector("#screen_shot1_start"), {}).then(canvas => {
-    document.body.appendChild(canvas)
+
+  html2canvas(document.querySelector("#screen_shot1_start"), {
+    }).then(canvas => {
+      canvas.toBlob(blob => {
+        let now=new Date();
+        let filename="screen_image_"+now.getFullYear()+now.getMonth()+now.getDate()+now.getMilliseconds()+ ".png";
+        $("#screen_shot1_result").attr("download", filename).attr("href", window.URL.createObjectURL(blob));
+        $('a#screen_shot1_result')[0].click();
+    });
   });
 
   $('.weapon_list_shot').addClass("weapon_list");
