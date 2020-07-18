@@ -1997,9 +1997,9 @@ function screen_shot1() {
   $('.select_shot').removeClass("select");
   $('.wp_slot_name').addClass("wp_slot_name_shot");
   $('.wp_slot_name_shot').removeClass("wp_slot_name");
-  $('.ship_param_label_a').css("padding-top","2px");
-  $('.ship_param_label_b').css("padding-top","2px");
-  $('.ship_param_label_c').css("padding-top","2px");
+  $('.ship_param_label_a').css("padding-top","0px");
+  $('.ship_param_label_b').css("padding-top","0px");
+  $('.ship_param_label_c').css("padding-top","0px");
 
 
   html2canvas(document.querySelector("#screen_shot1_start"), {

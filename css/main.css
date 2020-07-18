@@ -777,6 +777,7 @@ text-shadow:0 0 3px #00A5BF;
   border-bottom: solid 1px #EBE7E1;
   border-radius: 8px 8px 0 0;
   user-select:none;
+  line-height:16px;
 }
 
 .ship_status_shot {
@@ -786,6 +787,8 @@ text-shadow:0 0 3px #00A5BF;
   border-bottom: solid 1px #EBE7E1;
   border-radius: 8px 8px 0 0;
   user-select:none;
+  line-height:16px;
+
 }
 
 .ship_param_label_a {
