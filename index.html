@@ -29,31 +29,31 @@
 		</div>
 	</nav>
 	<div class=main>
-			<div class="main_frame">
-				<div id="friend">
-					<div class="d-flex" style="padding:24px 0 0 24px;">
-						<div><span class="content_title align-middle">自艦隊</span></div>
-						<div class="d-flex align-items-center justify-content-between" style="width:1300px;">
-							<!-- <div>表示隻数</div> -->
-							<div class="d-flex">
-								<div style="width:30px;"></div>
-								<div class="btn-group btn-toggle ship_switch">
-									<button class="btn btn-sm btn-default active">3隻表示</button>
-									<button class="btn btn-sm btn-dark" id="ship_extra_switch">6隻表示</button>
-								</div>
-							</div>
-							<div>
-								<a class="tool_icons" href="javascript:void(0);" onclick="screen_shot1();" title="編成画面の画像を保存する"><img src="./img/util/photo_camera.png"></a>&nbsp;&nbsp;&nbsp;<a class="tool_icons" href="javascript:void(0);" onclick="friend_all_close();" title="艦娘を全て閉じる"><img src="./img/util/delete.png"></a>
-								<a id="screen_shot1_result" href=""  style="display:none;"  download="test-image.png">画像保存</a>
+		<div class="main_frame">
+			<div id="friend">
+				<div class="d-flex" style="padding:24px 0 0 24px;">
+					<div><span class="content_title align-middle">自艦隊</span></div>
+					<div class="d-flex align-items-center justify-content-between" style="width:1440px;">
+						<!-- <div>表示隻数</div> -->
+						<div class="d-flex">
+							<div style="width:30px;"></div>
+							<div class="btn-group btn-toggle ship_switch">
+								<button class="btn btn-sm btn-default active">3隻表示</button>
+								<button class="btn btn-sm btn-dark" id="ship_extra_switch">6隻表示</button>
 							</div>
 						</div>
-						<hr>
+						<div>
+							<a class="tool_icons" href="javascript:void(0);" onclick="screen_shot1();" title="編成画面の画像を保存する"><img src="./img/util/photo_camera.png"></a>&nbsp;&nbsp;&nbsp;<a class="tool_icons" href="javascript:void(0);" onclick="friend_all_close();"
+								title="艦娘を全て閉じる"><img src="./img/util/delete.png"></a>
+							<a id="screen_shot1_result" href="" style="display:none;" download="test-image.png">画像保存</a>
+						</div>
 					</div>
 					<hr>
-					<div id="screen_shot1_start">
+				</div>
+				<hr>
+				<div id="screen_shot1_start">
 					<div class="d-flex flex-wrap">
 						<!-- 艦リスト[旗艦] -->
-
 						<div id="friend_1">
 							<div class="d-flex kan_frame ship_list bg-stlype-disable">
 								<div class="kan_frame_tag"><img src="./img/util/1.png"></div>
@@ -63,24 +63,73 @@
 						<div id="friend_1_selected" style="display:none;">
 							<input id="friend_1_param" type="hidden" />
 							<div class="d-flex flex-column flex-wrap kan_frame_selected ship_list ">
-								<div class="kan_frame_tag" style="width:26px; height:84px;"><img src="./img/util/1.png"></div>
-								<div style="width:26px; height:165px;">
+								<div class="kan_frame_tag" style="width:24px; height:106px;"><img src="./img/util/1.png"></div>
+								<div style="width:24px; height:165px;">
 									<div id="wp_1_slotall"></div>
 								</div>
-								<div class="d-flex flex-column" style="width:392px;">
+								<div class="d-flex flex-column" style="width:442px;">
+									<div style="height:10px;"></div>
 									<div class="d-flex">
-										<div class="d-flex flex-column" style="height:88px;">
-											<div style="width:130px;height:27px;">
+										<div class="d-flex flex-column" style="height:100px;">
+											<div style="width:140px;height:27px;">
 												<div class="ship_name"><span id="ship_1_name"></span></div>
 											</div>
-											<div class="d-flex" style="width:130px;height:30px;">
+											<div class="d-flex" style="width:140px;height:30px;padding-right:6px;">
 												<div>
 													<a href="#"><img id="ship_1_face" data-toggle="modal" data-target="#ｍodal_friend" data-friendid="1"></a>
 												</div>
 											</div>
 											<div class="d-flex" style="width:130px;height:20px;">
-												<div class="d-flex flex-row-reverse" style="width:124px;font-size:0.8em;">
-													<div class="linkbox"><span style="color:#5AC2D9;">Lv:&nbsp;</span><span><span id="ship_1_lv"></span></span></div>
+												<div class="d-flex flex-row-reverse" style="width:130px;font-size:0.9em;">
+													<div class="linkbox dropdown">
+														<div class="dropdown-toggle" id="ship_1_lvch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															<div class="dropdown-menu" id="ship_1_dropdown" aria-labelledby="ship_1_lvch">
+																<div class="d-flex form-group" style="width:300px;padding:10px 20px 0 20px;">
+																	<div class="d-flex flex-column" style="width:260px;">
+																		<div style="font-size:1em;">レベルの設定</div>
+																		<div>
+																			<hr style="margin:10px 0 10px 0;">
+																		</div>
+																		<div class="d-flex" style="padding:0 20px 0 20px;">
+																			<div class="ship_toggle_form">
+																				<input type="number" class="ship_1_lv_counter" id="ship_1_lv_input" max="175" min="1">
+																			</div>
+																			<div style="width:10px;"></div>
+																			<div class="d-flex flex-column align-items-center">
+																				<div><input type="button" class="btnspinner btnup" style="margin-top:4px;" data-cal="1" data-target=".ship_1_lv_counter"></div>
+																				<div><input type="button" class="btnspinner btndown" style="margin-top:-3px;" data-cal="-1" data-target=".ship_1_lv_counter"></div>
+																			</div>
+																			<div style="width:30px;"></div>
+																			<div class="d-flex flex-column">
+																				<div class="d-flex" style="padding-top:3px;">
+																					<div><input type="button" class="btnspinner btnminus" data-cal="-10" data-target=".ship_1_lv_counter"></div>
+																					<div class="spinner_label">10</div>
+																					<div><input type="button" class="btnspinner btnplus" data-cal="10" data-target=".ship_1_lv_counter"></div>
+																				</div>
+																				<div class="d-flex">
+																					<div><input type="button" class="btnspinner btnminus" data-cal="-100" data-target=".ship_1_lv_counter"></div>
+																					<div class="spinner_label">100</div>
+																					<div><input type="button" class="btnspinner btnplus" data-cal="100" data-target=".ship_1_lv_counter"></div>
+																				</div>
+																			</div>
+																		</div>
+																		<div style="margin-top:10px;"><input type="range" class="ship_1_lv_counter" value="99" id="ship_1_lv_slidebar" max="175" min="1" oninput="document.getElementById('ship_1_lv_input').value=this.value"></div>
+																		<div>
+																			<hr style="margin:10px 0 10px 0;">
+																		</div>
+																		<div class="d-flex justify-content-end">
+																			<div><input class="btn btn-primary" type="button" value=" 決定 " onclick="ship_dropdown_submit('1:lv');"></div>
+																			<div style="width:15px;"></div>
+																			<div><input class="btn btn-dark" type="button" value="閉じる" onclick="ship_dropdown_close('1');"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<span style="width:50px;"></span>
+															<span style="color:#5AC2D9;">Lv</span>
+															<span id="ship_1_lv"></span>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -88,6 +137,7 @@
 											<div class="d-flex ship_status">
 												<input type="hidden" id="friend_1_base_param" value="">
 												<input type="hidden" id="friend_1_base_as" value="">
+												<input type="hidden" id="friend_1_base_search" value="">
 												<input type="hidden" id="friend_1_base_luck" value="">
 												<input type="hidden" id="friend_1_slot0" value="">
 												<input type="hidden" id="friend_1_slot1" value="">
@@ -113,7 +163,7 @@
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_a">対潜</div>
-															<div class="ship_param_a"><span class="status_result" id="ship_1_as"></span></div>
+															<div class="ship_param_a"><span class="status_result dropdown-toggle" id="ship_1_as"></span></div>
 														</div>
 													</div>
 												</div>
@@ -124,11 +174,53 @@
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_b">運</div>
-														<div class="ship_param_b"><span id="ship_1_luck"></span></div>
+														<div class="ship_param_b status_result dropdown-toggle" id="ship_1_luckch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span culass="caret" id="ship_1_luck"></span></div>
+														<div class="dropdown-menu" id="ship_1_dropdown_luck" aria-labelledby="ship_1_luckch">
+															<div class="d-flex form-group" style="width:300px;padding:10px 20px 0 20px;">
+																<div class="d-flex flex-column" style="width:260px;">
+																	<div style="font-size:1em;">運の設定</div>
+																	<div>
+																		<hr style="margin:10px 0 10px 0;">
+																	</div>
+																	<div class="d-flex" style="padding:0 20px 0 20px;">
+																		<div class="ship_toggle_form">
+																			<input type="number" class="ship_1_luck_counter" id="ship_1_luck_input">
+																		</div>
+																		<div style="width:10px;"></div>
+																		<div class="d-flex flex-column align-items-center">
+																			<div><input type="button" class="btnspinner btnup" style="margin-top:3px;" data-cal="1" data-target=".ship_1_luck_counter"></div>
+																			<div><input type="button" class="btnspinner btndown" style="margin-top:2px;" data-cal="-1" data-target=".ship_1_luck_counter"></div>
+																		</div>
+																		<div style="width:30px;"></div>
+																		<div class="d-flex flex-column">
+																			<div class="d-flex" style="padding-top:3px;">
+																				<div><input type="button" class="btnspinner btnminus" data-cal="-10" data-target=".ship_1_luck_counter"></div>
+																				<div class="spinner_label" style="padding-top:6px;">10</div>
+																				<div><input type="button" class="btnspinner btnplus" data-cal="10" data-target=".ship_1_luck_counter"></div>
+																			</div>
+																			<div class="d-flex" style="padding-top:3px;">
+																				<div><input type="button" class="btnspinner btnminus" data-cal="-100" data-target=".ship_1_luck_counter"></div>
+																				<div class="spinner_label" style="padding-top:6px;">100</div>
+																				<div><input type="button" class="btnspinner btnplus" data-cal="100" data-target=".ship_1_luck_counter"></div>
+																			</div>
+																		</div>
+																	</div>
+																	<div style="margin-top:15px;"><input type="range" class="ship_1_luck_counter" value="99" id="ship_1_luck_slidebar" max="99" min="1" oninput="document.getElementById('ship_1_luck_input').value=this.value"></div>
+																	<div>
+																		<hr style="margin:15px 0 20px 0;">
+																	</div>
+																	<div class="d-flex justify-content-end">
+																		<div><input class="btn btn-primary" type="button" value=" 決定 " onclick="ship_dropdown_submit('1:luck');"></div>
+																		<div style="width:15px;"></div>
+																		<div><input class="btn btn-dark" type="button" value="閉じる" onclick="ship_dropdown_luck_close('1');"></div>
+																	</div>
+																</div>
+															</div>
+														</div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_b">命中項</div>
-														<div class="ship_param_b"><span class="status_result" id="ship_1_hit"></span></div>
+														<div class="ship_param_b"><span class="ship_status_guid" id="ship_1_hit"></span></div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_b">射程</div>
@@ -138,19 +230,19 @@
 												<div class="d-flex flex-column">
 													<div class="d-flex">
 														<div class="ship_param_label_c">砲撃攻撃力</div>
-														<div class="ship_param_c" style=" border-radius:0 8px 0 0;"><span class="status_result" id="ship_1_basefp"></span></div>
+														<div class="ship_param_c" style=" border-radius:0 8px 0 0;"><span class="ship_status_guid" id="ship_1_basefp"></span></div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_c">雷撃攻撃力</div>
-														<div class="ship_param_c"><span class="status_result" id="ship_1_baseth"></span></div>
+														<div class="ship_param_c"><span class="ship_status_guid" id="ship_1_baseth"></span></div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_c">対潜攻撃力</div>
-														<div class="ship_param_c"><span class="status_result" id="ship_1_baseas"></span></div>
+														<div class="ship_param_c"><span class="ship_status_guid" id="ship_1_baseas"></span></div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_c">夜戦攻撃力</div>
-														<div class="ship_param_c" style=" border-radius:0 0 8px 0;"><span class="status_result" id="ship_1_basenp"></span></div>
+														<div class="ship_param_c" style=" border-radius:0 0 8px 0;"><span class="ship_status_guid" id="ship_1_basenp"></span></div>
 													</div>
 												</div>
 											</div>
@@ -158,7 +250,7 @@
 									</div>
 									<div>
 										<div id="wp_1_improve_toolbar"></div>
-										<div class="d-flex flex-column" style="width:392px;">
+										<div class="d-flex flex-column" style="width:442px;">
 											<div id="wp_1_slot1"></div>
 											<div id="wp_1_slot2"></div>
 											<div id="wp_1_slot3"></div>
@@ -173,6 +265,7 @@
 								</div>
 							</div>
 						</div>
+
 						<!-- 艦リスト[2番艦] -->
 						<div id="friend_2">
 							<div class="d-flex kan_frame ship_list bg-stlype-disable">
@@ -183,24 +276,73 @@
 						<div id="friend_2_selected" style="display:none;">
 							<input id="friend_2_param" type="hidden" />
 							<div class="d-flex flex-column flex-wrap kan_frame_selected ship_list ">
-								<div class="kan_frame_tag" style="width:26px; height:84px;"><img src="./img/util/2.png"></div>
-								<div style="width:26px; height:165px;">
+								<div class="kan_frame_tag" style="width:24px; height:106px;"><img src="./img/util/2.png"></div>
+								<div style="width:24px; height:165px;">
 									<div id="wp_2_slotall"></div>
 								</div>
-								<div class="d-flex flex-column" style="width:392px;">
+								<div class="d-flex flex-column" style="width:442px;">
+									<div style="height:10px;"></div>
 									<div class="d-flex">
-										<div class="d-flex flex-column" style="height:88px;">
-											<div style="width:130px;height:27px;">
+										<div class="d-flex flex-column" style="height:100px;">
+											<div style="width:140px;height:27px;">
 												<div class="ship_name"><span id="ship_2_name"></span></div>
 											</div>
-											<div class="d-flex" style="width:130px;height:30px;">
+											<div class="d-flex" style="width:140px;height:30px;padding-right:6px;">
 												<div>
 													<a href="#"><img id="ship_2_face" data-toggle="modal" data-target="#ｍodal_friend" data-friendid="2"></a>
 												</div>
 											</div>
 											<div class="d-flex" style="width:130px;height:20px;">
-												<div class="d-flex flex-row-reverse" style="width:124px;font-size:0.8em;">
-													<div class="linkbox"><span style="color:#5AC2D9;">Lv:&nbsp;</span><span><span id="ship_2_lv"></span></span></div>
+												<div class="d-flex flex-row-reverse" style="width:130px;font-size:0.9em;">
+													<div class="linkbox dropdown">
+														<div class="dropdown-toggle" id="ship_2_lvch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															<div class="dropdown-menu" id="ship_2_dropdown" aria-labelledby="ship_2_lvch">
+																<div class="d-flex form-group" style="width:300px;padding:10px 20px 0 20px;">
+																	<div class="d-flex flex-column" style="width:260px;">
+																		<div style="font-size:1em;">レベルの設定</div>
+																		<div>
+																			<hr style="margin:10px 0 10px 0;">
+																		</div>
+																		<div class="d-flex" style="padding:0 20px 0 20px;">
+																			<div class="ship_toggle_form">
+																				<input type="number" class="ship_2_lv_counter" id="ship_2_lv_input" max="175" min="1">
+																			</div>
+																			<div style="width:10px;"></div>
+																			<div class="d-flex flex-column align-items-center">
+																				<div><input type="button" class="btnspinner btnup" style="margin-top:4px;" data-cal="1" data-target=".ship_2_lv_counter"></div>
+																				<div><input type="button" class="btnspinner btndown" style="margin-top:-3px;" data-cal="-1" data-target=".ship_2_lv_counter"></div>
+																			</div>
+																			<div style="width:30px;"></div>
+																			<div class="d-flex flex-column">
+																				<div class="d-flex" style="padding-top:3px;">
+																					<div><input type="button" class="btnspinner btnminus" data-cal="-10" data-target=".ship_2_lv_counter"></div>
+																					<div class="spinner_label">10</div>
+																					<div><input type="button" class="btnspinner btnplus" data-cal="10" data-target=".ship_2_lv_counter"></div>
+																				</div>
+																				<div class="d-flex">
+																					<div><input type="button" class="btnspinner btnminus" data-cal="-100" data-target=".ship_2_lv_counter"></div>
+																					<div class="spinner_label">100</div>
+																					<div><input type="button" class="btnspinner btnplus" data-cal="100" data-target=".ship_2_lv_counter"></div>
+																				</div>
+																			</div>
+																		</div>
+																		<div style="margin-top:10px;"><input type="range" class="ship_2_lv_counter" value="99" id="ship_2_lv_slidebar" max="175" min="1" oninput="document.getElementById('ship_2_lv_input').value=this.value"></div>
+																		<div>
+																			<hr style="margin:10px 0 10px 0;">
+																		</div>
+																		<div class="d-flex justify-content-end">
+																			<div><input class="btn btn-primary" type="button" value=" 決定 " onclick="ship_dropdown_submit('2:lv');"></div>
+																			<div style="width:15px;"></div>
+																			<div><input class="btn btn-dark" type="button" value="閉じる" onclick="ship_dropdown_close('2');"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<span style="width:50px;"></span>
+															<span style="color:#5AC2D9;">Lv</span>
+															<span id="ship_2_lv"></span>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -208,6 +350,7 @@
 											<div class="d-flex ship_status">
 												<input type="hidden" id="friend_2_base_param" value="">
 												<input type="hidden" id="friend_2_base_as" value="">
+												<input type="hidden" id="friend_2_base_search" value="">
 												<input type="hidden" id="friend_2_base_luck" value="">
 												<input type="hidden" id="friend_2_slot0" value="">
 												<input type="hidden" id="friend_2_slot1" value="">
@@ -233,7 +376,7 @@
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_a">対潜</div>
-															<div class="ship_param_a"><span class="status_result" id="ship_2_as"></span></div>
+															<div class="ship_param_a"><span class="status_result dropdown-toggle" id="ship_2_as"></span></div>
 														</div>
 													</div>
 												</div>
@@ -244,11 +387,53 @@
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_b">運</div>
-														<div class="ship_param_b"><span id="ship_2_luck"></span></div>
+														<div class="ship_param_b status_result dropdown-toggle" id="ship_2_luckch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span culass="caret" id="ship_2_luck"></span></div>
+														<div class="dropdown-menu" id="ship_2_dropdown_luck" aria-labelledby="ship_2_luckch">
+															<div class="d-flex form-group" style="width:300px;padding:10px 20px 0 20px;">
+																<div class="d-flex flex-column" style="width:260px;">
+																	<div style="font-size:1em;">運の設定</div>
+																	<div>
+																		<hr style="margin:10px 0 10px 0;">
+																	</div>
+																	<div class="d-flex" style="padding:0 20px 0 20px;">
+																		<div class="ship_toggle_form">
+																			<input type="number" class="ship_2_luck_counter" id="ship_2_luck_input">
+																		</div>
+																		<div style="width:10px;"></div>
+																		<div class="d-flex flex-column align-items-center">
+																			<div><input type="button" class="btnspinner btnup" style="margin-top:3px;" data-cal="1" data-target=".ship_2_luck_counter"></div>
+																			<div><input type="button" class="btnspinner btndown" style="margin-top:2px;" data-cal="-1" data-target=".ship_2_luck_counter"></div>
+																		</div>
+																		<div style="width:30px;"></div>
+																		<div class="d-flex flex-column">
+																			<div class="d-flex" style="padding-top:3px;">
+																				<div><input type="button" class="btnspinner btnminus" data-cal="-10" data-target=".ship_2_luck_counter"></div>
+																				<div class="spinner_label" style="padding-top:6px;">10</div>
+																				<div><input type="button" class="btnspinner btnplus" data-cal="10" data-target=".ship_2_luck_counter"></div>
+																			</div>
+																			<div class="d-flex" style="padding-top:3px;">
+																				<div><input type="button" class="btnspinner btnminus" data-cal="-100" data-target=".ship_2_luck_counter"></div>
+																				<div class="spinner_label" style="padding-top:6px;">100</div>
+																				<div><input type="button" class="btnspinner btnplus" data-cal="100" data-target=".ship_2_luck_counter"></div>
+																			</div>
+																		</div>
+																	</div>
+																	<div style="margin-top:15px;"><input type="range" class="ship_2_luck_counter" value="99" id="ship_2_luck_slidebar" max="99" min="1" oninput="document.getElementById('ship_2_luck_input').value=this.value"></div>
+																	<div>
+																		<hr style="margin:15px 0 20px 0;">
+																	</div>
+																	<div class="d-flex justify-content-end">
+																		<div><input class="btn btn-primary" type="button" value=" 決定 " onclick="ship_dropdown_submit('2:luck');"></div>
+																		<div style="width:15px;"></div>
+																		<div><input class="btn btn-dark" type="button" value="閉じる" onclick="ship_dropdown_luck_close('2');"></div>
+																	</div>
+																</div>
+															</div>
+														</div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_b">命中項</div>
-														<div class="ship_param_b"><span class="status_result" id="ship_2_hit"></span></div>
+														<div class="ship_param_b"><span class="ship_status_guid" id="ship_2_hit"></span></div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_b">射程</div>
@@ -258,19 +443,19 @@
 												<div class="d-flex flex-column">
 													<div class="d-flex">
 														<div class="ship_param_label_c">砲撃攻撃力</div>
-														<div class="ship_param_c" style=" border-radius:0 8px 0 0;"><span class="status_result" id="ship_2_basefp"></span></div>
+														<div class="ship_param_c" style=" border-radius:0 8px 0 0;"><span class="ship_status_guid" id="ship_2_basefp"></span></div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_c">雷撃攻撃力</div>
-														<div class="ship_param_c"><span class="status_result" id="ship_2_baseth"></span></div>
+														<div class="ship_param_c"><span class="ship_status_guid" id="ship_2_baseth"></span></div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_c">対潜攻撃力</div>
-														<div class="ship_param_c"><span class="status_result" id="ship_2_baseas"></span></div>
+														<div class="ship_param_c"><span class="ship_status_guid" id="ship_2_baseas"></span></div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_c">夜戦攻撃力</div>
-														<div class="ship_param_c" style=" border-radius:0 0 8px 0;"><span class="status_result" id="ship_2_basenp"></span></div>
+														<div class="ship_param_c" style=" border-radius:0 0 8px 0;"><span class="ship_status_guid" id="ship_2_basenp"></span></div>
 													</div>
 												</div>
 											</div>
@@ -278,7 +463,7 @@
 									</div>
 									<div>
 										<div id="wp_2_improve_toolbar"></div>
-										<div class="d-flex flex-column" style="width:392px;">
+										<div class="d-flex flex-column" style="width:442px;">
 											<div id="wp_2_slot1"></div>
 											<div id="wp_2_slot2"></div>
 											<div id="wp_2_slot3"></div>
@@ -294,6 +479,7 @@
 							</div>
 						</div>
 
+
 						<!-- 艦リスト[3番艦] -->
 						<div id="friend_3">
 							<div class="d-flex kan_frame ship_list bg-stlype-disable">
@@ -304,24 +490,73 @@
 						<div id="friend_3_selected" style="display:none;">
 							<input id="friend_3_param" type="hidden" />
 							<div class="d-flex flex-column flex-wrap kan_frame_selected ship_list ">
-								<div class="kan_frame_tag" style="width:26px; height:84px;"><img src="./img/util/3.png"></div>
-								<div style="width:26px; height:165px;">
+								<div class="kan_frame_tag" style="width:24px; height:106px;"><img src="./img/util/3.png"></div>
+								<div style="width:24px; height:165px;">
 									<div id="wp_3_slotall"></div>
 								</div>
-								<div class="d-flex flex-column" style="width:392px;">
+								<div class="d-flex flex-column" style="width:442px;">
+									<div style="height:10px;"></div>
 									<div class="d-flex">
-										<div class="d-flex flex-column" style="height:88px;">
-											<div style="width:130px;height:27px;">
+										<div class="d-flex flex-column" style="height:100px;">
+											<div style="width:140px;height:27px;">
 												<div class="ship_name"><span id="ship_3_name"></span></div>
 											</div>
-											<div class="d-flex" style="width:130px;height:30px;">
+											<div class="d-flex" style="width:140px;height:30px;padding-right:6px;">
 												<div>
 													<a href="#"><img id="ship_3_face" data-toggle="modal" data-target="#ｍodal_friend" data-friendid="3"></a>
 												</div>
 											</div>
 											<div class="d-flex" style="width:130px;height:20px;">
-												<div class="d-flex flex-row-reverse" style="width:124px;font-size:0.8em;">
-													<div class="linkbox"><span style="color:#5AC2D9;">Lv:&nbsp;</span><span><span id="ship_3_lv"></span></span></div>
+												<div class="d-flex flex-row-reverse" style="width:130px;font-size:0.9em;">
+													<div class="linkbox dropdown">
+														<div class="dropdown-toggle" id="ship_3_lvch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															<div class="dropdown-menu" id="ship_3_dropdown" aria-labelledby="ship_3_lvch">
+																<div class="d-flex form-group" style="width:300px;padding:10px 20px 0 20px;">
+																	<div class="d-flex flex-column" style="width:260px;">
+																		<div style="font-size:1em;">レベルの設定</div>
+																		<div>
+																			<hr style="margin:10px 0 10px 0;">
+																		</div>
+																		<div class="d-flex" style="padding:0 20px 0 20px;">
+																			<div class="ship_toggle_form">
+																				<input type="number" class="ship_3_lv_counter" id="ship_3_lv_input" max="175" min="1">
+																			</div>
+																			<div style="width:10px;"></div>
+																			<div class="d-flex flex-column align-items-center">
+																				<div><input type="button" class="btnspinner btnup" style="margin-top:4px;" data-cal="1" data-target=".ship_3_lv_counter"></div>
+																				<div><input type="button" class="btnspinner btndown" style="margin-top:-3px;" data-cal="-1" data-target=".ship_3_lv_counter"></div>
+																			</div>
+																			<div style="width:30px;"></div>
+																			<div class="d-flex flex-column">
+																				<div class="d-flex" style="padding-top:3px;">
+																					<div><input type="button" class="btnspinner btnminus" data-cal="-10" data-target=".ship_3_lv_counter"></div>
+																					<div class="spinner_label">10</div>
+																					<div><input type="button" class="btnspinner btnplus" data-cal="10" data-target=".ship_3_lv_counter"></div>
+																				</div>
+																				<div class="d-flex">
+																					<div><input type="button" class="btnspinner btnminus" data-cal="-100" data-target=".ship_3_lv_counter"></div>
+																					<div class="spinner_label">100</div>
+																					<div><input type="button" class="btnspinner btnplus" data-cal="100" data-target=".ship_3_lv_counter"></div>
+																				</div>
+																			</div>
+																		</div>
+																		<div style="margin-top:10px;"><input type="range" class="ship_3_lv_counter" value="99" id="ship_3_lv_slidebar" max="175" min="1" oninput="document.getElementById('ship_3_lv_input').value=this.value"></div>
+																		<div>
+																			<hr style="margin:10px 0 10px 0;">
+																		</div>
+																		<div class="d-flex justify-content-end">
+																			<div><input class="btn btn-primary" type="button" value=" 決定 " onclick="ship_dropdown_submit('3:lv');"></div>
+																			<div style="width:15px;"></div>
+																			<div><input class="btn btn-dark" type="button" value="閉じる" onclick="ship_dropdown_close('3');"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<span style="width:50px;"></span>
+															<span style="color:#5AC2D9;">Lv</span>
+															<span id="ship_3_lv"></span>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -329,6 +564,7 @@
 											<div class="d-flex ship_status">
 												<input type="hidden" id="friend_3_base_param" value="">
 												<input type="hidden" id="friend_3_base_as" value="">
+												<input type="hidden" id="friend_3_base_search" value="">
 												<input type="hidden" id="friend_3_base_luck" value="">
 												<input type="hidden" id="friend_3_slot0" value="">
 												<input type="hidden" id="friend_3_slot1" value="">
@@ -354,7 +590,7 @@
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_a">対潜</div>
-															<div class="ship_param_a"><span class="status_result" id="ship_3_as"></span></div>
+															<div class="ship_param_a"><span class="status_result dropdown-toggle" id="ship_3_as"></span></div>
 														</div>
 													</div>
 												</div>
@@ -365,11 +601,53 @@
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_b">運</div>
-														<div class="ship_param_b"><span id="ship_3_luck"></span></div>
+														<div class="ship_param_b status_result dropdown-toggle" id="ship_3_luckch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span culass="caret" id="ship_3_luck"></span></div>
+														<div class="dropdown-menu" id="ship_3_dropdown_luck" aria-labelledby="ship_3_luckch">
+															<div class="d-flex form-group" style="width:300px;padding:10px 20px 0 20px;">
+																<div class="d-flex flex-column" style="width:260px;">
+																	<div style="font-size:1em;">運の設定</div>
+																	<div>
+																		<hr style="margin:10px 0 10px 0;">
+																	</div>
+																	<div class="d-flex" style="padding:0 20px 0 20px;">
+																		<div class="ship_toggle_form">
+																			<input type="number" class="ship_3_luck_counter" id="ship_3_luck_input">
+																		</div>
+																		<div style="width:10px;"></div>
+																		<div class="d-flex flex-column align-items-center">
+																			<div><input type="button" class="btnspinner btnup" style="margin-top:3px;" data-cal="1" data-target=".ship_3_luck_counter"></div>
+																			<div><input type="button" class="btnspinner btndown" style="margin-top:2px;" data-cal="-1" data-target=".ship_3_luck_counter"></div>
+																		</div>
+																		<div style="width:30px;"></div>
+																		<div class="d-flex flex-column">
+																			<div class="d-flex" style="padding-top:3px;">
+																				<div><input type="button" class="btnspinner btnminus" data-cal="-10" data-target=".ship_3_luck_counter"></div>
+																				<div class="spinner_label" style="padding-top:6px;">10</div>
+																				<div><input type="button" class="btnspinner btnplus" data-cal="10" data-target=".ship_3_luck_counter"></div>
+																			</div>
+																			<div class="d-flex" style="padding-top:3px;">
+																				<div><input type="button" class="btnspinner btnminus" data-cal="-100" data-target=".ship_3_luck_counter"></div>
+																				<div class="spinner_label" style="padding-top:6px;">100</div>
+																				<div><input type="button" class="btnspinner btnplus" data-cal="100" data-target=".ship_3_luck_counter"></div>
+																			</div>
+																		</div>
+																	</div>
+																	<div style="margin-top:15px;"><input type="range" class="ship_3_luck_counter" value="99" id="ship_3_luck_slidebar" max="99" min="1" oninput="document.getElementById('ship_3_luck_input').value=this.value"></div>
+																	<div>
+																		<hr style="margin:15px 0 20px 0;">
+																	</div>
+																	<div class="d-flex justify-content-end">
+																		<div><input class="btn btn-primary" type="button" value=" 決定 " onclick="ship_dropdown_submit('3:luck');"></div>
+																		<div style="width:15px;"></div>
+																		<div><input class="btn btn-dark" type="button" value="閉じる" onclick="ship_dropdown_luck_close('3');"></div>
+																	</div>
+																</div>
+															</div>
+														</div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_b">命中項</div>
-														<div class="ship_param_b"><span class="status_result" id="ship_3_hit"></span></div>
+														<div class="ship_param_b"><span class="ship_status_guid" id="ship_3_hit"></span></div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_b">射程</div>
@@ -379,19 +657,19 @@
 												<div class="d-flex flex-column">
 													<div class="d-flex">
 														<div class="ship_param_label_c">砲撃攻撃力</div>
-														<div class="ship_param_c" style=" border-radius:0 8px 0 0;"><span class="status_result" id="ship_3_basefp"></span></div>
+														<div class="ship_param_c" style=" border-radius:0 8px 0 0;"><span class="ship_status_guid" id="ship_3_basefp"></span></div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_c">雷撃攻撃力</div>
-														<div class="ship_param_c"><span class="status_result" id="ship_3_baseth"></span></div>
+														<div class="ship_param_c"><span class="ship_status_guid" id="ship_3_baseth"></span></div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_c">対潜攻撃力</div>
-														<div class="ship_param_c"><span class="status_result" id="ship_3_baseas"></span></div>
+														<div class="ship_param_c"><span class="ship_status_guid" id="ship_3_baseas"></span></div>
 													</div>
 													<div class="d-flex">
 														<div class="ship_param_label_c">夜戦攻撃力</div>
-														<div class="ship_param_c" style=" border-radius:0 0 8px 0;"><span class="status_result" id="ship_3_basenp"></span></div>
+														<div class="ship_param_c" style=" border-radius:0 0 8px 0;"><span class="ship_status_guid" id="ship_3_basenp"></span></div>
 													</div>
 												</div>
 											</div>
@@ -399,7 +677,7 @@
 									</div>
 									<div>
 										<div id="wp_3_improve_toolbar"></div>
-										<div class="d-flex flex-column" style="width:392px;">
+										<div class="d-flex flex-column" style="width:442px;">
 											<div id="wp_3_slot1"></div>
 											<div id="wp_3_slot2"></div>
 											<div id="wp_3_slot3"></div>
@@ -415,7 +693,6 @@
 							</div>
 						</div>
 
-
 						<!-- 艦リスト[4番艦] -->
 						<div class="friend_extra">
 							<div id="friend_4">
@@ -427,24 +704,73 @@
 							<div id="friend_4_selected" style="display:none;">
 								<input id="friend_4_param" type="hidden" />
 								<div class="d-flex flex-column flex-wrap kan_frame_selected ship_list ">
-									<div class="kan_frame_tag" style="width:26px; height:84px;"><img src="./img/util/4.png"></div>
-									<div style="width:26px; height:165px;">
+									<div class="kan_frame_tag" style="width:24px; height:106px;"><img src="./img/util/4.png"></div>
+									<div style="width:24px; height:165px;">
 										<div id="wp_4_slotall"></div>
 									</div>
-									<div class="d-flex flex-column" style="width:392px;">
+									<div class="d-flex flex-column" style="width:442px;">
+										<div style="height:10px;"></div>
 										<div class="d-flex">
-											<div class="d-flex flex-column" style="height:88px;">
-												<div style="width:130px;height:27px;">
+											<div class="d-flex flex-column" style="height:100px;">
+												<div style="width:140px;height:27px;">
 													<div class="ship_name"><span id="ship_4_name"></span></div>
 												</div>
-												<div class="d-flex" style="width:130px;height:30px;">
+												<div class="d-flex" style="width:140px;height:30px;padding-right:6px;">
 													<div>
 														<a href="#"><img id="ship_4_face" data-toggle="modal" data-target="#ｍodal_friend" data-friendid="4"></a>
 													</div>
 												</div>
 												<div class="d-flex" style="width:130px;height:20px;">
-													<div class="d-flex flex-row-reverse" style="width:124px;font-size:0.8em;">
-														<div class="linkbox"><span style="color:#5AC2D9;">Lv:&nbsp;</span><span><span id="ship_4_lv"></span></span></div>
+													<div class="d-flex flex-row-reverse" style="width:130px;font-size:0.9em;">
+														<div class="linkbox dropdown">
+															<div class="dropdown-toggle" id="ship_4_lvch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																<div class="dropdown-menu" id="ship_4_dropdown" aria-labelledby="ship_4_lvch">
+																	<div class="d-flex form-group" style="width:300px;padding:10px 20px 0 20px;">
+																		<div class="d-flex flex-column" style="width:260px;">
+																			<div style="font-size:1em;">レベルの設定</div>
+																			<div>
+																				<hr style="margin:10px 0 10px 0;">
+																			</div>
+																			<div class="d-flex" style="padding:0 20px 0 20px;">
+																				<div class="ship_toggle_form">
+																					<input type="number" class="ship_4_lv_counter" id="ship_4_lv_input" max="175" min="1">
+																				</div>
+																				<div style="width:10px;"></div>
+																				<div class="d-flex flex-column align-items-center">
+																					<div><input type="button" class="btnspinner btnup" style="margin-top:4px;" data-cal="1" data-target=".ship_4_lv_counter"></div>
+																					<div><input type="button" class="btnspinner btndown" style="margin-top:-3px;" data-cal="-1" data-target=".ship_4_lv_counter"></div>
+																				</div>
+																				<div style="width:30px;"></div>
+																				<div class="d-flex flex-column">
+																					<div class="d-flex" style="padding-top:3px;">
+																						<div><input type="button" class="btnspinner btnminus" data-cal="-10" data-target=".ship_4_lv_counter"></div>
+																						<div class="spinner_label">10</div>
+																						<div><input type="button" class="btnspinner btnplus" data-cal="10" data-target=".ship_4_lv_counter"></div>
+																					</div>
+																					<div class="d-flex">
+																						<div><input type="button" class="btnspinner btnminus" data-cal="-100" data-target=".ship_4_lv_counter"></div>
+																						<div class="spinner_label">100</div>
+																						<div><input type="button" class="btnspinner btnplus" data-cal="100" data-target=".ship_4_lv_counter"></div>
+																					</div>
+																				</div>
+																			</div>
+																			<div style="margin-top:10px;"><input type="range" class="ship_4_lv_counter" value="99" id="ship_4_lv_slidebar" max="175" min="1" oninput="document.getElementById('ship_4_lv_input').value=this.value"></div>
+																			<div>
+																				<hr style="margin:10px 0 10px 0;">
+																			</div>
+																			<div class="d-flex justify-content-end">
+																				<div><input class="btn btn-primary" type="button" value=" 決定 " onclick="ship_dropdown_submit('4:lv');"></div>
+																				<div style="width:15px;"></div>
+																				<div><input class="btn btn-dark" type="button" value="閉じる" onclick="ship_dropdown_close('4');"></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<span style="width:50px;"></span>
+																<span style="color:#5AC2D9;">Lv</span>
+																<span id="ship_4_lv"></span>
+															</div>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -452,6 +778,7 @@
 												<div class="d-flex ship_status">
 													<input type="hidden" id="friend_4_base_param" value="">
 													<input type="hidden" id="friend_4_base_as" value="">
+													<input type="hidden" id="friend_4_base_search" value="">
 													<input type="hidden" id="friend_4_base_luck" value="">
 													<input type="hidden" id="friend_4_slot0" value="">
 													<input type="hidden" id="friend_4_slot1" value="">
@@ -477,7 +804,7 @@
 															</div>
 															<div class="d-flex">
 																<div class="ship_param_label_a">対潜</div>
-																<div class="ship_param_a"><span class="status_result" id="ship_4_as"></span></div>
+																<div class="ship_param_a"><span class="status_result dropdown-toggle" id="ship_4_as"></span></div>
 															</div>
 														</div>
 													</div>
@@ -488,11 +815,53 @@
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_b">運</div>
-															<div class="ship_param_b"><span id="ship_4_luck"></span></div>
+															<div class="ship_param_b status_result dropdown-toggle" id="ship_4_luckch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span culass="caret" id="ship_4_luck"></span></div>
+															<div class="dropdown-menu" id="ship_4_dropdown_luck" aria-labelledby="ship_4_luckch">
+																<div class="d-flex form-group" style="width:300px;padding:10px 20px 0 20px;">
+																	<div class="d-flex flex-column" style="width:260px;">
+																		<div style="font-size:1em;">運の設定</div>
+																		<div>
+																			<hr style="margin:10px 0 10px 0;">
+																		</div>
+																		<div class="d-flex" style="padding:0 20px 0 20px;">
+																			<div class="ship_toggle_form">
+																				<input type="number" class="ship_4_luck_counter" id="ship_4_luck_input">
+																			</div>
+																			<div style="width:10px;"></div>
+																			<div class="d-flex flex-column align-items-center">
+																				<div><input type="button" class="btnspinner btnup" style="margin-top:3px;" data-cal="1" data-target=".ship_4_luck_counter"></div>
+																				<div><input type="button" class="btnspinner btndown" style="margin-top:2px;" data-cal="-1" data-target=".ship_4_luck_counter"></div>
+																			</div>
+																			<div style="width:30px;"></div>
+																			<div class="d-flex flex-column">
+																				<div class="d-flex" style="padding-top:3px;">
+																					<div><input type="button" class="btnspinner btnminus" data-cal="-10" data-target=".ship_4_luck_counter"></div>
+																					<div class="spinner_label" style="padding-top:6px;">10</div>
+																					<div><input type="button" class="btnspinner btnplus" data-cal="10" data-target=".ship_4_luck_counter"></div>
+																				</div>
+																				<div class="d-flex" style="padding-top:3px;">
+																					<div><input type="button" class="btnspinner btnminus" data-cal="-100" data-target=".ship_4_luck_counter"></div>
+																					<div class="spinner_label" style="padding-top:6px;">100</div>
+																					<div><input type="button" class="btnspinner btnplus" data-cal="100" data-target=".ship_4_luck_counter"></div>
+																				</div>
+																			</div>
+																		</div>
+																		<div style="margin-top:15px;"><input type="range" class="ship_4_luck_counter" value="99" id="ship_4_luck_slidebar" max="99" min="1" oninput="document.getElementById('ship_4_luck_input').value=this.value"></div>
+																		<div>
+																			<hr style="margin:15px 0 20px 0;">
+																		</div>
+																		<div class="d-flex justify-content-end">
+																			<div><input class="btn btn-primary" type="button" value=" 決定 " onclick="ship_dropdown_submit('4:luck');"></div>
+																			<div style="width:15px;"></div>
+																			<div><input class="btn btn-dark" type="button" value="閉じる" onclick="ship_dropdown_luck_close('4');"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_b">命中項</div>
-															<div class="ship_param_b"><span class="status_result" id="ship_4_hit"></span></div>
+															<div class="ship_param_b"><span class="ship_status_guid" id="ship_4_hit"></span></div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_b">射程</div>
@@ -502,19 +871,19 @@
 													<div class="d-flex flex-column">
 														<div class="d-flex">
 															<div class="ship_param_label_c">砲撃攻撃力</div>
-															<div class="ship_param_c" style=" border-radius:0 8px 0 0;"><span class="status_result" id="ship_4_basefp"></span></div>
+															<div class="ship_param_c" style=" border-radius:0 8px 0 0;"><span class="ship_status_guid" id="ship_4_basefp"></span></div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_c">雷撃攻撃力</div>
-															<div class="ship_param_c"><span class="status_result" id="ship_4_baseth"></span></div>
+															<div class="ship_param_c"><span class="ship_status_guid" id="ship_4_baseth"></span></div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_c">対潜攻撃力</div>
-															<div class="ship_param_c"><span class="status_result" id="ship_4_baseas"></span></div>
+															<div class="ship_param_c"><span class="ship_status_guid" id="ship_4_baseas"></span></div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_c">夜戦攻撃力</div>
-															<div class="ship_param_c" style=" border-radius:0 0 8px 0;"><span class="status_result" id="ship_4_basenp"></span></div>
+															<div class="ship_param_c" style=" border-radius:0 0 8px 0;"><span class="ship_status_guid" id="ship_4_basenp"></span></div>
 														</div>
 													</div>
 												</div>
@@ -522,7 +891,7 @@
 										</div>
 										<div>
 											<div id="wp_4_improve_toolbar"></div>
-											<div class="d-flex flex-column" style="width:392px;">
+											<div class="d-flex flex-column" style="width:442px;">
 												<div id="wp_4_slot1"></div>
 												<div id="wp_4_slot2"></div>
 												<div id="wp_4_slot3"></div>
@@ -549,24 +918,73 @@
 							<div id="friend_5_selected" style="display:none;">
 								<input id="friend_5_param" type="hidden" />
 								<div class="d-flex flex-column flex-wrap kan_frame_selected ship_list ">
-									<div class="kan_frame_tag" style="width:26px; height:84px;"><img src="./img/util/5.png"></div>
-									<div style="width:26px; height:165px;">
+									<div class="kan_frame_tag" style="width:24px; height:106px;"><img src="./img/util/5.png"></div>
+									<div style="width:24px; height:165px;">
 										<div id="wp_5_slotall"></div>
 									</div>
-									<div class="d-flex flex-column" style="width:392px;">
+									<div class="d-flex flex-column" style="width:442px;">
+										<div style="height:10px;"></div>
 										<div class="d-flex">
-											<div class="d-flex flex-column" style="height:88px;">
-												<div style="width:130px;height:27px;">
+											<div class="d-flex flex-column" style="height:100px;">
+												<div style="width:140px;height:27px;">
 													<div class="ship_name"><span id="ship_5_name"></span></div>
 												</div>
-												<div class="d-flex" style="width:130px;height:30px;">
+												<div class="d-flex" style="width:140px;height:30px;padding-right:6px;">
 													<div>
 														<a href="#"><img id="ship_5_face" data-toggle="modal" data-target="#ｍodal_friend" data-friendid="5"></a>
 													</div>
 												</div>
 												<div class="d-flex" style="width:130px;height:20px;">
-													<div class="d-flex flex-row-reverse" style="width:124px;font-size:0.8em;">
-														<div class="linkbox"><span style="color:#5AC2D9;">Lv:&nbsp;</span><span><span id="ship_5_lv"></span></span></div>
+													<div class="d-flex flex-row-reverse" style="width:130px;font-size:0.9em;">
+														<div class="linkbox dropdown">
+															<div class="dropdown-toggle" id="ship_5_lvch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																<div class="dropdown-menu" id="ship_5_dropdown" aria-labelledby="ship_5_lvch">
+																	<div class="d-flex form-group" style="width:300px;padding:10px 20px 0 20px;">
+																		<div class="d-flex flex-column" style="width:260px;">
+																			<div style="font-size:1em;">レベルの設定</div>
+																			<div>
+																				<hr style="margin:10px 0 10px 0;">
+																			</div>
+																			<div class="d-flex" style="padding:0 20px 0 20px;">
+																				<div class="ship_toggle_form">
+																					<input type="number" class="ship_5_lv_counter" id="ship_5_lv_input" max="175" min="1">
+																				</div>
+																				<div style="width:10px;"></div>
+																				<div class="d-flex flex-column align-items-center">
+																					<div><input type="button" class="btnspinner btnup" style="margin-top:4px;" data-cal="1" data-target=".ship_5_lv_counter"></div>
+																					<div><input type="button" class="btnspinner btndown" style="margin-top:-3px;" data-cal="-1" data-target=".ship_5_lv_counter"></div>
+																				</div>
+																				<div style="width:30px;"></div>
+																				<div class="d-flex flex-column">
+																					<div class="d-flex" style="padding-top:3px;">
+																						<div><input type="button" class="btnspinner btnminus" data-cal="-10" data-target=".ship_5_lv_counter"></div>
+																						<div class="spinner_label">10</div>
+																						<div><input type="button" class="btnspinner btnplus" data-cal="10" data-target=".ship_5_lv_counter"></div>
+																					</div>
+																					<div class="d-flex">
+																						<div><input type="button" class="btnspinner btnminus" data-cal="-100" data-target=".ship_5_lv_counter"></div>
+																						<div class="spinner_label">100</div>
+																						<div><input type="button" class="btnspinner btnplus" data-cal="100" data-target=".ship_5_lv_counter"></div>
+																					</div>
+																				</div>
+																			</div>
+																			<div style="margin-top:10px;"><input type="range" class="ship_5_lv_counter" value="99" id="ship_5_lv_slidebar" max="175" min="1" oninput="document.getElementById('ship_5_lv_input').value=this.value"></div>
+																			<div>
+																				<hr style="margin:10px 0 10px 0;">
+																			</div>
+																			<div class="d-flex justify-content-end">
+																				<div><input class="btn btn-primary" type="button" value=" 決定 " onclick="ship_dropdown_submit('5:lv');"></div>
+																				<div style="width:15px;"></div>
+																				<div><input class="btn btn-dark" type="button" value="閉じる" onclick="ship_dropdown_close('5');"></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<span style="width:50px;"></span>
+																<span style="color:#5AC2D9;">Lv</span>
+																<span id="ship_5_lv"></span>
+															</div>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -574,6 +992,7 @@
 												<div class="d-flex ship_status">
 													<input type="hidden" id="friend_5_base_param" value="">
 													<input type="hidden" id="friend_5_base_as" value="">
+													<input type="hidden" id="friend_5_base_search" value="">
 													<input type="hidden" id="friend_5_base_luck" value="">
 													<input type="hidden" id="friend_5_slot0" value="">
 													<input type="hidden" id="friend_5_slot1" value="">
@@ -599,7 +1018,7 @@
 															</div>
 															<div class="d-flex">
 																<div class="ship_param_label_a">対潜</div>
-																<div class="ship_param_a"><span class="status_result" id="ship_5_as"></span></div>
+																<div class="ship_param_a"><span class="status_result dropdown-toggle" id="ship_5_as"></span></div>
 															</div>
 														</div>
 													</div>
@@ -610,11 +1029,53 @@
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_b">運</div>
-															<div class="ship_param_b"><span id="ship_5_luck"></span></div>
+															<div class="ship_param_b status_result dropdown-toggle" id="ship_5_luckch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span culass="caret" id="ship_5_luck"></span></div>
+															<div class="dropdown-menu" id="ship_5_dropdown_luck" aria-labelledby="ship_5_luckch">
+																<div class="d-flex form-group" style="width:300px;padding:10px 20px 0 20px;">
+																	<div class="d-flex flex-column" style="width:260px;">
+																		<div style="font-size:1em;">運の設定</div>
+																		<div>
+																			<hr style="margin:10px 0 10px 0;">
+																		</div>
+																		<div class="d-flex" style="padding:0 20px 0 20px;">
+																			<div class="ship_toggle_form">
+																				<input type="number" class="ship_5_luck_counter" id="ship_5_luck_input">
+																			</div>
+																			<div style="width:10px;"></div>
+																			<div class="d-flex flex-column align-items-center">
+																				<div><input type="button" class="btnspinner btnup" style="margin-top:3px;" data-cal="1" data-target=".ship_5_luck_counter"></div>
+																				<div><input type="button" class="btnspinner btndown" style="margin-top:2px;" data-cal="-1" data-target=".ship_5_luck_counter"></div>
+																			</div>
+																			<div style="width:30px;"></div>
+																			<div class="d-flex flex-column">
+																				<div class="d-flex" style="padding-top:3px;">
+																					<div><input type="button" class="btnspinner btnminus" data-cal="-10" data-target=".ship_5_luck_counter"></div>
+																					<div class="spinner_label" style="padding-top:6px;">10</div>
+																					<div><input type="button" class="btnspinner btnplus" data-cal="10" data-target=".ship_5_luck_counter"></div>
+																				</div>
+																				<div class="d-flex" style="padding-top:3px;">
+																					<div><input type="button" class="btnspinner btnminus" data-cal="-100" data-target=".ship_5_luck_counter"></div>
+																					<div class="spinner_label" style="padding-top:6px;">100</div>
+																					<div><input type="button" class="btnspinner btnplus" data-cal="100" data-target=".ship_5_luck_counter"></div>
+																				</div>
+																			</div>
+																		</div>
+																		<div style="margin-top:15px;"><input type="range" class="ship_5_luck_counter" value="99" id="ship_5_luck_slidebar" max="99" min="1" oninput="document.getElementById('ship_5_luck_input').value=this.value"></div>
+																		<div>
+																			<hr style="margin:15px 0 20px 0;">
+																		</div>
+																		<div class="d-flex justify-content-end">
+																			<div><input class="btn btn-primary" type="button" value=" 決定 " onclick="ship_dropdown_submit('5:luck');"></div>
+																			<div style="width:15px;"></div>
+																			<div><input class="btn btn-dark" type="button" value="閉じる" onclick="ship_dropdown_luck_close('5');"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_b">命中項</div>
-															<div class="ship_param_b"><span class="status_result" id="ship_5_hit"></span></div>
+															<div class="ship_param_b"><span class="ship_status_guid" id="ship_5_hit"></span></div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_b">射程</div>
@@ -624,19 +1085,19 @@
 													<div class="d-flex flex-column">
 														<div class="d-flex">
 															<div class="ship_param_label_c">砲撃攻撃力</div>
-															<div class="ship_param_c" style=" border-radius:0 8px 0 0;"><span class="status_result" id="ship_5_basefp"></span></div>
+															<div class="ship_param_c" style=" border-radius:0 8px 0 0;"><span class="ship_status_guid" id="ship_5_basefp"></span></div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_c">雷撃攻撃力</div>
-															<div class="ship_param_c"><span class="status_result" id="ship_5_baseth"></span></div>
+															<div class="ship_param_c"><span class="ship_status_guid" id="ship_5_baseth"></span></div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_c">対潜攻撃力</div>
-															<div class="ship_param_c"><span class="status_result" id="ship_5_baseas"></span></div>
+															<div class="ship_param_c"><span class="ship_status_guid" id="ship_5_baseas"></span></div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_c">夜戦攻撃力</div>
-															<div class="ship_param_c" style=" border-radius:0 0 8px 0;"><span class="status_result" id="ship_5_basenp"></span></div>
+															<div class="ship_param_c" style=" border-radius:0 0 8px 0;"><span class="ship_status_guid" id="ship_5_basenp"></span></div>
 														</div>
 													</div>
 												</div>
@@ -644,7 +1105,7 @@
 										</div>
 										<div>
 											<div id="wp_5_improve_toolbar"></div>
-											<div class="d-flex flex-column" style="width:392px;">
+											<div class="d-flex flex-column" style="width:442px;">
 												<div id="wp_5_slot1"></div>
 												<div id="wp_5_slot2"></div>
 												<div id="wp_5_slot3"></div>
@@ -661,7 +1122,6 @@
 							</div>
 						</div>
 						<div class="friend_extra">
-
 							<!-- 艦リスト[6番艦] -->
 							<div id="friend_6">
 								<div class="d-flex kan_frame ship_list bg-stlype-disable">
@@ -672,24 +1132,73 @@
 							<div id="friend_6_selected" style="display:none;">
 								<input id="friend_6_param" type="hidden" />
 								<div class="d-flex flex-column flex-wrap kan_frame_selected ship_list ">
-									<div class="kan_frame_tag" style="width:26px; height:84px;"><img src="./img/util/6.png"></div>
-									<div style="width:26px; height:165px;">
+									<div class="kan_frame_tag" style="width:24px; height:106px;"><img src="./img/util/6.png"></div>
+									<div style="width:24px; height:165px;">
 										<div id="wp_6_slotall"></div>
 									</div>
-									<div class="d-flex flex-column" style="width:392px;">
+									<div class="d-flex flex-column" style="width:442px;">
+										<div style="height:10px;"></div>
 										<div class="d-flex">
-											<div class="d-flex flex-column" style="height:88px;">
-												<div style="width:130px;height:27px;">
+											<div class="d-flex flex-column" style="height:100px;">
+												<div style="width:140px;height:27px;">
 													<div class="ship_name"><span id="ship_6_name"></span></div>
 												</div>
-												<div class="d-flex" style="width:130px;height:30px;">
+												<div class="d-flex" style="width:140px;height:30px;padding-right:6px;">
 													<div>
 														<a href="#"><img id="ship_6_face" data-toggle="modal" data-target="#ｍodal_friend" data-friendid="6"></a>
 													</div>
 												</div>
 												<div class="d-flex" style="width:130px;height:20px;">
-													<div class="d-flex flex-row-reverse" style="width:124px;font-size:0.8em;">
-														<div class="linkbox"><span style="color:#5AC2D9;">Lv:&nbsp;</span><span><span id="ship_6_lv"></span></span></div>
+													<div class="d-flex flex-row-reverse" style="width:130px;font-size:0.9em;">
+														<div class="linkbox dropdown">
+															<div class="dropdown-toggle" id="ship_6_lvch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																<div class="dropdown-menu" id="ship_6_dropdown" aria-labelledby="ship_6_lvch">
+																	<div class="d-flex form-group" style="width:300px;padding:10px 20px 0 20px;">
+																		<div class="d-flex flex-column" style="width:260px;">
+																			<div style="font-size:1em;">レベルの設定</div>
+																			<div>
+																				<hr style="margin:10px 0 10px 0;">
+																			</div>
+																			<div class="d-flex" style="padding:0 20px 0 20px;">
+																				<div class="ship_toggle_form">
+																					<input type="number" class="ship_6_lv_counter" id="ship_6_lv_input" max="175" min="1">
+																				</div>
+																				<div style="width:10px;"></div>
+																				<div class="d-flex flex-column align-items-center">
+																					<div><input type="button" class="btnspinner btnup" style="margin-top:4px;" data-cal="1" data-target=".ship_6_lv_counter"></div>
+																					<div><input type="button" class="btnspinner btndown" style="margin-top:-3px;" data-cal="-1" data-target=".ship_6_lv_counter"></div>
+																				</div>
+																				<div style="width:30px;"></div>
+																				<div class="d-flex flex-column">
+																					<div class="d-flex" style="padding-top:3px;">
+																						<div><input type="button" class="btnspinner btnminus" data-cal="-10" data-target=".ship_6_lv_counter"></div>
+																						<div class="spinner_label">10</div>
+																						<div><input type="button" class="btnspinner btnplus" data-cal="10" data-target=".ship_6_lv_counter"></div>
+																					</div>
+																					<div class="d-flex">
+																						<div><input type="button" class="btnspinner btnminus" data-cal="-100" data-target=".ship_6_lv_counter"></div>
+																						<div class="spinner_label">100</div>
+																						<div><input type="button" class="btnspinner btnplus" data-cal="100" data-target=".ship_6_lv_counter"></div>
+																					</div>
+																				</div>
+																			</div>
+																			<div style="margin-top:10px;"><input type="range" class="ship_6_lv_counter" value="99" id="ship_6_lv_slidebar" max="175" min="1" oninput="document.getElementById('ship_6_lv_input').value=this.value"></div>
+																			<div>
+																				<hr style="margin:10px 0 10px 0;">
+																			</div>
+																			<div class="d-flex justify-content-end">
+																				<div><input class="btn btn-primary" type="button" value=" 決定 " onclick="ship_dropdown_submit('6:lv');"></div>
+																				<div style="width:15px;"></div>
+																				<div><input class="btn btn-dark" type="button" value="閉じる" onclick="ship_dropdown_close('6');"></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<span style="width:50px;"></span>
+																<span style="color:#5AC2D9;">Lv</span>
+																<span id="ship_6_lv"></span>
+															</div>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -697,6 +1206,7 @@
 												<div class="d-flex ship_status">
 													<input type="hidden" id="friend_6_base_param" value="">
 													<input type="hidden" id="friend_6_base_as" value="">
+													<input type="hidden" id="friend_6_base_search" value="">
 													<input type="hidden" id="friend_6_base_luck" value="">
 													<input type="hidden" id="friend_6_slot0" value="">
 													<input type="hidden" id="friend_6_slot1" value="">
@@ -722,7 +1232,7 @@
 															</div>
 															<div class="d-flex">
 																<div class="ship_param_label_a">対潜</div>
-																<div class="ship_param_a"><span class="status_result" id="ship_6_as"></span></div>
+																<div class="ship_param_a"><span class="status_result dropdown-toggle" id="ship_6_as"></span></div>
 															</div>
 														</div>
 													</div>
@@ -733,11 +1243,53 @@
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_b">運</div>
-															<div class="ship_param_b"><span id="ship_6_luck"></span></div>
+															<div class="ship_param_b status_result dropdown-toggle" id="ship_6_luckch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span culass="caret" id="ship_6_luck"></span></div>
+															<div class="dropdown-menu" id="ship_6_dropdown_luck" aria-labelledby="ship_6_luckch">
+																<div class="d-flex form-group" style="width:300px;padding:10px 20px 0 20px;">
+																	<div class="d-flex flex-column" style="width:260px;">
+																		<div style="font-size:1em;">運の設定</div>
+																		<div>
+																			<hr style="margin:10px 0 10px 0;">
+																		</div>
+																		<div class="d-flex" style="padding:0 20px 0 20px;">
+																			<div class="ship_toggle_form">
+																				<input type="number" class="ship_6_luck_counter" id="ship_6_luck_input">
+																			</div>
+																			<div style="width:10px;"></div>
+																			<div class="d-flex flex-column align-items-center">
+																				<div><input type="button" class="btnspinner btnup" style="margin-top:3px;" data-cal="1" data-target=".ship_6_luck_counter"></div>
+																				<div><input type="button" class="btnspinner btndown" style="margin-top:2px;" data-cal="-1" data-target=".ship_6_luck_counter"></div>
+																			</div>
+																			<div style="width:30px;"></div>
+																			<div class="d-flex flex-column">
+																				<div class="d-flex" style="padding-top:3px;">
+																					<div><input type="button" class="btnspinner btnminus" data-cal="-10" data-target=".ship_6_luck_counter"></div>
+																					<div class="spinner_label" style="padding-top:6px;">10</div>
+																					<div><input type="button" class="btnspinner btnplus" data-cal="10" data-target=".ship_6_luck_counter"></div>
+																				</div>
+																				<div class="d-flex" style="padding-top:3px;">
+																					<div><input type="button" class="btnspinner btnminus" data-cal="-100" data-target=".ship_6_luck_counter"></div>
+																					<div class="spinner_label" style="padding-top:6px;">100</div>
+																					<div><input type="button" class="btnspinner btnplus" data-cal="100" data-target=".ship_6_luck_counter"></div>
+																				</div>
+																			</div>
+																		</div>
+																		<div style="margin-top:15px;"><input type="range" class="ship_6_luck_counter" value="99" id="ship_6_luck_slidebar" max="99" min="1" oninput="document.getElementById('ship_6_luck_input').value=this.value"></div>
+																		<div>
+																			<hr style="margin:15px 0 20px 0;">
+																		</div>
+																		<div class="d-flex justify-content-end">
+																			<div><input class="btn btn-primary" type="button" value=" 決定 " onclick="ship_dropdown_submit('6:luck');"></div>
+																			<div style="width:15px;"></div>
+																			<div><input class="btn btn-dark" type="button" value="閉じる" onclick="ship_dropdown_luck_close('6');"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_b">命中項</div>
-															<div class="ship_param_b"><span class="status_result" id="ship_6_hit"></span></div>
+															<div class="ship_param_b"><span class="ship_status_guid" id="ship_6_hit"></span></div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_b">射程</div>
@@ -747,19 +1299,19 @@
 													<div class="d-flex flex-column">
 														<div class="d-flex">
 															<div class="ship_param_label_c">砲撃攻撃力</div>
-															<div class="ship_param_c" style=" border-radius:0 8px 0 0;"><span class="status_result" id="ship_6_basefp"></span></div>
+															<div class="ship_param_c" style=" border-radius:0 8px 0 0;"><span class="ship_status_guid" id="ship_6_basefp"></span></div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_c">雷撃攻撃力</div>
-															<div class="ship_param_c"><span class="status_result" id="ship_6_baseth"></span></div>
+															<div class="ship_param_c"><span class="ship_status_guid" id="ship_6_baseth"></span></div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_c">対潜攻撃力</div>
-															<div class="ship_param_c"><span class="status_result" id="ship_6_baseas"></span></div>
+															<div class="ship_param_c"><span class="ship_status_guid" id="ship_6_baseas"></span></div>
 														</div>
 														<div class="d-flex">
 															<div class="ship_param_label_c">夜戦攻撃力</div>
-															<div class="ship_param_c" style=" border-radius:0 0 8px 0;"><span class="status_result" id="ship_6_basenp"></span></div>
+															<div class="ship_param_c" style=" border-radius:0 0 8px 0;"><span class="ship_status_guid" id="ship_6_basenp"></span></div>
 														</div>
 													</div>
 												</div>
@@ -767,7 +1319,7 @@
 										</div>
 										<div>
 											<div id="wp_6_improve_toolbar"></div>
-											<div class="d-flex flex-column" style="width:392px;">
+											<div class="d-flex flex-column" style="width:442px;">
 												<div id="wp_6_slot1"></div>
 												<div id="wp_6_slot2"></div>
 												<div id="wp_6_slot3"></div>
@@ -783,11 +1335,11 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<!-- 艦娘選択用モーダルウィンドウ -->

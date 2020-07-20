@@ -4,6 +4,7 @@
 
 $(window).on("load", function() {
   //ウインドウを開いた時点の初期化動作
+
   // 艦種一覧データを読み込んで、艦娘選択モーダルウィンドウのタブに表示させる処理
   $.get('./data/MY_SHIPTYPE.csv', function(data) {
     let csv = $.csv.toArrays(data);
@@ -298,7 +299,7 @@ function ship_open(param) {
   let content;
 
   document.getElementById("friend_" + friendid + "_base_param").value = result[1] + ':' + result[4] + ':' + result[5] + ':' + result[6] + ':' + result[7] + ':' + result[8] + ':' + result[9] + ':' + result[10] + ':' + result[11] + ':' + result[12] + ':' + result[13] + ':' + result[14] + ':' + result[15] + ':' + result[16];
-  //base_param [艦ID(1),スロット数(4),火力(5),雷装(6),対空(7),対潜初期(8),対潜最大(9),回避初期(10),回避最大(11),索敵初期(12),索敵最大(13),運初期(14),運最大(15),射程(16)]
+  //base_param [艦ID[0],スロット数[1],火力[2],雷装[3],対空[4],対潜初期[5],対潜最大[6],回避初期[7],回避最大[8],索敵初期[9],索敵最大[10],運初期[11],運最大[12],射程[13]
 
   document.getElementById("ship_" + friendid + "_face").src = "./img/ship/" + result[1] + ".png";
   document.getElementById("ship_" + friendid + "_name").innerHTML = result[3];
@@ -308,15 +309,21 @@ function ship_open(param) {
   document.getElementById("ship_" + friendid + "_aa").innerHTML = result[7];
   document.getElementById("ship_" + friendid + "_as").innerHTML = result[9];
   document.getElementById("friend_" + friendid + "_base_as").value = result[9] + ":0";
+  document.getElementById("friend_" + friendid + "_base_as").value = result[9] + ":0";
   document.getElementById("ship_" + friendid + "_search").innerHTML = result[13];
+  document.getElementById("friend_" + friendid + "_base_search").value = result[13];
   document.getElementById("ship_" + friendid + "_luck").innerHTML = result[14];
-  document.getElementById("friend_" + friendid + "_base_luck").value = result[14];
+  document.getElementById("ship_" + friendid + "_luck").innerHTML = result[14];
 
+  document.getElementById("ship_" + friendid + "_luck_input").min = Number(result[14]);
+  document.getElementById("ship_" + friendid + "_luck_input").max = Number(result[15]);
+  document.getElementById("ship_" + friendid + "_luck_slidebar").min = Number(result[14]);
+  document.getElementById("ship_" + friendid + "_luck_slidebar").max = Number(result[15]);
 
   //命中項計算
-  i = 90 + Math.floor(Math.sqrt(99) * 2 + 1.5 * Math.sqrt(Number(result[14]))); //命中項計算
-  document.getElementById("ship_" + friendid + "_hit").innerHTML = i;
-  content = $('<p>■命中項(昼砲撃) = 90 + 2 × √(レベル) + 1.5 × √(運) + 装備命中値 + 装備改修(命中)<br>　※小数点以下は切り捨て</p><p>■計算結果<br>' + i + ' = 90 + 2 × √(99) + 1.5 × √(' + result[14] + ') + 0 + 0</p>');
+  i = Math.floor(Math.sqrt(99) * 2 + 1.5 * Math.sqrt(Number(result[14]))); //命中項計算
+  document.getElementById("ship_" + friendid + "_hit").innerHTML = i + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
+  content = $('<p>■基礎命中項 = 2 × √(レベル) + 1.5 × √(運) + 装備命中値 + 装備改修(命中)<br>　※小数点以下は切り捨て</p><p>■計算結果<br>' + i + ' = 2 × √(99) + 1.5 × √(' + result[14] + ') + 0 + 0</p>');
   $('#ship_' + friendid + '_hit').data('powertipjq', content);
   $('#ship_' + friendid + '_hit').powerTip({
     openEvents: ['click'],
@@ -347,14 +354,14 @@ function ship_open(param) {
     closeEvents: ['click'],
     placement: 's'
   });
-  document.getElementById("ship_" + friendid + "_basefp").innerHTML = Number(result[5]) + 5;
+  document.getElementById("ship_" + friendid + "_basefp").innerHTML = Number(result[5]) + 5 + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
 
   //雷撃計算
   if (result[6] == "0") {
     document.getElementById("ship_" + friendid + "_baseth").innerHTML = 0;
     content = $('<p>■計算式(雷撃攻撃力)<br>雷撃攻撃力 = 雷撃 + 装備改修(雷撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>0 = 0 + 0 + 0</p>');
   } else {
-    document.getElementById("ship_" + friendid + "_baseth").innerHTML = Number(result[6]) + 5;
+    document.getElementById("ship_" + friendid + "_baseth").innerHTML = Number(result[6]) + 5 + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
     content = $('<p>■計算式(雷撃攻撃力)<br>雷撃攻撃力 = 雷撃 + 装備改修(雷撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>' + (Number(result[6]) + 5) + ' = ' + result[6] + ' + 0 + 5</p>');
   }
   $('#ship_' + friendid + '_baseth').data('powertipjq', content);
@@ -373,7 +380,7 @@ function ship_open(param) {
     closeEvents: ['click'],
     placement: 's'
   });
-  document.getElementById("ship_" + friendid + "_baseas").innerHTML = Math.floor(i * 100) / 100;
+  document.getElementById("ship_" + friendid + "_baseas").innerHTML = Math.floor(i * 100) / 100 + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
 
   //夜戦計算
   content = $('<p>■計算式(夜戦攻撃力)<br>夜戦攻撃力 = 火力 + 雷装 + 装備改修(夜戦)　</p><p>■計算結果<br>' + (Number(result[5]) + Number(result[6])) + ' = ' + result[5] + ' + ' + result[6] + ' + 0 </p>');
@@ -383,7 +390,7 @@ function ship_open(param) {
     closeEvents: ['click'],
     placement: 's'
   });
-  document.getElementById("ship_" + friendid + "_basenp").innerHTML = Number(result[5]) + Number(result[6]);
+  document.getElementById("ship_" + friendid + "_basenp").innerHTML = Number(result[5]) + Number(result[6]) + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
   document.getElementById("md_" + friendid + "_wp_friend").value = result[1] + ':' + result[0] + ':' + result[2];
 
   //艦娘スロットの書き出し
@@ -524,6 +531,55 @@ function ship_open(param) {
     });
     $("#wp_" + friendid + "_0").html(htmlwrite2);
   });
+
+
+
+  //スライドバー制御用
+  let arySpinnerCtrl = [];
+  let spin_speed = 20; //変動スピード
+  //長押し押下時
+  $('.btnspinner').on('touchstart mousedown click', function(e) {
+    if (arySpinnerCtrl['interval']) return false;
+    let target = $(this).data('target');
+    arySpinnerCtrl['target'] = target;
+    arySpinnerCtrl['timestamp'] = e.timeStamp;
+    arySpinnerCtrl['cal'] = Number($(this).data('cal'));
+    //クリックは単一の処理に留める
+    if (e.type == 'click') {
+      spinnerCal();
+      arySpinnerCtrl = [];
+      return false;
+    }
+    //長押し時の処理
+    setTimeout(function() {
+      //インターバル未実行中 + 長押しのイベントタイプスタンプ一致時に計算処理
+      if (!arySpinnerCtrl['interval'] && arySpinnerCtrl['timestamp'] == e.timeStamp) {
+        arySpinnerCtrl['interval'] = setInterval(spinnerCal, spin_speed);
+      }
+    }, 500);
+  });
+  //長押し解除時 画面スクロールも解除に含む
+  $(document).on('touchend mouseup scroll', function(e) {
+    if (arySpinnerCtrl['interval']) {
+      clearInterval(arySpinnerCtrl['interval']);
+      arySpinnerCtrl = [];
+    }
+  });
+  //変動計算関数
+  function spinnerCal() {
+    let target = $(arySpinnerCtrl['target']);
+    let num = Number(target.val());
+    num = num + arySpinnerCtrl['cal'];
+    if (num > Number(target.attr('max'))) {
+      target.val(Number(target.attr('max')));
+    } else if (Number(target.attr('min')) > num) {
+      target.val(Number(target.attr('min')));
+    } else {
+      target.val(num);
+    }
+  }
+
+
   $('#ｍodal_friend').modal('hide');
   document.getElementById("friend_" + friendid + "_selected").style.display = "block";
   document.getElementById("friend_" + friendid).style.display = "none";
@@ -1249,6 +1305,7 @@ function friend_status_update(friendid) {
   //base [艦ID(0),スロット数(1),火力(2),雷装(3),対空(4),対潜初期(5),対潜最大(6),回避初期(7),回避最大(8),索敵初期(9),索敵最大(10),運初期(11),運最大(12),射程(13)]
   let as = document.getElementById("friend_" + friendid + "_base_as").value;
   as = as.split(':');
+  //対潜値[0],対潜改修値[1]
 
   let content;
   let improve;
@@ -1257,6 +1314,7 @@ function friend_status_update(friendid) {
   let status;
   let lv = Number(document.getElementById("ship_" + friendid + "_lv").innerHTML);
   let luck = Number(document.getElementById("ship_" + friendid + "_luck").innerHTML);
+  let search = Number(document.getElementById("friend_" + friendid + "_base_search").value);
   let fp;
   let th;
 
@@ -1304,12 +1362,12 @@ function friend_status_update(friendid) {
   //対潜計算
   param[3] = Number(as[0]) + Number(as[1]) + Number(slot0[7]) + Number(slot0[15]) + Number(slot1[7]) + Number(slot1[15]) + Number(slot2[7]) + Number(slot2[15]) + Number(slot3[7]) + Number(slot3[15]) + Number(slot4[7]) + Number(slot4[15]) + Number(slot5[7]) + Number(slot5[15]);
   //索敵計算
-  param[4] = Number(base[10]) + Number(slot0[8]) + Number(slot0[16]) + Number(slot1[8]) + Number(slot1[16]) + Number(slot2[8]) + Number(slot2[16]) + Number(slot3[8]) + Number(slot3[16]) + Number(slot4[8]) + Number(slot4[16]) + Number(slot5[8]) + Number(slot5[16])
+  param[4] = search + Number(slot0[8]) + Number(slot0[16]) + Number(slot1[8]) + Number(slot1[16]) + Number(slot2[8]) + Number(slot2[16]) + Number(slot3[8]) + Number(slot3[16]) + Number(slot4[8]) + Number(slot4[16]) + Number(slot5[8]) + Number(slot5[16])
   //命中項計算
   bonus = Math.floor(param[5]) + Number(slot0[9]) + Number(slot1[9]) + Number(slot2[9]) + Number(slot3[9]) + Number(slot4[9]) + Number(slot5[9]);
   improve = get_hit_improve(slot0[1], slot0[2], slot0[3]) + get_hit_improve(slot1[1], slot1[2], slot1[3]) + get_hit_improve(slot2[1], slot2[2], slot2[3]) + get_hit_improve(slot3[1], slot3[2], slot3[3]) + get_hit_improve(slot4[1], slot4[2], slot4[3]) + get_hit_improve(slot5[1], slot5[2], slot5[3]);
-  param[5] = Math.floor(90 + 2 * Math.sqrt(lv) + 1.5 * Math.sqrt(luck) + bonus + improve);
-  content = $('<p>■命中項(昼砲撃) = 90 + 2 × √(レベル) + 1.5 × √(運) + 装備命中値 + 装備改修(命中)<br>　※小数点以下は切り捨て</p><p>■計算結果<br>' + param[5] + ' = 90 + 2 × √(' + lv + ') + 1.5 × √(' + luck + ') + ' + bonus + ' + ' + Math.floor(improve * 10000) / 10000 + '</p>');
+  param[5] = Math.floor(2 * Math.sqrt(lv) + 1.5 * Math.sqrt(luck) + bonus + improve);
+  content = $('<p>■基礎命中項 =  2 × √(レベル) + 1.5 × √(運) + 装備命中値 + 装備改修(命中)<br>　※小数点以下は切り捨て</p><p>■計算結果<br>' + param[5] + ' = 2 × √(' + lv + ') + 1.5 × √(' + luck + ') + ' + bonus + ' + ' + Math.floor(improve * 10000) / 10000 + '</p>');
   $('#ship_' + friendid + '_hit').data('powertipjq', content);
   $('#ship_' + friendid + '_hit').powerTip({
     openEvents: ['click'],
@@ -1378,7 +1436,7 @@ function friend_status_update(friendid) {
   document.getElementById("ship_" + friendid + "_aa").innerHTML = param[2];
   document.getElementById("ship_" + friendid + "_as").innerHTML = param[3];
   document.getElementById("ship_" + friendid + "_search").innerHTML = param[4];
-  document.getElementById("ship_" + friendid + "_hit").innerHTML = param[5];
+  document.getElementById("ship_" + friendid + "_hit").innerHTML = param[5] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
   switch (param[7]) {
     case 1:
       document.getElementById("ship_" + friendid + "_range").innerHTML = "短";
@@ -1393,14 +1451,14 @@ function friend_status_update(friendid) {
       document.getElementById("ship_" + friendid + "_range").innerHTML = "超長";
       break;
   }
-  document.getElementById("ship_" + friendid + "_basefp").innerHTML = param[8];
+  document.getElementById("ship_" + friendid + "_basefp").innerHTML = param[8] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
   if (param[1] == 0) {
     document.getElementById("ship_" + friendid + "_baseth").innerHTML = 0;
   } else {
-    document.getElementById("ship_" + friendid + "_baseth").innerHTML = param[9];
+    document.getElementById("ship_" + friendid + "_baseth").innerHTML = param[9] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
   }
-  document.getElementById("ship_" + friendid + "_baseas").innerHTML = param[10];
-  document.getElementById("ship_" + friendid + "_basenp").innerHTML = param[11];
+  document.getElementById("ship_" + friendid + "_baseas").innerHTML = param[10] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
+  document.getElementById("ship_" + friendid + "_basenp").innerHTML = param[11] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
 
 }
 
@@ -1989,6 +2047,7 @@ function screen_shot1() {
   $('.ship_status_shot').removeClass("ship_status");
   $('.linkbox').addClass("linkbox_shot");
   $('.linkbox_shot').removeClass("linkbox");
+  $('.ship_status_guid').children('img').hide();
   $('.kan_frame_selected').addClass("kan_frame_selected_shot");
   $('.kan_frame_selected_shot').removeClass("kan_frame_selected");
   $('.kan_frame').addClass("kan_frame_shot");
@@ -1997,18 +2056,17 @@ function screen_shot1() {
   $('.select_shot').removeClass("select");
   $('.wp_slot_name').addClass("wp_slot_name_shot");
   $('.wp_slot_name_shot').removeClass("wp_slot_name");
-  $('.ship_param_label_a').css("padding-top","0px");
-  $('.ship_param_label_b').css("padding-top","0px");
-  $('.ship_param_label_c').css("padding-top","0px");
+  $('.ship_param_label_a').css("padding-top", "0px");
+  $('.ship_param_label_b').css("padding-top", "0px");
+  $('.ship_param_label_c').css("padding-top", "0px");
 
 
-  html2canvas(document.querySelector("#screen_shot1_start"), {
-    }).then(canvas => {
-      canvas.toBlob(blob => {
-        let now=new Date();
-        let filename="screen_image_"+now.getFullYear()+now.getMonth()+now.getDate()+now.getMilliseconds()+ ".png";
-        $("#screen_shot1_result").attr("download", filename).attr("href", window.URL.createObjectURL(blob));
-        $('a#screen_shot1_result')[0].click();
+  html2canvas(document.querySelector("#screen_shot1_start"), {}).then(canvas => {
+    canvas.toBlob(blob => {
+      let now = new Date();
+      let filename = "screen_image_" + now.getFullYear() + now.getMonth() + now.getDate() + now.getMilliseconds() + ".png";
+      $("#screen_shot1_result").attr("download", filename).attr("href", window.URL.createObjectURL(blob));
+      $('a#screen_shot1_result')[0].click();
     });
   });
 
@@ -2036,8 +2094,102 @@ function screen_shot1() {
   $('.select').removeClass("select_shot");
   $('.wp_slot_name_shot').addClass("wp_slot_name");
   $('.wp_slot_name').removeClass("wp_slot_name_shot");
-  $('.ship_param_label_a').css("padding-top","5px");
-  $('.ship_param_label_b').css("padding-top","5px");
-  $('.ship_param_label_c').css("padding-top","5px");
+  $('.ship_param_label_a').css("padding-top", "5px");
+  $('.ship_param_label_b').css("padding-top", "5px");
+  $('.ship_param_label_c').css("padding-top", "5px");
+  $('.ship_status_guid').children('img').show();
+}
 
+
+
+//ドロップダウンメニュー関連の処理
+$('.dropdown-menu').click(function(e) {
+  e.stopPropagation();
+});
+
+//ドロップダウンメニューオープン時の処理
+$("#ship_1_lvch").on("click", function() {
+  document.getElementById("ship_1_lv_input").value = document.getElementById("ship_1_lv").innerHTML;
+  document.getElementById("ship_1_lv_slidebar").value = document.getElementById("ship_1_lv").innerHTML;
+});
+$("#ship_1_luckch").on("click", function() {
+  document.getElementById("ship_1_luck_input").value = document.getElementById("ship_1_luck").innerHTML;
+  document.getElementById("ship_1_luck_slidebar").value = document.getElementById("ship_1_luck").innerHTML;
+});
+$("#ship_2_lvch").on("click", function() {
+  document.getElementById("ship_2_lv_input").value = document.getElementById("ship_2_lv").innerHTML;
+  document.getElementById("ship_2_lv_slidebar").value = document.getElementById("ship_2_lv").innerHTML;
+});
+$("#ship_2_luckch").on("click", function() {
+  document.getElementById("ship_2_luck_input").value = document.getElementById("ship_2_luck").innerHTML;
+  document.getElementById("ship_2_luck_slidebar").value = document.getElementById("ship_2_luck").innerHTML;
+});
+$("#ship_3_lvch").on("click", function() {
+  document.getElementById("ship_3_lv_input").value = document.getElementById("ship_3_lv").innerHTML;
+  document.getElementById("ship_3_lv_slidebar").value = document.getElementById("ship_3_lv").innerHTML;
+});
+$("#ship_3_luckch").on("click", function() {
+  document.getElementById("ship_3_luck_input").value = document.getElementById("ship_3_luck").innerHTML;
+  document.getElementById("ship_3_luck_slidebar").value = document.getElementById("ship_3_luck").innerHTML;
+});
+$("#ship_4_lvch").on("click", function() {
+  document.getElementById("ship_4_lv_input").value = document.getElementById("ship_4_lv").innerHTML;
+  document.getElementById("ship_4_lv_slidebar").value = document.getElementById("ship_4_lv").innerHTML;
+});
+$("#ship_4_luckch").on("click", function() {
+  document.getElementById("ship_4_luck_input").value = document.getElementById("ship_4_luck").innerHTML;
+  document.getElementById("ship_4_luck_slidebar").value = document.getElementById("ship_4_luck").innerHTML;
+});
+$("#ship_5_lvch").on("click", function() {
+  document.getElementById("ship_5_lv_input").value = document.getElementById("ship_5_lv").innerHTML;
+  document.getElementById("ship_5_lv_slidebar").value = document.getElementById("ship_5_lv").innerHTML;
+});
+$("#ship_5_luckch").on("click", function() {
+  document.getElementById("ship_5_luck_input").value = document.getElementById("ship_5_luck").innerHTML;
+  document.getElementById("ship_5_luck_slidebar").value = document.getElementById("ship_5_luck").innerHTML;
+});
+$("#ship_6_lvch").on("click", function() {
+  document.getElementById("ship_6_lv_input").value = document.getElementById("ship_6_lv").innerHTML;
+  document.getElementById("ship_6_lv_slidebar").value = document.getElementById("ship_6_lv").innerHTML;
+});
+$("#ship_6_luckch").on("click", function() {
+  document.getElementById("ship_6_luck_input").value = document.getElementById("ship_6_luck").innerHTML;
+  document.getElementById("ship_6_luck_slidebar").value = document.getElementById("ship_6_luck").innerHTML;
+});
+
+
+//ドロップダウンメニュー決定ボタン選択時の処理
+function ship_dropdown_submit(param) {
+  const result = param.split(':');
+  //friendid値[0],ドロップダウン操作パラメータ[1]
+  param = document.getElementById("friend_" + result[0] + "_base_param").value;
+  const status = param.split(':');
+  //艦ID[0],スロット数[1],火力[2],雷装[3],対空[4],対潜初期[5],対潜最大[6],回避初期[7],回避最大[8],索敵初期[9],索敵最大[10],運初期[11],運最大[12],射程[13]
+  param = document.getElementById("friend_" + result[0] + "_base_as").value;
+  const as = param.split(':');
+
+  //対潜値[0],対潜改修値[1]
+  if (result[1] == "lv") {
+    let lv = document.getElementById("ship_" + result[0] + "_lv_input").value;
+    document.getElementById("ship_" + result[0] + "_lv").innerHTML = lv;
+    document.getElementById("friend_" + result[0] + "_base_search").value = Math.floor((Number(status[10]) - Number(status[9])) / 99 * lv + Number(status[9]));
+    document.getElementById("friend_" + result[0] + "_base_as").value = Math.floor((Number(status[6]) - Number(status[5])) / 99 * lv + Number(status[5])) + ':' + as[1];
+    friend_status_update(result[0]);
+    $("#ship_" + result[0] + "_dropdown").collapse('toggle');
+  }
+  if (result[1] == "luck") {
+    let luck = document.getElementById("ship_" + result[0] + "_luck_input").value;
+    document.getElementById("ship_" + result[0] + "_luck").innerHTML = luck;
+    friend_status_update(result[0]);
+    $("#ship_" + result[0] + "_dropdown_luck").collapse('toggle');
+  }
+}
+
+//ドロップダウンメニュー閉じるボタン選択時の処理
+function ship_dropdown_close(friendid) {
+  $("#ship_" + friendid + "_dropdown").collapse('toggle');
+}
+
+function ship_dropdown_luck_close(friendid) {
+  $("#ship_" + friendid + "_dropdown_luck").collapse('toggle');
 }
