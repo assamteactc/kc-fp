@@ -917,9 +917,10 @@ transform: scale(1.2, 1.2);
   margin-top: 1px;
   padding-top: 3px;
   padding-left: 3px;
-  margin-right: 2px;
+  margin-right: 0px;
   background: #FFFFFA;
   border-top: 1px solid #EBE7E1;
+  border-: 1px solid #EBE7E1;
   /* box-shadow:1px 1px 0 #EBE7E1 inset; */
 }
 
