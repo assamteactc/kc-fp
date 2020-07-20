@@ -836,7 +836,7 @@ body {
 }
 
 .ship_status_guid {
-  margin-left: 4px;
+  margin-right: 2px;
   user-select: none;
   cursor: pointer;
   transition: .3s;
