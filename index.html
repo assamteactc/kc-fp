@@ -145,6 +145,7 @@
 												<input type="hidden" id="friend_1_slot3" value="">
 												<input type="hidden" id="friend_1_slot4" value="">
 												<input type="hidden" id="friend_1_slot5" value="">
+												<input type="hidden" id="friend_1_set" value="">
 												<input type="hidden" id="friend_1_setbonus" value="">
 												<div id="friend_1_as"></div>
 												<div>
@@ -256,7 +257,7 @@
 											<div id="wp_1_slot3"></div>
 											<div id="wp_1_slot4"></div>
 											<div id="wp_1_slot5"></div>
-											<div style="padding-top:3px;" id="wp_1_slot0"></div>
+											<div style="padding-top:4px;" id="wp_1_slot0"></div>
 										</div>
 									</div>
 								</div>
@@ -358,6 +359,7 @@
 												<input type="hidden" id="friend_2_slot3" value="">
 												<input type="hidden" id="friend_2_slot4" value="">
 												<input type="hidden" id="friend_2_slot5" value="">
+												<input type="hidden" id="friend_2_set" value="">
 												<input type="hidden" id="friend_2_setbonus" value="">
 												<div id="friend_2_as"></div>
 												<div>
@@ -469,7 +471,7 @@
 											<div id="wp_2_slot3"></div>
 											<div id="wp_2_slot4"></div>
 											<div id="wp_2_slot5"></div>
-											<div style="padding-top:3px;" id="wp_2_slot0"></div>
+											<div style="padding-top:4px;" id="wp_2_slot0"></div>
 										</div>
 									</div>
 								</div>
@@ -572,6 +574,7 @@
 												<input type="hidden" id="friend_3_slot3" value="">
 												<input type="hidden" id="friend_3_slot4" value="">
 												<input type="hidden" id="friend_3_slot5" value="">
+												<input type="hidden" id="friend_3_set" value="">
 												<input type="hidden" id="friend_3_setbonus" value="">
 												<div id="friend_3_as"></div>
 												<div>
@@ -683,7 +686,7 @@
 											<div id="wp_3_slot3"></div>
 											<div id="wp_3_slot4"></div>
 											<div id="wp_3_slot5"></div>
-											<div style="padding-top:3px;" id="wp_3_slot0"></div>
+											<div style="padding-top:4px;" id="wp_3_slot0"></div>
 										</div>
 									</div>
 								</div>
@@ -786,6 +789,7 @@
 													<input type="hidden" id="friend_4_slot3" value="">
 													<input type="hidden" id="friend_4_slot4" value="">
 													<input type="hidden" id="friend_4_slot5" value="">
+													<input type="hidden" id="friend_4_set" value="">
 													<input type="hidden" id="friend_4_setbonus" value="">
 													<div id="friend_4_as"></div>
 													<div>
@@ -897,7 +901,7 @@
 												<div id="wp_4_slot3"></div>
 												<div id="wp_4_slot4"></div>
 												<div id="wp_4_slot5"></div>
-												<div style="padding-top:3px;" id="wp_4_slot0"></div>
+												<div style="padding-top:4px;" id="wp_4_slot0"></div>
 											</div>
 										</div>
 									</div>
@@ -1000,6 +1004,7 @@
 													<input type="hidden" id="friend_5_slot3" value="">
 													<input type="hidden" id="friend_5_slot4" value="">
 													<input type="hidden" id="friend_5_slot5" value="">
+													<input type="hidden" id="friend_5_set" value="">
 													<input type="hidden" id="friend_5_setbonus" value="">
 													<div id="friend_5_as"></div>
 													<div>
@@ -1111,7 +1116,7 @@
 												<div id="wp_5_slot3"></div>
 												<div id="wp_5_slot4"></div>
 												<div id="wp_5_slot5"></div>
-												<div style="padding-top:3px;" id="wp_5_slot0"></div>
+												<div style="padding-top:4px;" id="wp_5_slot0"></div>
 											</div>
 										</div>
 									</div>
@@ -1214,6 +1219,7 @@
 													<input type="hidden" id="friend_6_slot3" value="">
 													<input type="hidden" id="friend_6_slot4" value="">
 													<input type="hidden" id="friend_6_slot5" value="">
+													<input type="hidden" id="friend_6_set" value="">
 													<input type="hidden" id="friend_6_setbonus" value="">
 													<div id="friend_6_as"></div>
 													<div>
@@ -1325,7 +1331,7 @@
 												<div id="wp_6_slot3"></div>
 												<div id="wp_6_slot4"></div>
 												<div id="wp_6_slot5"></div>
-												<div style="padding-top:3px;" id="wp_6_slot0"></div>
+												<div style="padding-top:4px;" id="wp_6_slot0"></div>
 											</div>
 										</div>
 									</div>
@@ -1339,8 +1345,51 @@
 				</div>
 			</div>
 		</div>
+		<div class="main_frame" style="margin-top:40px;height:100px;">
+			<div id="enemy">
+				<div class="d-flex" style="padding:24px 0 0 24px;">
+					<div><span class="content_title align-middle">敵艦隊</span></div>
+					<div class="d-flex align-items-center justify-content-between" style="width:1440px;">
+						<div class="d-flex">
+							<div style="width:30px;"></div>
+							<div class="btn-group btn-toggle ship_switch">
+							</div>
+						</div>
+						<div>
+							<a class="tool_icons" title="作成中"><img src="./img/util/photo_camera.png"></a>&nbsp;&nbsp;&nbsp;<a class="tool_icons" href="javascript:void(0);" onclick="friend_all_close();"
+								title="閉じる"><img src="./img/util/delete.png"></a>
+							<a id="screen_shot1_result" href="" style="display:none;" download="test-image.png">画像保存</a>
+						</div>
+					</div>
+					<hr>
+				</div>
+				<hr>
+			</div>
+		</div>
+
+	<div class="main_frame" style="margin-top:40px;height:100px;">
+		<div id="report">
+			<div class="d-flex" style="padding:24px 0 0 24px;">
+				<div><span class="content_title align-middle">レポート</span></div>
+				<div class="d-flex align-items-center justify-content-between" style="width:1416px;">
+					<div class="d-flex">
+						<div style="width:30px;"></div>
+						<div class="btn-group btn-toggle ship_switch">
+						</div>
+					</div>
+					<div>
+						<a class="tool_icons" title="作成中"><img src="./img/util/photo_camera.png"></a>&nbsp;&nbsp;&nbsp;<a class="tool_icons" href="javascript:void(0);" onclick="friend_all_close();"
+							title="閉じる"><img src="./img/util/delete.png"></a>
+						<a id="screen_shot1_result" href="" style="display:none;" download="test-image.png">画像保存</a>
+					</div>
+				</div>
+				<hr>
+			</div>
+			<hr>
+		</div>
 	</div>
-	</div>
+</div>
+
 
 	<!-- 艦娘選択用モーダルウィンドウ -->
 	<div class="modal fade" id="ｍodal_friend" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
@@ -1449,7 +1498,7 @@
 
 	<!-- 装備選択用モーダルウィンドウ -->
 	<div class="modal fade" id="ｍd_1_wp" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
-		<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-dialog modal-xl modal-wp" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<input type="hidden" id="md_1_wp_friend" />
@@ -1470,7 +1519,7 @@
 					<div id="md_1_wp_sub_content"></div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" onclick="weapon_discard()">はずす</button>
+					<button type="button" class="btn btn-danger" onclick="md_slot_release('1')">はずす</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
 				</div>
 			</div>
@@ -1499,7 +1548,7 @@
 					<div id="md_2_wp_sub_content"></div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" onclick="weapon_discard()">はずす</button>
+					<button type="button" class="btn btn-danger" onclick="md_slot_release('2')">はずす</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
 				</div>
 			</div>
@@ -1529,7 +1578,7 @@
 					<div id="md_3_wp_sub_content"></div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" onclick="weapon_discard()">はずす</button>
+					<button type="button" class="btn btn-danger" onclick="md_slot_release('3')">はずす</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
 				</div>
 			</div>
@@ -1558,7 +1607,7 @@
 					<div id="md_4_wp_sub_content"></div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" onclick="weapon_discard()">はずす</button>
+					<button type="button" class="btn btn-danger" onclick="md_slot_release('4')">はずす</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
 				</div>
 			</div>
@@ -1587,7 +1636,7 @@
 					<div id="md_5_wp_sub_content"></div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" onclick="weapon_discard()">はずす</button>
+					<button type="button" class="btn btn-danger" onclick="md_slot_release('5')">はずす</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
 				</div>
 			</div>
@@ -1617,7 +1666,7 @@
 					<div id="md_6_wp_sub_content"></div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" onclick="weapon_discard()">はずす</button>
+					<button type="button" class="btn btn-danger" onclick="md_slot_release('6')">はずす</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
 				</div>
 			</div>

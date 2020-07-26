@@ -170,6 +170,12 @@ body {
   z-index: 2;
 }
 
+.modal-wp {
+  /* モーダルサイズXLをデフォルト1140から1400へ変更する。 */
+  max-width:1400px !important;
+  margin-left:250px;
+}
+
 .container {
   margin: 10px 0;
 }
@@ -947,12 +953,12 @@ transform: scale(1.2, 1.2);
 }
 
 .wp_list_name {
-  width: 43%;
+  width: 50%;
   text-align: left;
 }
 
 .wp_list_label_name {
-  width: 42%;
+  width: 49%;
   text-align: left;
 }
 
@@ -962,7 +968,7 @@ transform: scale(1.2, 1.2);
 }
 
 .wp_list_param {
-  width: 9.5%;
+  width: 7%;
   text-align: center;
 }
 

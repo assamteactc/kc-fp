@@ -124,50 +124,50 @@ $(window).on("load", function() {
   });
 
 
-    //スライドバー制御用
-    let arySpinnerCtrl = [];
-    let spin_speed = 20; //変動スピード
-    //長押し押下時
-    $('.btnspinner').on('touchstart mousedown click', function(e) {
-      if (arySpinnerCtrl['interval']) return false;
-      let target = $(this).data('target');
-      arySpinnerCtrl['target'] = target;
-      arySpinnerCtrl['timestamp'] = e.timeStamp;
-      arySpinnerCtrl['cal'] = Number($(this).data('cal'));
-      //クリックは単一の処理に留める
-      if (e.type == 'click') {
-        spinnerCal();
-        arySpinnerCtrl = [];
-        return false;
-      }
-      //長押し時の処理
-      setTimeout(function() {
-        //インターバル未実行中 + 長押しのイベントタイプスタンプ一致時に計算処理
-        if (!arySpinnerCtrl['interval'] && arySpinnerCtrl['timestamp'] == e.timeStamp) {
-          arySpinnerCtrl['interval'] = setInterval(spinnerCal, spin_speed);
-        }
-      }, 500);
-    });
-    //長押し解除時 画面スクロールも解除に含む
-    $(document).on('touchend mouseup scroll', function(e) {
-      if (arySpinnerCtrl['interval']) {
-        clearInterval(arySpinnerCtrl['interval']);
-        arySpinnerCtrl = [];
-      }
-    });
-    //変動計算関数
-    function spinnerCal() {
-      let target = $(arySpinnerCtrl['target']);
-      let num = Number(target.val());
-      num = num + arySpinnerCtrl['cal'];
-      if (num > Number(target.attr('max'))) {
-        target.val(Number(target.attr('max')));
-      } else if (Number(target.attr('min')) > num) {
-        target.val(Number(target.attr('min')));
-      } else {
-        target.val(num);
-      }
+  //スライドバー制御用
+  let arySpinnerCtrl = [];
+  let spin_speed = 20; //変動スピード
+  //長押し押下時
+  $('.btnspinner').on('touchstart mousedown click', function(e) {
+    if (arySpinnerCtrl['interval']) return false;
+    let target = $(this).data('target');
+    arySpinnerCtrl['target'] = target;
+    arySpinnerCtrl['timestamp'] = e.timeStamp;
+    arySpinnerCtrl['cal'] = Number($(this).data('cal'));
+    //クリックは単一の処理に留める
+    if (e.type == 'click') {
+      spinnerCal();
+      arySpinnerCtrl = [];
+      return false;
     }
+    //長押し時の処理
+    setTimeout(function() {
+      //インターバル未実行中 + 長押しのイベントタイプスタンプ一致時に計算処理
+      if (!arySpinnerCtrl['interval'] && arySpinnerCtrl['timestamp'] == e.timeStamp) {
+        arySpinnerCtrl['interval'] = setInterval(spinnerCal, spin_speed);
+      }
+    }, 500);
+  });
+  //長押し解除時 画面スクロールも解除に含む
+  $(document).on('touchend mouseup scroll', function(e) {
+    if (arySpinnerCtrl['interval']) {
+      clearInterval(arySpinnerCtrl['interval']);
+      arySpinnerCtrl = [];
+    }
+  });
+  //変動計算関数
+  function spinnerCal() {
+    let target = $(arySpinnerCtrl['target']);
+    let num = Number(target.val());
+    num = num + arySpinnerCtrl['cal'];
+    if (num > Number(target.attr('max'))) {
+      target.val(Number(target.attr('max')));
+    } else if (Number(target.attr('min')) > num) {
+      target.val(Number(target.attr('min')));
+    } else {
+      target.val(num);
+    }
+  }
 
 
 });
@@ -346,8 +346,8 @@ function ship_open(param) {
   let i;
   let content;
 
-  document.getElementById("friend_" + friendid + "_base_param").value = result[1] + ':' + result[4] + ':' + result[5] + ':' + result[6] + ':' + result[7] + ':' + result[8] + ':' + result[9] + ':' + result[10] + ':' + result[11] + ':' + result[12] + ':' + result[13] + ':' + result[14] + ':' + result[15] + ':' + result[16];
-  //base_param [艦ID[0],スロット数[1],火力[2],雷装[3],対空[4],対潜初期[5],対潜最大[6],回避初期[7],回避最大[8],索敵初期[9],索敵最大[10],運初期[11],運最大[12],射程[13]
+  document.getElementById("friend_" + friendid + "_base_param").value = result[1] + ':' + result[0] + ':' + result[2] + ':' + result[4] + ':' + result[5] + ':' + result[6] + ':' + result[7] + ':' + result[8] + ':' + result[9] + ':' + result[10] + ':' + result[11] + ':' + result[12] + ':' + result[13] + ':' + result[14] + ':' + result[15] + ':' + result[16];
+  //base_param [艦ID[0],艦カテゴリ[1],艦種[2],スロット数[3],火力[4],雷装[5],対空[6],対潜初期[7],対潜最大[8],回避初期[9],回避最大[10],索敵初期[11],索敵最大[12],運初期[13],運最大[14],射程[15]
 
   document.getElementById("ship_" + friendid + "_face").src = "./img/ship/" + result[1] + ".png";
   document.getElementById("ship_" + friendid + "_name").innerHTML = result[3];
@@ -360,6 +360,8 @@ function ship_open(param) {
   document.getElementById("friend_" + friendid + "_base_as").value = result[9] + ":0";
   document.getElementById("ship_" + friendid + "_search").innerHTML = result[13];
   document.getElementById("friend_" + friendid + "_base_search").value = result[13];
+  document.getElementById("friend_" + friendid + "_set").value = "0:0:0:0:0:0:0:0:0:0";
+  document.getElementById("friend_" + friendid + "_setbonus").value = "0:0:0:0:0";
   document.getElementById("ship_" + friendid + "_luck").innerHTML = result[14];
   document.getElementById("ship_" + friendid + "_luck").innerHTML = result[14];
 
@@ -525,6 +527,12 @@ function ship_open(param) {
           htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_hit"></div>';
           htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_hit wp_improve_param"></div>';
           htmlwrite += '</div></div>';
+          htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
+          htmlwrite += '<div class="wp_list_initial">' + this[12] + '</div>&nbsp;';
+          htmlwrite += '<div class="d-flex flex-column">';
+          htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_bom"></div>';
+          htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_bom wp_improve_param"></div>';
+          htmlwrite += '</div></div>';
           htmlwrite += '</div></a>';
 
           if (this[18] != "FALSE") {
@@ -571,6 +579,12 @@ function ship_open(param) {
             htmlwrite2 += '<div class="d-flex flex-column">';
             htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_hit"></div>';
             htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_hit wp_improve_param"></div>';
+            htmlwrite2 += '</div></div>';
+            htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
+            htmlwrite2 += '<div class="wp_list_initial">' + this[12] + '</div>&nbsp;';
+            htmlwrite2 += '<div class="d-flex flex-column">';
+            htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_bom"></div>';
+            htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_bom wp_improve_param"></div>';
             htmlwrite2 += '</div></div>';
             htmlwrite2 += '</div></a>';
           }
@@ -746,12 +760,12 @@ $('#ｍd_6_wp').on('show.bs.modal', function(event) {
 
 function md_wp_oepn(friendid, slotid, modal) {
   const improve = document.getElementById("wp_" + friendid + "_slot" + slotid + "_improve").value
-  let param = document.getElementById("md_" + friendid + "_wp_friend").value + ':' + friendid + ':' + improve.slice(1);
+  let param = document.getElementById("md_" + friendid + "_wp_friend").value + ':' + friendid + ':' + slotid + ':' + improve.slice(1);
+  let check = 0;
+  let i;
   const result = param.split(':');
+  // 艦ID[0],カテゴリ[1],艦種[2],friendid値[3],スロットID[4],装備改修値[5]
 
-  //ボーナス値計算
-  wp_bonus_single(result);
-  // 艦ID(0),カテゴリ(1),艦種(2),friendid値(3),装備改修値(4)
   switch (slotid) {
     case 0:
       modal.find('.modal-header span#md_wptitle').text("補強増設スロット");
@@ -773,11 +787,8 @@ function md_wp_oepn(friendid, slotid, modal) {
       break;
   }
   document.getElementById("md_" + friendid + "_wp_slotid").value = slotid;
-
   //改修ボーナス値計算
   if (document.getElementById("wp_" + friendid + "_slot" + slotid + "_improve").disabled == false) {
-    improve_check(friendid + ':' + result[4]);
-
     document.getElementById("md_" + friendid + "_wp_improvebar_0").classList.remove('active');
     document.getElementById("md_" + friendid + "_wp_improvebar_1").classList.remove('active');
     document.getElementById("md_" + friendid + "_wp_improvebar_2").classList.remove('active');
@@ -789,7 +800,16 @@ function md_wp_oepn(friendid, slotid, modal) {
     document.getElementById("md_" + friendid + "_wp_improvebar_8").classList.remove('active');
     document.getElementById("md_" + friendid + "_wp_improvebar_9").classList.remove('active');
     document.getElementById("md_" + friendid + "_wp_improvebar_10").classList.remove('active');
-    document.getElementById("md_" + friendid + "_wp_improvebar_" + result[4]).classList.add('active');
+    document.getElementById("md_" + friendid + "_wp_improvebar_" + result[5]).classList.add('active');
+    improve_check(friendid + ':' + result[5]);
+  } else {
+    for (i = 0; i < 11; i++) {
+      if ($("#md_" + friendid + "_wp_improvebar_" + i).hasClass('active')) {
+        check = i;
+        break;
+      }
+    }
+    improve_check(friendid + ':' + check);
   }
 
   if (slotid == "0") {
@@ -890,219 +910,221 @@ function htmlwrite_md_wp_content_clear(friendid) {
 function improve_check(param) {
   let result = param.split(':');
   // friendid値[0],改修値[1]
-  result = document.getElementById("md_" + result[0] + "_wp_friend").value + ':' + param;
+  let slotid = document.getElementById("md_" + result[0] + "_wp_slotid").value;
+  result = document.getElementById("md_" + result[0] + "_wp_friend").value + ':' + result[0] + ':' + slotid + ':' + result[1];
   result = result.split(':');
-  // 艦ID(0),カテゴリ(1),艦種(2),friendid値(3),装備改修値(4)
-  document.getElementById("md_" + result[3] + "_wp_improve").value = result[4];
-  wp_bonus_single(result);
+  // 艦ID(0),カテゴリ(1),艦種(2),friendid値(3),スロットID[4],装備改修値[5]
+
+  document.getElementById("md_" + result[3] + "_wp_improve").value = result[5];
+  wp_bonus(result);
   //小口径主砲・高角砲なし
   let listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_1:1_fp');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 100) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_1:1_hit');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 100) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
   })
   //小口径主砲・高角砲あり
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_1:2_fp');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 100) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_1:2_aa');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 70) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 70) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_1:2_hit');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 100) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
   })
   //中口径主砲・高角砲なし
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_2:1_fp');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 100) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_2:1_hit');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 100) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
   })
   //魚雷
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_5:1_th');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 120) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 120) / 100;
     }
   })
   //機銃
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_21:1_fp');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 100) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_21:1_th');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 120) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 120) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_21:1_aa');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 70) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 70) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_36:1_fp');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 100) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_36:1_aa');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 70) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 70) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_36:1_hit');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 100) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
   })
   //ソナー
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_14:1_fp');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 75) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 75) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_14:1_as');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 200 / 3) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 200 / 3) / 100;
     }
   })
   //爆雷
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_15:1_fp');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 75) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 75) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_15:1_as');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 200 / 3) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 200 / 3) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_15:2_as');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 200 / 3) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 200 / 3) / 100;
     }
   })
   //電探
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_12:1_hit');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 100) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_12:2_hit');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 170) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 170) / 100;
     }
   })
   //探照灯
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_29:1_fp');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 100) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
   })
   //対地装備
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_24:1_fp');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 100) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_37:1_fp');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 100) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
   })
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_46:1_fp');
   $(listitem).each(function(index) {
-    if (result[4] == "0") {
+    if (result[5] == "0") {
       this.innerHTML = "";
     } else {
-      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[4])) * 100) / 100;
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
   })
 }
@@ -1122,148 +1144,556 @@ function filter_priweapon(friendid) {
   }
 }
 //武器ボーナスを武器モーダルウインドウに書き出す処理
-function wp_bonus_single(result) {
-  // 艦ID(0),カテゴリ(1),艦種(2),friendid値(3),装備改修値(4)
+function wp_bonus(result) {
+  // 艦ID[0],カテゴリ[1],艦種[2],friendid値[3],スロットID[4],装備改修値[5]
   let ship_search = "";
   let wp_id = "";
   let lookup = false;
+  let set_lookup = false;
   let bonus = "";
+  let wp_param;
+  let i;
+  let now;
+  let lock = false;
+  let search;
+  let source;
+  let set_list;
+  let set_improve = [];
+  let set_id = [];
+  let set_type = [];
+  let set_fp = [];
+  let set_th = [];
+  let set_aa = [];
+  let set_as = [];
+  let set_rd = [];
+  let set_offset;
+  let setbonus_flag = false;
+  let bonus_flag = false;
+  let set_bonus1_hit = false;
+  let set_bonus2_hit = false;
+  let set_bonus3_hit = false;
+  let hit_count = 0;
 
-  $.get('./data/BONUS.csv', function(data) {
-    csv = $.csv.toArrays(data);
-    $(csv).each(function(index) {
+  //セットボーナス計算　不要配列削除
+  if (result[4] != "0") {
+    wp_param = document.getElementById("friend_" + result[3] + "_set").value;
+    wp_param = wp_param.split(':');
+    if (wp_param[0] == "0") {
+      wp_param[0] = null;
+      wp_param[1] = null;
+    }
+    if (wp_param[2] == "0") {
+      wp_param[2] = null;
+      wp_param[3] = null;
+    }
+    if (wp_param[4] == "0") {
+      wp_param[4] = null;
+      wp_param[5] = null;
+    }
+    if (wp_param[6] == "0") {
+      wp_param[6] = null;
+      wp_param[7] = null;
+    }
+    if (wp_param[8] == "0") {
+      wp_param[8] = null;
+      wp_param[9] = null;
+    }
+    wp_param[Number(result[4]) * 2 - 2] = null;
+    wp_param[Number(result[4]) * 2 - 1] = null;
+    wp_param = $.grep(wp_param, function(e) {
+      return e;
+    }); //空要素を削除
+  }
+  $.get('./data/SETBONUS.csv', function(data2) {
+    csv = $.csv.toArrays(data2);
+    $(csv).each(function(index2) {
       if (this[0] != "id") {
-        //最初のループ時のみ動作
-        if (wp_id == "") {
-          wp_id = this[0];
-        }
-        if (this[0] != wp_id) {
-          if (lookup == false) {
-            if ($('wp_' + result[3] + '_' + wp_id + '_bonus_fp').length) {
-              $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_id + '_bonus_fp')).each(function(index) {
-                this.innerHTML = "";
-              });
-              $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_id + '_bonus_th')).each(function() {
-                this.innerHTML = "";
-              });
-              $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_id + '_bonus_aa')).each(function() {
-                this.innerHTML = "";
-              });
-              $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_id + '_bonus_as')).each(function() {
-                this.innerHTML = "";
-              });
+        //ボーナス対象艦に合致するか検索
+        if (set_lookup == false) {
+          search = ":" + this[15] + ":";
+          if (search.indexOf(":" + result[0] + ":") != -1) {
+            set_lookup = true;
+          } else {
+            if (this[14].indexOf(result[2]) != -1) {
+              set_lookup = true;
+            } else {
+              if (this[13].indexOf(result[1]) != -1) {
+                set_lookup = true;
+              }
             }
           }
-          wp_id = this[0];
-          lookup = false;
         }
-        if (lookup == false) {
-          if (Number(result[4]) >= Number(this[2])) {
-            search = ":" + this[12] + ":";
-            if (search.indexOf(":" + result[0] + ":") != -1) {
-              lookup = true;
-            } else {
-              if (this[11].indexOf(result[2]) != -1) {
-                lookup = true;
+        if (set_lookup == true) {
+          //セットボーナス検索　①ウエポン1
+          set_list = [].concat(wp_param);
+          if (this[0] != "0") {
+            for (i = 0; i < set_list.length; i++) {
+              search = ":" + this[0] + ":";
+              if (search.indexOf(":" + set_list[i * 2] + ":") != -1 && Number(set_list[i * 2 + 1]) >= Number(this[1])) {
+                set_list.splice(i * 2, 2);
+                set_bonus1_hit = true;
+                hit_count++;
+                break;
+              }
+            }
+          }
+          //セットボーナス検索　②ウェポン3
+          if (this[4] != "0") {
+            for (i = 0; i < set_list.length; i++) {
+              search = ":" + this[4] + ":";
+              if (search.indexOf(":" + set_list[i * 2] + ":") != -1 && Number(set_list[i * 2 + 1]) >= Number(this[5])) {
+                set_list.splice(i * 2, 2);
+                set_bonus3_hit = true;
+                hit_count++;
+                break;
+              }
+            }
+          }
+          //セットボーナス検索　③ウェポン2
+          if (this[2] != "0") {
+            for (i = 0; i < set_list.length; i++) {
+              search = ":" + this[2] + ":";
+              if (search.indexOf(":" + set_list[i * 2] + ":") != -1 && Number(set_list[i * 2 + 1]) >= Number(this[3])) {
+                set_list.splice(i * 2, 2);
+                set_bonus2_hit = true;
+                hit_count++;
+                break;
+              }
+            }
+          }
+
+          if (now != this[0] + ':' + this[6]) {
+            set_offset = [0, 0, 0, 0, 0];
+          }
+          //セットボーナス検索用の配列作成
+          if (this[4] == "0") {
+            if (hit_count == 1) {
+              set_type.push(this[0] + ':' + this[6]);
+              if (Math.sign(Number(this[7])) != -1 && Math.sign(Number(this[7]) - set_offset[0]) == -1) {
+                set_fp.push(0);
               } else {
-                if (this[10].indexOf(result[1]) != -1) {
-                  lookup = true;
+                set_fp.push(Number(this[7]) - set_offset[0]);
+              }
+              if (Math.sign(Number(this[8])) != -1 && Math.sign(Number(this[8]) - set_offset[1]) == -1) {
+                set_th.push(0);
+              } else {
+                set_th.push(Number(this[8]) - set_offset[1]);
+              }
+              if (Math.sign(Number(this[9])) != -1 && Math.sign(Number(this[9]) - set_offset[2]) == -1) {
+                set_aa.push(0);
+              } else {
+                set_aa.push(Number(this[9]) - set_offset[2]);
+              }
+              if (Math.sign(Number(this[11])) != -1 && Math.sign(Number(this[11]) - set_offset[3]) == -1) {
+                set_as.push(0);
+              } else {
+                set_as.push(Number(this[11]) - set_offset[3]);
+              }
+              if (Math.sign(Number(this[12])) != -1 && Math.sign(Number(this[12]) - set_offset[4]) == -1) {
+                set_rd.push(0);
+              } else {
+                set_rd.push(Number(this[12]) - set_offset[4]);
+              }
+              if (set_bonus1_hit == false) {
+                set_id.push(this[0]);
+                set_improve.push(Number(this[1]));
+              } else {
+                set_id.push(this[2]);
+                set_improve.push(Number(this[3]));
+              }
+
+            } else {
+              if (hit_count == 2) {
+                //既に手持ちの装備でセットボーナスが発動している場合
+                set_offset[0] = Number(this[7]);
+                set_offset[1] = Number(this[8]);
+                set_offset[2] = Number(this[9]);
+                set_offset[3] = Number(this[11]);
+                set_offset[4] = Number(this[12]);
+                now = this[0] + ':' + this[6];
+              }
+            }
+          } else {
+            if (hit_count == 2) {
+              set_type.push(this[0] + ':' + this[6]);
+              if (Math.sign(Number(this[7])) != -1 && Math.sign(Number(this[7]) - set_offset[0]) == -1) {
+                set_fp.push(0);
+              } else {
+                set_fp.push(Number(this[7]) - set_offset[0]);
+              }
+              if (Math.sign(Number(this[8])) != -1 && Math.sign(Number(this[8]) - set_offset[1]) == -1) {
+                set_th.push(0);
+              } else {
+                set_th.push(Number(this[8]) - set_offset[1]);
+              }
+              if (Math.sign(Number(this[9])) != -1 && Math.sign(Number(this[9]) - set_offset[2]) == -1) {
+                set_aa.push(0);
+              } else {
+                set_aa.push(Number(this[9]) - set_offset[2]);
+              }
+              if (Math.sign(Number(this[11])) != -1 && Math.sign(Number(this[11]) - set_offset[3]) == -1) {
+                set_as.push(0);
+              } else {
+                set_as.push(Number(this[11]) - set_offset[3]);
+              }
+              if (Math.sign(Number(this[12])) != -1 && Math.sign(Number(this[12]) - set_offset[4]) == -1) {
+                set_rd.push(0);
+              } else {
+                set_rd.push(Number(this[12]) - set_offset[4]);
+              }
+              if (set_bonus1_hit == false) {
+                set_id.push(this[0]);
+                set_improve.push(Number(this[1]));
+              } else {
+                if (set_bonus2_hit == false) {
+                  set_id.push(this[2]);
+                  set_improve.push(Number(this[3]));
+                } else {
+                  set_id.push(this[4]);
+                  set_improve.push(Number(this[5]));
                 }
               }
+            } else {
+              if (hit_count == 3) {
+                //既に手持ちの装備でセットボーナスが発動している場合
+                set_offset[0] = Number(this[7]);
+                set_offset[1] = Number(this[8]);
+                set_offset[2] = Number(this[9]);
+                set_offset[3] = Number(this[11]);
+                set_offset[4] = Number(this[12]);
+                now = this[0] + ':' + this[6];
+              }
             }
           }
-          if (lookup == true) {
-            bonus = this[3];
-            if (bonus == "0") {
+          set_lookup = false;
+          hit_count = 0;
+          set_bonus1_hit = false;
+          set_bonus2_hit = false;
+          set_bonus3_hit = false;
+        }
+      }
+    });
+    for (i = 0; i < set_id.length; i++) {
+      wp_param = set_id[i].split(':');
+      for (j = 0; j < wp_param.length; j++) {
+        if (wp_param != 0) {
+          if (set_fp[i] == 0) {
+            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_fp')).each(function(index) {
+              this.innerHTML = "";
+            });
+          } else {
+            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_fp')).each(function(index) {
+              if ($(this).hasClass('bonusch')) {
+                source = this.innerHTML;
+                //火力のみセットボーナスでマイナスが発生する可能性あるため、特殊な処理を行う。
+                if (Math.sign(Number(source) + set_fp[i]) == -1) {
+                  this.innerHTML = Number(source) + set_fp[i];
+                } else {
+                  this.innerHTML = "+" + (Number(source) + set_fp[i]);
+                }
+              } else {
+                if (Math.sign(set_fp[i]) == -1) {
+                  this.innerHTML = set_fp[i];
+                } else {
+                  this.innerHTML = "+" + set_fp[i];
+                }
+              }
+            });
+            $('.wp_' + result[3] + '_' + wp_param[j] + '_bonus_fp').addClass('setbonus bonusch');
+          }
+          if (set_th[i] <= 0) {
+            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_th')).each(function() {
+              this.innerHTML = "";
+            });
+          } else {
+            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_th')).each(function() {
+              if ($(this).hasClass('bonusch')) {
+                source = this.innerHTML
+                this.innerHTML = "+" + (Number(source) + set_th[i]);
+              } else {
+                this.innerHTML = "+" + set_th[i];
+              }
+            });
+            $('.wp_' + result[3] + '_' + wp_param[j] + '_bonus_th').addClass('setbonus bonusch');
+          }
+          if (set_aa[i] <= 0) {
+            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_aa')).each(function() {
+              this.innerHTML = "";
+            });
+          } else {
+            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_aa')).each(function() {
+              if ($(this).hasClass('bonusch')) {
+                source = this.innerHTML
+                this.innerHTML = "+" + (Number(source) + set_aa[i]);
+              } else {
+                this.innerHTML = "+" + set_aa[i];
+              }
+            });
+            $('.wp_' + result[3] + '_' + wp_param[j] + '_bonus_aa').addClass('setbonus bonusch');
+          }
+          if (set_as[i] <= 0) {
+            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_as')).each(function() {
+              this.innerHTML = "";
+            });
+          } else {
+            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_as')).each(function() {
+              if ($(this).hasClass('bonusch')) {
+                source = this.innerHTML
+                this.innerHTML = "+" + (Number(source) + set_as[i]);
+              } else {
+                this.innerHTML = "+" + set_as[i];
+              }
+            });
+            $('.wp_' + result[3] + '_' + wp_param[j] + '_bonus_as').addClass('setbonus bonusch');
+          }
+          if (set_rd[i] <= 0) {
+            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_search')).each(function() {
+              this.innerHTML = "";
+            });
+          } else {
+            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_search')).each(function() {
+              if ($(this).hasClass('bonusch')) {
+                source = this.innerHTML
+                this.innerHTML = "+" + (Number(source) + set_rd[i]);
+              } else {
+                this.innerHTML = "+" + set_rd[i];
+              }
+            });
+            $('.wp_' + result[3] + '_' + wp_param[j] + '_bonus_search').addClass('setbonus bonusch');
+          }
+        }
+      }
+    }
+    $(document.getElementsByClassName('setbonus')).each(function() {
+      if ($(this).hasClass('bonusch')) {
+        $(this).removeClass('bonusch');
+      } else {
+        $(this).removeClass('setbonus');
+        this.innerHTML = "";
+      }
+    });
+    lock = false;
+    //ボーナスパラメータ初期化
+    $.get('./data/BONUS.csv', function(data) {
+      csv = $.csv.toArrays(data);
+      $(csv).each(function(index) {
+        if (this[0] != "id") {
+          if (now != this[0]) {
+            lock = false;
+          }
+          //シングルボーナスチェック
+          if (lock == false) {
+            if (Number(result[5]) >= Number(this[2])) {
+              search = ":" + this[12] + ":";
+              if (search.indexOf(":" + result[0] + ":") != -1 || this[11].indexOf(result[2]) != -1 || this[10].indexOf(result[1]) != -1) {
+                wp_param[0] = Number(this[3]);
+                wp_param[1] = Number(this[4]);
+                wp_param[2] = Number(this[5]);
+                wp_param[3] = Number(this[7]);
+                wp_param[4] = Number(this[8]);
+                lookup = true;
+              }
+            }
+          }
+          //シングルボーナス結果追記
+          if (lookup == true && lock == false) {
+            lock = true;
+            now = this[0];
+            lookup = false;
+            if (wp_param[0] == 0) {
               $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_fp')).each(function(index) {
-                this.innerHTML = "";
+                if ($(this).hasClass('setbonus') == false) {
+                  this.innerHTML = "";
+                }
               });
             } else {
-              if (Math.sign(bonus) != -1) {
+              if (Math.sign(wp_param[0]) != -1) {
                 $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_fp')).each(function(index) {
-                  this.innerHTML = "+" + bonus;
+                  if ($(this).hasClass('setbonus')) {
+                    source = this.innerHTML;
+                    //火力のみセットボーナスでマイナスが発生する可能性あるため、特殊な処理を行う。
+                    if (source.indexOf("+") != -1) {
+                      this.innerHTML = "+" + (Number(source) + wp_param[0]);
+                    } else {
+                      if (Math.sign((Number(source) + wp_param[0])) != -1) {
+                        this.innerHTML = "+" + (Number(source) + wp_param[0]);
+                      } else {
+                        this.innerHTML = (Number(source) + wp_param[0]);
+                      }
+                    }
+                  } else {
+                    this.innerHTML = "+" + wp_param[0];
+                  }
                 });
+                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_fp')).addClass('bonus bonusch');
               } else {
                 $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_fp')).each(function(index) {
-                  this.innerHTML = bonus;
+                  if ($(this).hasClass('setbonus')) {
+                    source = this.innerHTML;
+                    if (source.indexOf("+") != -1) {
+                      if (Math.sign((Number(source) + wp_param[0])) != -1) {
+                        this.innerHTML = "+" + (Number(source) + wp_param[0]);
+                      } else {
+                        this.innerHTML = (Number(source) + wp_param[0]);
+                      }
+                    } else {
+                      this.innerHTML = Number(source.slice(1)) + wp_param[0];
+                    }
+                  } else {
+                    this.innerHTML = wp_param[0];
+                  }
                 });
+                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_fp')).addClass('bonus bonusch');
               }
             }
-            bonus = this[4];
-            if (this[4] == "0") {
+            if (wp_param[1] == 0) {
               $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_th')).each(function() {
-                this.innerHTML = "";
+                if ($(this).hasClass('setbonus') == false) {
+                  this.innerHTML = "";
+                }
               });
             } else {
-              if (Math.sign(bonus) != -1) {
+              if (Math.sign(wp_param[1]) != -1) {
                 $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_th')).each(function() {
-                  this.innerHTML = "+" + bonus;
+                  if ($(this).hasClass('setbonus')) {
+                    source = this.innerHTML
+                    this.innerHTML = "+" + (Number(source.slice(1)) + wp_param[1]);
+                  } else {
+                    this.innerHTML = "+" + wp_param[1];
+                  }
                 });
+                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_th')).addClass('bonus bonusch');
               } else {
                 $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_th')).each(function() {
-                  this.innerHTML = bonus;
+                  if ($(this).hasClass('setbonus')) {
+                    source = this.innerHTML
+                    this.innerHTML = Number(source.slice(1)) + wp_param[1];
+                  } else {
+                    this.innerHTML = wp_param[1];
+                  }
                 });
+                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_th')).addClass('bonus bonusch');
               }
             }
-            bonus = this[5]
-            if (this[5] == "0") {
+            if (wp_param[2] == 0) {
               $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_aa')).each(function() {
-                this.innerHTML = "";
+                if ($(this).hasClass('setbonus') == false) {
+                  this.innerHTML = "";
+                }
               });
             } else {
-              if (Math.sign(this[5]) != -1) {
+              if (Math.sign(wp_param[2]) != -1) {
                 $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_aa')).each(function() {
-                  this.innerHTML = "+" + bonus;
+                  if ($(this).hasClass('setbonus')) {
+                    source = this.innerHTML
+                    this.innerHTML = "+" + (Number(source.slice(1)) + wp_param[2]);
+                  } else {
+                    this.innerHTML = "+" + wp_param[2];
+                  }
                 });
+                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_aa')).addClass('bonus bonusch');
               } else {
                 $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_aa')).each(function() {
-                  this.innerHTML = bonus;
+                  if ($(this).hasClass('setbonus')) {
+                    source = this.innerHTML
+                    this.innerHTML = Number(source.slice(1)) + wp_param[0];
+                  } else {
+                    this.innerHTML = wp_param[2];
+                  }
                 });
+                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_aa')).addClass('bonus bonusch');
               }
             }
-            bonus = this[7];
-            if (this[7] == "0") {
+            if (wp_param[3] == 0) {
               $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_as')).each(function() {
-                this.innerHTML = "";
+                if ($(this).hasClass('setbonus') == false) {
+                  this.innerHTML = "";
+                }
               });
             } else {
-              if (Math.sign(this[7]) != -1) {
+              if (Math.sign(wp_param[3]) != -1) {
                 $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_as')).each(function() {
-                  this.innerHTML = "+" + bonus;
+                  if ($(this).hasClass('setbonus')) {
+                    source = this.innerHTML
+                    this.innerHTML = "+" + (Number(source.slice(1)) + wp_param[3]);
+                  } else {
+                    this.innerHTML = "+" + wp_param[3];
+                  }
                 });
+                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_as')).addClass('bonus bonusch');
               } else {
                 $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_as')).each(function() {
-                  this.innerHTML = bonus;
+                  if ($(this).hasClass('setbonus')) {
+                    source = this.innerHTML
+                    this.innerHTML = Number(source.slice(1)) + wp_param[3];
+                  } else {
+                    this.innerHTML = wp_param[3];
+                  }
                 });
+                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_as')).addClass('bonus bonusch');
               }
             }
-            bonus = this[8];
-            if (this[8] == "0") {
+            if (wp_param[4] == 0) {
               $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_search')).each(function() {
-                this.innerHTML = "";
+                if ($(this).hasClass('setbonus') == false) {
+                  this.innerHTML = "";
+                }
               });
             } else {
-              if (Math.sign(this[8]) != -1) {
+              if (Math.sign(wp_param[4]) != -1) {
                 $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_search')).each(function() {
-                  this.innerHTML = "+" + bonus;
+                  if ($(this).hasClass('setbonus')) {
+                    source = this.innerHTML
+                    this.innerHTML = "+" + (Number(source.slice(1)) + wp_param[4]);
+                  } else {
+                    this.innerHTML = "+" + wp_param[4];
+                  }
                 });
+                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_search')).addClass('bonus bonusch');
               } else {
                 $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_search')).each(function() {
-                  this.innerHTML = bonus;
+                  if ($(this).hasClass('setbonus')) {
+                    source = this.innerHTML
+                    this.innerHTML = Number(source.slice(1)) + wp_param[4];
+                  } else {
+                    this.innerHTML = wp_param[4];
+                  }
                 });
+                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_search')).addClass('bonus bonusch');
               }
             }
             //改修ボーナスを武器選択リンクへ付与
             bonus = this[3] + ':' + this[4] + ':' + this[5] + ':' + this[7] + ':' + this[8] + ':' + this[9];
             $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus')).each(function() {
-              $(this).attr('href', $(this).attr('href').slice(0, -3) + ':' + bonus + '\');');
+              if (this.dataset.bonuslen) {
+                //対象の武器にボーナス付きリンクが付与されている場合、既存のボーナス項目を上書きする。
+                source = -4 - this.dataset.bonuslen;
+              } else {
+                source = -3;
+              }
+              $(this).attr('href', $(this).attr('href').slice(0, source) + ':' + bonus + '\');');
+              this.dataset.bonuslen = bonus.length;
+
             });
           }
         }
-      }
+      });
+      $(document.getElementsByClassName('bonus')).each(function() {
+        if ($(this).hasClass('bonusch')) {
+          $(this).removeClass('bonusch');
+        } else {
+          if ($(this).hasClass('setbonus')) {
+            $(this).removeClass('bonus setbonus');
+          } else {
+            $(this).removeClass('bonus');
+            this.innerHTML = "";
+          }
+        }
+      });
     });
   });
 }
+
 
 //////////////////////////////////////////////////////
 //[3-3.武器装備モーダルウィンドウ武器選択時に動作]
@@ -1278,6 +1708,15 @@ function weapon_open(param) {
   document.getElementById("wp_" + result[0] + "_slot" + slotid + "_name").innerHTML = result[4];
   document.getElementById("wp_" + result[0] + "_slot" + slotid + "_del").disabled = false;
   document.getElementById('friend_' + result[0] + '_slot' + slotid).value = "";
+
+  if (slotid != "0") {
+    let wp_set = document.getElementById('friend_' + result[0] + '_set').value;
+    //Slot1武器id[0],Slot1武器改修[1],Slot2武器id[2],Slot2武器改修[3],Slot3武器id[4],Slot3武器改修[5],Slot4武器id[6],Slot4武器改修[7],Slot5武器id[8],Slot5武器改修[9]
+    wp_set = wp_set.split(':');
+    wp_set[Number(slotid) * 2 - 2] = result[1];
+    wp_set[Number(slotid) * 2 - 1] = improve;
+    document.getElementById('friend_' + result[0] + '_set').value = wp_set[0] + ':' + wp_set[1] + ':' + wp_set[2] + ':' + wp_set[3] + ':' + wp_set[4] + ':' + wp_set[5] + ':' + wp_set[6] + ':' + wp_set[7] + ':' + wp_set[8] + ':' + wp_set[9];
+  }
 
   if (result.length > 14) {
     document.getElementById('friend_' + result[0] + '_slot' + slotid).value = result[1] + ':' + result[2] + ':' + result[5] + ':' + improve + ':' + result[6] + ':' + result[7] + ':' + result[8] + ':' + result[9] + ':' + result[10] + ':' + result[11] + ':' + result[12] + ':' + result[13] + ':' + result[14] + ':' + result[15] + ':' + result[16] + ':' + result[17] + ':' + result[18] + ':' + result[19];
@@ -1299,18 +1738,18 @@ function weapon_open(param) {
 
 
 //艦ステータスを計算する
-function friend_status_update(friendid) {
+function friend_status_update(friendid, slotid, wpid, wpimprove) {
+  //friendid値[0],スロット[1],武器id[2],改修値[3] ※引数がfriendid値のみの場合、シングル・セットボーナス計算は行わない。
 
-  const base = document.getElementById("friend_" + friendid + "_base_param").value.split(':');
-  //base [艦ID(0),スロット数(1),火力(2),雷装(3),対空(4),対潜初期(5),対潜最大(6),回避初期(7),回避最大(8),索敵初期(9),索敵最大(10),運初期(11),運最大(12),射程(13)]
   let as = document.getElementById("friend_" + friendid + "_base_as").value;
   as = as.split(':');
   //対潜値[0],対潜改修値[1]
+  //base_param [艦ID[0],艦カテゴリ[1],艦種[2],スロット数[3],火力[4],雷装[5],対空[6],対潜初期[7],対潜最大[8],回避初期[9],回避最大[10],索敵初期[11],索敵最大[12],運初期[13],運最大[14],射程[15]
+  const base = document.getElementById("friend_" + friendid + "_base_param").value.split(':');
 
   let content;
   let improve;
   let bonus;
-  let setbonus;
   let status;
   let lv = Number(document.getElementById("ship_" + friendid + "_lv").innerHTML);
   let luck = Number(document.getElementById("ship_" + friendid + "_luck").innerHTML);
@@ -1327,140 +1766,337 @@ function friend_status_update(friendid) {
   let param = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   //火力[0],雷装[1],対空[2],対潜[3],索敵[4],命中[5],爆装[6],射程[7],砲撃攻撃力[8],雷撃攻撃力[9],対潜攻撃力[10],夜戦攻撃力[11]
 
-  if (document.getElementById("friend_" + friendid + "_slot0").value != "") {
-    slot0 = document.getElementById("friend_" + friendid + "_slot0").value;
-    slot0 = slot0.split(':');
-    //武器id[0],カテゴリID[1],改修分類[2],改修値[3],火力[4],雷装[5],対空[6],対潜[7],索敵[8],命中[9],爆装[10],射程[11],火力ボーナス[12],雷装ボーナス[13],対空ボーナス[14],対潜ボーナス[15],索敵ボーナス[16],射程ボーナス[17]
-  }
-  if (document.getElementById("friend_" + friendid + "_slot1").value != "") {
-    slot1 = document.getElementById("friend_" + friendid + "_slot1").value;
-    slot1 = slot1.split(':');
-  }
-  if (document.getElementById("friend_" + friendid + "_slot2").value != "") {
-    slot2 = document.getElementById("friend_" + friendid + "_slot2").value;
-    slot2 = slot2.split(':');
-  }
-  if (document.getElementById("friend_" + friendid + "_slot3").value != "") {
-    slot3 = document.getElementById("friend_" + friendid + "_slot3").value;
-    slot3 = slot3.split(':');
-  }
-  if (document.getElementById("friend_" + friendid + "_slot4").value != "") {
-    slot4 = document.getElementById("friend_" + friendid + "_slot4").value;
-    slot4 = slot4.split(':');
-  }
-  if (document.getElementById("friend_" + friendid + "_slot5").value != "") {
-    slot5 = document.getElementById("friend_" + friendid + "_slot5").value;
-    slot5 = slot5.split(':');
-  }
+  //////////////////////////////////
+  //引数に装備改修値が含まれている場合の動作：セットボーナス計算
+  /////////////////////////////////
+  let wp_param = document.getElementById("friend_" + friendid + "_set").value;
+  wp_param = wp_param.split(':');
+  let i;
+  let set_lookup = false;
+  let lock = false;
+  let set_search;
+  let set_list;
+  let setbonus = [0, 0, 0, 0, 0];
+  let hit_count = 0;
+  let now = "";
 
-  //火力計算
-  param[0] = Number(base[2]) + Number(slot0[4]) + Number(slot0[12]) + Number(slot1[4]) + Number(slot1[12]) + Number(slot2[4]) + Number(slot2[12]) + Number(slot3[4]) + Number(slot3[12]) + Number(slot4[4]) + Number(slot4[12]) + Number(slot5[4]) + Number(slot5[12]);
-  //雷装計算
-  param[1] = Number(base[3]) + Number(slot0[5]) + Number(slot0[13]) + Number(slot1[5]) + Number(slot1[13]) + Number(slot2[5]) + Number(slot2[13]) + Number(slot3[5]) + Number(slot3[13]) + Number(slot4[5]) + Number(slot4[13]) + Number(slot5[5]) + Number(slot5[13]);
-  //対空計算
-  param[2] = Number(base[4]) + Number(slot0[6]) + Number(slot0[14]) + Number(slot1[6]) + Number(slot1[14]) + Number(slot2[6]) + Number(slot2[14]) + Number(slot3[6]) + Number(slot3[14]) + Number(slot4[6]) + Number(slot4[14]) + Number(slot5[6]) + Number(slot5[14]);
-  //対潜計算
-  param[3] = Number(as[0]) + Number(as[1]) + Number(slot0[7]) + Number(slot0[15]) + Number(slot1[7]) + Number(slot1[15]) + Number(slot2[7]) + Number(slot2[15]) + Number(slot3[7]) + Number(slot3[15]) + Number(slot4[7]) + Number(slot4[15]) + Number(slot5[7]) + Number(slot5[15]);
-  //索敵計算
-  param[4] = search + Number(slot0[8]) + Number(slot0[16]) + Number(slot1[8]) + Number(slot1[16]) + Number(slot2[8]) + Number(slot2[16]) + Number(slot3[8]) + Number(slot3[16]) + Number(slot4[8]) + Number(slot4[16]) + Number(slot5[8]) + Number(slot5[16])
-  //命中項計算
-  bonus = Math.floor(param[5]) + Number(slot0[9]) + Number(slot1[9]) + Number(slot2[9]) + Number(slot3[9]) + Number(slot4[9]) + Number(slot5[9]);
-  improve = get_hit_improve(slot0[1], slot0[2], slot0[3]) + get_hit_improve(slot1[1], slot1[2], slot1[3]) + get_hit_improve(slot2[1], slot2[2], slot2[3]) + get_hit_improve(slot3[1], slot3[2], slot3[3]) + get_hit_improve(slot4[1], slot4[2], slot4[3]) + get_hit_improve(slot5[1], slot5[2], slot5[3]);
-  param[5] = Math.floor(2 * Math.sqrt(lv) + 1.5 * Math.sqrt(luck) + bonus + improve);
-  content = $('<p>■基礎命中項 =  2 × √(レベル) + 1.5 × √(運) + 装備命中値 + 装備改修(命中)<br>　※小数点以下は切り捨て</p><p>■計算結果<br>' + param[5] + ' = 2 × √(' + lv + ') + 1.5 × √(' + luck + ') + ' + bonus + ' + ' + Math.floor(improve * 10000) / 10000 + '</p>');
-  $('#ship_' + friendid + '_hit').data('powertipjq', content);
-  $('#ship_' + friendid + '_hit').powerTip({
-    openEvents: ['click'],
-    closeEvents: ['click'],
-    placement: 's'
-  });
-
-  //射程計算
-  param[7] = Math.max(Number(base[13]), Number(slot0[11]), Number(slot1[11]), Number(slot2[11]), Number(slot3[11]), Number(slot4[11]), Number(slot5[11]), Number(slot0[17]), Number(slot1[17]), Number(slot2[17]), Number(slot3[17]), Number(slot4[17]), Number(slot5[17]));
-  //砲撃攻撃力計算
-  param[8] = Number(base[2]) + Number(slot0[4]) + Number(slot1[4]) + Number(slot2[4]) + Number(slot3[4]) + Number(slot4[4]) + Number(slot5[4]) + Number(slot0[12]) + Number(slot1[12]) + Number(slot2[12]) + Number(slot3[12]) + Number(slot4[12]) + Number(slot5[12]);
-  fp = param[8];
-  improve = get_fp_improve(slot0[1], slot0[2], slot0[3]) + get_fp_improve(slot1[1], slot1[2], slot1[3]) + get_fp_improve(slot2[1], slot2[2], slot2[3]) + get_fp_improve(slot3[1], slot3[2], slot3[3]) + get_fp_improve(slot4[1], slot4[2], slot4[3]) + get_fp_improve(slot5[1], slot5[2], slot5[3]);
-  param[8] += 5 + improve;
-  content = $('<p>■計算式(砲撃攻撃力)<br>砲撃攻撃力 = 火力 + 装備改修(砲撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>' + Math.floor(param[8] * 10000) / 10000 + ' = ' + fp + ' + ' + Math.floor(improve * 10000) / 10000 + ' + 5</p>');
-  $('#ship_' + friendid + '_basefp').data('powertipjq', content);
-  $('#ship_' + friendid + '_basefp').powerTip({
-    openEvents: ['click'],
-    closeEvents: ['click'],
-    placement: 's'
-  });
-  param[8] = Math.floor(param[8] * 100) / 100;
-  //雷装攻撃力計算
-  param[9] = Number(base[3]) + Number(slot0[5]) + Number(slot1[5]) + Number(slot2[5]) + Number(slot3[5]) + Number(slot4[5]) + Number(slot5[5]) + Number(slot0[13]) + Number(slot1[13]) + Number(slot2[13]) + Number(slot3[13]) + Number(slot4[13]) + Number(slot5[13]);
-  th = param[9];
-  improve = get_th_improve(slot0[1], slot0[2], slot0[3]) + get_th_improve(slot1[1], slot1[2], slot1[3]) + get_th_improve(slot2[1], slot2[2], slot2[3]) + get_th_improve(slot3[1], slot3[2], slot3[3]) + get_th_improve(slot4[1], slot4[2], slot4[3]) + get_th_improve(slot5[1], slot5[2], slot5[3]);
-  param[9] += 5 + improve;
-  content = $('<p>■計算式(雷撃攻撃力)<br>雷撃攻撃力 = 雷撃 + 装備改修(雷撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>' + Math.floor(param[9] * 10000) / 10000 + ' = ' + th + ' + ' + Math.floor(improve * 10000) / 10000 + ' + 5</p>');
-  $('#ship_' + friendid + '_baseth').data('powertipjq', content);
-  $('#ship_' + friendid + '_baseth').powerTip({
-    openEvents: ['click'],
-    closeEvents: ['click'],
-    placement: 's'
-  });
-  param[9] = Math.floor(param[9] * 100) / 100;
-  //対潜攻撃力計算
-  status = Number(as[0]) + Number(as[1]);
-  bonus = get_as(slot1[1], slot1[7]) + get_as(slot2[1], slot2[7]) + get_as(slot3[1], slot3[7]) + get_as(slot4[1], slot4[7]);
-  improve = get_as_improve(slot1[1], slot1[2], slot1[3]) + get_as_improve(slot2[1], slot2[2], slot2[3]) + get_as_improve(slot3[1], slot3[2], slot3[3]) + get_as_improve(slot4[1], slot4[2], slot4[3]);
-  setbonus = get_as_synergy(slot1[0], slot2[0], slot3[0], slot4[0]);
-  param[10] = (13 + 2 * Math.sqrt(status) + bonus * 1.5 + improve) * setbonus;
-  content = $('<p>■計算式(対潜攻撃力)<br>対潜攻撃力 = 対潜シナジー補正 × ( √(素対潜) × 2 + 装備対潜 × 1.5 + 装備強化値(対潜) + 艦種別定数 )</p><p>■計算結果<br>' + Math.floor(param[10] * 10000) / 10000 + ' = ' + setbonus + ' × ( √(' + status + ') × 2 + ' + bonus + ' × 1.5 + ' + Math.floor(improve * 10000) / 10000 + ' + 13 )</p>');
-  $('#ship_' + friendid + '_baseas').data('powertipjq', content);
-  $('#ship_' + friendid + '_baseas').powerTip({
-    openEvents: ['click'],
-    closeEvents: ['click'],
-    placement: 's'
-  });
-  param[10] = Math.floor(param[10] * 100) / 100;
-  //夜戦攻撃力計算
-  improve = get_np_improve(slot0[1], slot0[2], slot0[3]) + get_np_improve(slot1[1], slot1[2], slot1[3]) + get_np_improve(slot2[1], slot2[2], slot2[3]) + get_np_improve(slot3[1], slot3[2], slot3[3]) + get_np_improve(slot4[1], slot4[2], slot4[3]) + get_np_improve(slot5[1], slot5[2], slot5[3]);
-  param[11] = fp + th + improve;
-  content = $('<p>■計算式(夜戦攻撃力)<br>夜戦攻撃力 = 火力 + 雷装 + 改修強化値(夜戦)　</p><p>■計算結果<br>' + Math.floor(param[11] * 10000) / 10000 + ' = ' + fp + ' + ' + th + ' + ' + Math.floor(improve * 10000) / 10000 + '</p>');
-  $('#ship_' + friendid + '_basenp').data('powertipjq', content);
-  $('#ship_' + friendid + '_basenp').powerTip({
-    openEvents: ['click'],
-    closeEvents: ['click'],
-    placement: 's'
-  });
-  param[11] = Math.floor(param[11] * 100) / 100;
-
-
-  //パラメータ書き出し
-  document.getElementById("ship_" + friendid + "_pw").innerHTML = param[0];
-  document.getElementById("ship_" + friendid + "_th").innerHTML = param[1];
-  document.getElementById("ship_" + friendid + "_aa").innerHTML = param[2];
-  document.getElementById("ship_" + friendid + "_as").innerHTML = param[3];
-  document.getElementById("ship_" + friendid + "_search").innerHTML = param[4];
-  document.getElementById("ship_" + friendid + "_hit").innerHTML = param[5] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
-  switch (param[7]) {
-    case 1:
-      document.getElementById("ship_" + friendid + "_range").innerHTML = "短";
-      break;
-    case 2:
-      document.getElementById("ship_" + friendid + "_range").innerHTML = "中";
-      break;
-    case 3:
-      document.getElementById("ship_" + friendid + "_range").innerHTML = "長";
-      break;
-    case 4:
-      document.getElementById("ship_" + friendid + "_range").innerHTML = "超長";
-      break;
+  if (wp_param[0] == "0") {
+    wp_param[0] = null;
+    wp_param[1] = null;
   }
-  document.getElementById("ship_" + friendid + "_basefp").innerHTML = param[8] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
-  if (param[1] == 0) {
-    document.getElementById("ship_" + friendid + "_baseth").innerHTML = 0;
-  } else {
-    document.getElementById("ship_" + friendid + "_baseth").innerHTML = param[9] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
+  if (wp_param[2] == "0") {
+    wp_param[2] = null;
+    wp_param[3] = null;
   }
-  document.getElementById("ship_" + friendid + "_baseas").innerHTML = param[10] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
-  document.getElementById("ship_" + friendid + "_basenp").innerHTML = param[11] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
+  if (wp_param[4] == "0") {
+    wp_param[4] = null;
+    wp_param[5] = null;
+  }
+  if (wp_param[6] == "0") {
+    wp_param[6] = null;
+    wp_param[7] = null;
+  }
+  if (wp_param[8] == "0") {
+    wp_param[8] = null;
+    wp_param[9] = null;
+  }
+  //空要素を削除
+  wp_param = $.grep(wp_param, function(e) {
+    return e;
+  });
+  $.get('./data/SETBONUS.csv', function(data) {
+    csv = $.csv.toArrays(data);
+    $(csv).each(function(index) {
+      if (this[0] + ':' + this[6] != now) {
+        lock = false;
+      }
+      if (this[0] != "id") {
+        //ボーナス対象艦に合致するか検索
+        if (set_lookup == false) {
+          set_search = ":" + this[15] + ":";
+          if (set_search.indexOf(":" + base[0] + ":") != -1) {
+            set_lookup = true;
+          } else {
+            if (this[14].indexOf(base[2]) != -1) {
+              set_lookup = true;
+            } else {
+              if (this[13].indexOf(base[1]) != -1) {
+                set_lookup = true;
+              }
+            }
+          }
+        }
+        if (set_lookup == true && lock == false) {
+          //セットボーナス検索　①ウエポン1
+          set_list = [].concat(wp_param);
+          if (this[0] != "0") {
+            for (i = 0; i < set_list.length; i++) {
+              set_search = ":" + this[0] + ":";
+              if (set_search.indexOf(":" + set_list[i * 2] + ":") != -1 && Number(set_list[i * 2 + 1]) >= Number(this[1])) {
+                set_list.splice(i * 2, 2);
+                hit_count++;
+                break;
+              }
+            }
+          }
+          //セットボーナス検索　②ウェポン3
+          if (this[4] != "0") {
+            for (i = 0; i < set_list.length; i++) {
+              set_search = ":" + this[4] + ":";
+              if (set_search.indexOf(":" + set_list[i * 2] + ":") != -1 && Number(set_list[i * 2 + 1]) >= Number(this[5])) {
+                set_list.splice(i * 2, 2);
+                hit_count++;
+                break;
+              }
+            }
+          }
+          //セットボーナス検索　③ウェポン2
+          if (this[2] != "0") {
+            for (i = 0; i < set_list.length; i++) {
+              set_search = ":" + this[2] + ":";
+              if (set_search.indexOf(":" + set_list[i * 2] + ":") != -1 && Number(set_list[i * 2 + 1]) >= Number(this[3])) {
+                set_list.splice(i * 2, 2);
+                hit_count++;
+                break;
+              }
+            }
+          }
+
+          //ボーナス加算
+          if (this[4] == "0") {
+            if (hit_count == 2) {
+              //2セットボーナス計算
+              setbonus[0] += Number(this[16]);
+              setbonus[1] += Number(this[8]);
+              setbonus[2] += Number(this[9]);
+              setbonus[3] += Number(this[11]);
+              setbonus[4] += Number(this[12]);
+              lock = true;
+              now = this[0] + ':' + this[6];
+            }
+          } else {
+            if (hit_count==3) {
+              //3セットボーナス計算
+              setbonus[0] += Number(this[16]);
+              setbonus[1] += Number(this[8]);
+              setbonus[2] += Number(this[9]);
+              setbonus[3] += Number(this[11]);
+              setbonus[4] += Number(this[12]);
+              lock = true;
+              now = this[0] + ':' + this[6];
+            }
+          }
+          hit_count = 0;
+          set_lookup = false;
+        }
+      }
+    });
+    if (document.getElementById("friend_" + friendid + "_slot0").value != "") {
+      slot0 = document.getElementById("friend_" + friendid + "_slot0").value;
+      slot0 = slot0.split(':');
+      //武器id[0],カテゴリID[1],改修分類[2],改修値[3],火力[4],雷装[5],対空[6],対潜[7],索敵[8],命中[9],爆装[10],射程[11],火力ボーナス[12],雷装ボーナス[13],対空ボーナス[14],対潜ボーナス[15],索敵ボーナス[16],射程ボーナス[17]
+    }
+    if (document.getElementById("friend_" + friendid + "_slot1").value != "") {
+      slot1 = document.getElementById("friend_" + friendid + "_slot1").value;
+      slot1 = slot1.split(':');
+    }
+    if (document.getElementById("friend_" + friendid + "_slot2").value != "") {
+      slot2 = document.getElementById("friend_" + friendid + "_slot2").value;
+      slot2 = slot2.split(':');
+    }
+    if (document.getElementById("friend_" + friendid + "_slot3").value != "") {
+      slot3 = document.getElementById("friend_" + friendid + "_slot3").value;
+      slot3 = slot3.split(':');
+    }
+    if (document.getElementById("friend_" + friendid + "_slot4").value != "") {
+      slot4 = document.getElementById("friend_" + friendid + "_slot4").value;
+      slot4 = slot4.split(':');
+    }
+    if (document.getElementById("friend_" + friendid + "_slot5").value != "") {
+      slot5 = document.getElementById("friend_" + friendid + "_slot5").value;
+      slot5 = slot5.split(':');
+    }
+
+    //////////////////////////////////
+    //引数に装備改修値が含まれている場合の動作：シングルボーナス計算
+    /////////////////////////////////
+    $.get('./data/BONUS.csv', function(data2) {
+      if (slotid != null || slotid != "0") {
+        //シングルボーナス武器改修値変化によるアップデート
+        lookup = false;
+        csv = $.csv.toArrays(data2);
+        $(csv).each(function(index2) {
+          if (this[0] != "id") {
+            //シングルボーナスチェック
+            if (this[0] == wpid && Number(wpimprove) >= Number(this[2])) {
+              //ボーナス対象艦に合致するか検索
+              set_search = ":" + this[12] + ":";
+              if (set_search.indexOf(":" + base[0] + ":") != -1 || this[11].indexOf(base[2]) != -1 || this[10].indexOf(base[1]) != -1) {
+                lookup = true;
+                switch (slotid) {
+                  case "1":
+                    slot1[12] = this[3];
+                    slot1[13] = this[4];
+                    slot1[14] = this[5];
+                    slot1[15] = this[7];
+                    slot1[16] = this[8];
+                    slot1[17] = this[9];
+                    document.getElementById("friend_" + friendid + "_slot1").value = slot1[0] + ':' + slot1[1] + ':' + slot1[2] + ':' + slot1[3] + ':' + slot1[4] + ':' + slot1[5] + ':' + slot1[6] + ':' + slot1[7] + ':' + slot1[8] + ':' + slot1[9] + ':' + slot1[10] + ':' + slot1[11] + ':' + slot1[12] + ':' + slot1[13] + ':' + slot1[14] + ':' + slot1[15] + ':' + slot1[16] + ':' + slot1[17];
+                    break;
+                  case "2":
+                    slot2[12] = this[3];
+                    slot2[13] = this[4];
+                    slot2[14] = this[5];
+                    slot2[15] = this[7];
+                    slot2[16] = this[8];
+                    slot2[17] = this[9];
+                    document.getElementById("friend_" + friendid + "_slot2").value = slot2[0] + ':' + slot2[1] + ':' + slot2[2] + ':' + slot2[3] + ':' + slot2[4] + ':' + slot2[5] + ':' + slot2[6] + ':' + slot2[7] + ':' + slot2[8] + ':' + slot2[9] + ':' + slot2[10] + ':' + slot2[11] + ':' + slot2[12] + ':' + slot2[13] + ':' + slot2[14] + ':' + slot2[15] + ':' + slot2[16] + ':' + slot2[17];
+                    break;
+                  case "3":
+                    slot3[12] = this[3];
+                    slot3[13] = this[4];
+                    slot3[14] = this[5];
+                    slot3[15] = this[7];
+                    slot3[16] = this[8];
+                    slot3[17] = this[9];
+                    document.getElementById("friend_" + friendid + "_slot3").value = slot3[0] + ':' + slot3[1] + ':' + slot3[2] + ':' + slot3[3] + ':' + slot3[4] + ':' + slot3[5] + ':' + slot3[6] + ':' + slot3[7] + ':' + slot3[8] + ':' + slot3[9] + ':' + slot3[10] + ':' + slot3[11] + ':' + slot3[12] + ':' + slot3[13] + ':' + slot3[14] + ':' + slot3[15] + ':' + slot3[16] + ':' + slot3[17];
+                    break;
+                  case "4":
+                    slot4[12] = this[3];
+                    slot4[13] = this[4];
+                    slot4[14] = this[5];
+                    slot4[15] = this[7];
+                    slot4[16] = this[8];
+                    slot4[17] = this[9];
+                    document.getElementById("friend_" + friendid + "_slot4").value = slot4[0] + ':' + slot4[1] + ':' + slot4[2] + ':' + slot4[3] + ':' + slot4[4] + ':' + slot4[5] + ':' + slot4[6] + ':' + slot4[7] + ':' + slot4[8] + ':' + slot4[9] + ':' + slot4[10] + ':' + slot4[11] + ':' + slot4[12] + ':' + slot4[13] + ':' + slot4[14] + ':' + slot4[15] + ':' + slot4[16] + ':' + slot4[17];
+                    break;
+                  case "5":
+                    slot5[12] = this[3];
+                    slot5[13] = this[4];
+                    slot5[14] = this[5];
+                    slot5[15] = this[7];
+                    slot5[16] = this[8];
+                    slot5[17] = this[9];
+                    document.getElementById("friend_" + friendid + "_slot5").value = slot5[0] + ':' + slot5[1] + ':' + slot5[2] + ':' + slot5[3] + ':' + slot5[4] + ':' + slot5[5] + ':' + slot5[6] + ':' + slot5[7] + ':' + slot5[8] + ':' + slot5[9] + ':' + slot5[10] + ':' + slot5[11] + ':' + slot5[12] + ':' + slot5[13] + ':' + slot5[14] + ':' + slot5[15] + ':' + slot5[16] + ':' + slot5[17];
+                    break;
+                }
+                return false;
+              }
+            }
+          }
+        });
+      }
+
+      //火力計算
+      param[0] = Number(setbonus[0]) + Number(base[4]) + Number(slot0[4]) + Number(slot0[12]) + Number(slot1[4]) + Number(slot1[12]) + Number(slot2[4]) + Number(slot2[12]) + Number(slot3[4]) + Number(slot3[12]) + Number(slot4[4]) + Number(slot4[12]) + Number(slot5[4]) + Number(slot5[12]);
+      //雷装計算
+      param[1] = Number(setbonus[1]) + Number(base[5]) + Number(slot0[5]) + Number(slot0[13]) + Number(slot1[5]) + Number(slot1[13]) + Number(slot2[5]) + Number(slot2[13]) + Number(slot3[5]) + Number(slot3[13]) + Number(slot4[5]) + Number(slot4[13]) + Number(slot5[5]) + Number(slot5[13]);
+      //対空計算
+      param[2] = Number(setbonus[2]) + Number(base[6]) + Number(slot0[6]) + Number(slot0[14]) + Number(slot1[6]) + Number(slot1[14]) + Number(slot2[6]) + Number(slot2[14]) + Number(slot3[6]) + Number(slot3[14]) + Number(slot4[6]) + Number(slot4[14]) + Number(slot5[6]) + Number(slot5[14]);
+      //対潜計算
+      param[3] = Number(setbonus[3]) + Number(as[0]) + Number(as[1]) + Number(slot0[7]) + Number(slot0[15]) + Number(slot1[7]) + Number(slot1[15]) + Number(slot2[7]) + Number(slot2[15]) + Number(slot3[7]) + Number(slot3[15]) + Number(slot4[7]) + Number(slot4[15]) + Number(slot5[7]) + Number(slot5[15]);
+      //索敵計算
+      param[4] = Number(setbonus[4]) + search + Number(slot0[8]) + Number(slot0[16]) + Number(slot1[8]) + Number(slot1[16]) + Number(slot2[8]) + Number(slot2[16]) + Number(slot3[8]) + Number(slot3[16]) + Number(slot4[8]) + Number(slot4[16]) + Number(slot5[8]) + Number(slot5[16])
+      //命中項計算
+      bonus = Math.floor(param[5]) + Number(slot0[9]) + Number(slot1[9]) + Number(slot2[9]) + Number(slot3[9]) + Number(slot4[9]) + Number(slot5[9]);
+      improve = get_hit_improve(slot0[1], slot0[2], slot0[3]) + get_hit_improve(slot1[1], slot1[2], slot1[3]) + get_hit_improve(slot2[1], slot2[2], slot2[3]) + get_hit_improve(slot3[1], slot3[2], slot3[3]) + get_hit_improve(slot4[1], slot4[2], slot4[3]) + get_hit_improve(slot5[1], slot5[2], slot5[3]);
+      param[5] = Math.floor(2 * Math.sqrt(lv) + 1.5 * Math.sqrt(luck) + bonus + improve);
+      content = $('<p>■基礎命中項 =  2 × √(レベル) + 1.5 × √(運) + 装備命中値 + 装備改修(命中)<br>　※小数点以下は切り捨て</p><p>■計算結果<br>' + param[5] + ' = 2 × √(' + lv + ') + 1.5 × √(' + luck + ') + ' + bonus + ' + ' + Math.floor(improve * 10000) / 10000 + '</p>');
+      $('#ship_' + friendid + '_hit').data('powertipjq', content);
+      $('#ship_' + friendid + '_hit').powerTip({
+        openEvents: ['click'],
+        closeEvents: ['click'],
+        placement: 's'
+      });
+
+      //射程計算
+      param[7] = Math.max(Number(base[15]), Number(slot0[11]), Number(slot1[11]), Number(slot2[11]), Number(slot3[11]), Number(slot4[11]), Number(slot5[11]), Number(slot0[17]), Number(slot1[17]), Number(slot2[17]), Number(slot3[17]), Number(slot4[17]), Number(slot5[17]));
+      //砲撃攻撃力計算
+      param[8] = Number(setbonus[0])+Number(base[4]) + Number(slot0[4]) + Number(slot1[4]) + Number(slot2[4]) + Number(slot3[4]) + Number(slot4[4]) + Number(slot5[4]) + Number(slot0[12]) + Number(slot1[12]) + Number(slot2[12]) + Number(slot3[12]) + Number(slot4[12]) + Number(slot5[12]);
+      fp = param[8];
+      improve = get_fp_improve(slot0[1], slot0[2], slot0[3]) + get_fp_improve(slot1[1], slot1[2], slot1[3]) + get_fp_improve(slot2[1], slot2[2], slot2[3]) + get_fp_improve(slot3[1], slot3[2], slot3[3]) + get_fp_improve(slot4[1], slot4[2], slot4[3]) + get_fp_improve(slot5[1], slot5[2], slot5[3]);
+      param[8] += 5 + improve;
+      content = $('<p>■計算式(砲撃攻撃力)<br>砲撃攻撃力 = 火力 + 装備改修(砲撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>' + Math.floor(param[8] * 10000) / 10000 + ' = ' + fp + ' + ' + Math.floor(improve * 10000) / 10000 + ' + 5</p>');
+      $('#ship_' + friendid + '_basefp').data('powertipjq', content);
+      $('#ship_' + friendid + '_basefp').powerTip({
+        openEvents: ['click'],
+        closeEvents: ['click'],
+        placement: 's'
+      });
+      param[8] = Math.floor(param[8] * 100) / 100;
+      //雷装攻撃力計算
+      param[9] = Number(setbonus[1])+Number(base[5]) + Number(slot0[5]) + Number(slot1[5]) + Number(slot2[5]) + Number(slot3[5]) + Number(slot4[5]) + Number(slot5[5]) + Number(slot0[13]) + Number(slot1[13]) + Number(slot2[13]) + Number(slot3[13]) + Number(slot4[13]) + Number(slot5[13]);
+      th = param[9];
+      improve = get_th_improve(slot0[1], slot0[2], slot0[3]) + get_th_improve(slot1[1], slot1[2], slot1[3]) + get_th_improve(slot2[1], slot2[2], slot2[3]) + get_th_improve(slot3[1], slot3[2], slot3[3]) + get_th_improve(slot4[1], slot4[2], slot4[3]) + get_th_improve(slot5[1], slot5[2], slot5[3]);
+      param[9] += 5 + improve;
+      content = $('<p>■計算式(雷撃攻撃力)<br>雷撃攻撃力 = 雷撃 + 装備改修(雷撃) ＋ 通常艦隊定数　</p><p>■計算結果<br>' + Math.floor(param[9] * 10000) / 10000 + ' = ' + th + ' + ' + Math.floor(improve * 10000) / 10000 + ' + 5</p>');
+      $('#ship_' + friendid + '_baseth').data('powertipjq', content);
+      $('#ship_' + friendid + '_baseth').powerTip({
+        openEvents: ['click'],
+        closeEvents: ['click'],
+        placement: 's'
+      });
+      param[9] = Math.floor(param[9] * 100) / 100;
+      //対潜攻撃力計算
+      status = Number(as[0]) + Number(as[1]);
+      bonus = get_as(slot1[1], slot1[7]) + get_as(slot2[1], slot2[7]) + get_as(slot3[1], slot3[7]) + get_as(slot4[1], slot4[7]);
+      improve = get_as_improve(slot1[1], slot1[2], slot1[3]) + get_as_improve(slot2[1], slot2[2], slot2[3]) + get_as_improve(slot3[1], slot3[2], slot3[3]) + get_as_improve(slot4[1], slot4[2], slot4[3]);
+      setbonus = get_as_synergy(slot1[0], slot2[0], slot3[0], slot4[0]);
+      param[10] = (13 + 2 * Math.sqrt(status) + bonus * 1.5 + improve) * setbonus;
+      content = $('<p>■計算式(対潜攻撃力)<br>対潜攻撃力 = 対潜シナジー補正 × ( √(素対潜) × 2 + 装備対潜 × 1.5 + 装備強化値(対潜) + 艦種別定数 )</p><p>■計算結果<br>' + Math.floor(param[10] * 10000) / 10000 + ' = ' + setbonus + ' × ( √(' + status + ') × 2 + ' + bonus + ' × 1.5 + ' + Math.floor(improve * 10000) / 10000 + ' + 13 )</p>');
+      $('#ship_' + friendid + '_baseas').data('powertipjq', content);
+      $('#ship_' + friendid + '_baseas').powerTip({
+        openEvents: ['click'],
+        closeEvents: ['click'],
+        placement: 's'
+      });
+      param[10] = Math.floor(param[10] * 100) / 100;
+      //夜戦攻撃力計算
+      improve = get_np_improve(slot0[1], slot0[2], slot0[3]) + get_np_improve(slot1[1], slot1[2], slot1[3]) + get_np_improve(slot2[1], slot2[2], slot2[3]) + get_np_improve(slot3[1], slot3[2], slot3[3]) + get_np_improve(slot4[1], slot4[2], slot4[3]) + get_np_improve(slot5[1], slot5[2], slot5[3]);
+      param[11] = fp + th + improve;
+      content = $('<p>■計算式(夜戦攻撃力)<br>夜戦攻撃力 = 火力 + 雷装 + 改修強化値(夜戦)　</p><p>■計算結果<br>' + Math.floor(param[11] * 10000) / 10000 + ' = ' + fp + ' + ' + th + ' + ' + Math.floor(improve * 10000) / 10000 + '</p>');
+      $('#ship_' + friendid + '_basenp').data('powertipjq', content);
+      $('#ship_' + friendid + '_basenp').powerTip({
+        openEvents: ['click'],
+        closeEvents: ['click'],
+        placement: 's'
+      });
+      param[11] = Math.floor(param[11] * 100) / 100;
+
+      //パラメータ書き出し
+      document.getElementById("ship_" + friendid + "_pw").innerHTML = param[0];
+      document.getElementById("ship_" + friendid + "_th").innerHTML = param[1];
+      document.getElementById("ship_" + friendid + "_aa").innerHTML = param[2];
+      document.getElementById("ship_" + friendid + "_as").innerHTML = param[3];
+      document.getElementById("ship_" + friendid + "_search").innerHTML = param[4];
+      document.getElementById("ship_" + friendid + "_hit").innerHTML = param[5] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
+      switch (param[7]) {
+        case 1:
+          document.getElementById("ship_" + friendid + "_range").innerHTML = "短";
+          break;
+        case 2:
+          document.getElementById("ship_" + friendid + "_range").innerHTML = "中";
+          break;
+        case 3:
+          document.getElementById("ship_" + friendid + "_range").innerHTML = "長";
+          break;
+        case 4:
+          document.getElementById("ship_" + friendid + "_range").innerHTML = "超長";
+          break;
+      }
+      document.getElementById("ship_" + friendid + "_basefp").innerHTML = param[8] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
+      if (param[1] == 0) {
+        document.getElementById("ship_" + friendid + "_baseth").innerHTML = 0;
+      } else {
+        document.getElementById("ship_" + friendid + "_baseth").innerHTML = param[9] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
+      }
+      document.getElementById("ship_" + friendid + "_baseas").innerHTML = param[10] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
+      document.getElementById("ship_" + friendid + "_basenp").innerHTML = param[11] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
+    });
+  });
 
 }
+
 
 function get_fp_improve(i, j, k) {
   let result = 0;
@@ -1756,6 +2392,7 @@ function htmlwrite_md_wp_content(friendid) {
   htmlwrite += '<div class="wp_list_param">対潜</div>';
   htmlwrite += '<div class="wp_list_param">索敵</div>';
   htmlwrite += '<div class="wp_list_param">命中</div>';
+  htmlwrite += '<div class="wp_list_param">爆装</div>';
   htmlwrite += '<div class="wp_list_label_fooder"></div>';
   htmlwrite += '</div></li>';
   htmlwrite += '<div class="div_srcollbar">';
@@ -1774,6 +2411,7 @@ function htmlwrite_md_wp_content(friendid) {
   htmlwrite += '<div class="wp_list_param">対潜</div>';
   htmlwrite += '<div class="wp_list_param">索敵</div>';
   htmlwrite += '<div class="wp_list_param">命中</div>';
+  htmlwrite += '<div class="wp_list_param">爆装</div>';
   htmlwrite += '<div class="wp_list_label_fooder"></div>';
   htmlwrite += '</div></li>';
   htmlwrite += '<div class="div_srcollbar">';
@@ -1791,6 +2429,26 @@ function htmlwrite_md_wp_content(friendid) {
   htmlwrite += '<div class="wp_list_param">対潜</div>';
   htmlwrite += '<div class="wp_list_param">索敵</div>';
   htmlwrite += '<div class="wp_list_param">命中</div>';
+  htmlwrite += '<div class="wp_list_param">爆装</div>';
+  htmlwrite += '<div class="wp_list_label_fooder"></div>';
+  htmlwrite += '</div></li>';
+  htmlwrite += '<div class="div_srcollbar">';
+  htmlwrite += '<div id="wp_' + friendid + '_32"></div>';
+  htmlwrite += '<div id="wp_' + friendid + '_5"></div>';
+  htmlwrite += '<div id="wp_' + friendid + '_22"></div>';
+  htmlwrite += '</div></div></div>';
+
+  //水上機
+  htmlwrite += '<div class="tab-pane" id="wp_' + friendid + '_content_sp" role="tabpanel" aria-labelledby="tab-weapon-sp">';
+  htmlwrite += '<div class="list-group"><li class="list-group-item plain"><div class="list_title d-flex">';
+  htmlwrite += '<div class="wp_list_label_name">武器名</div>';
+  htmlwrite += '<div class="wp_list_param">火力</div>';
+  htmlwrite += '<div class="wp_list_param">雷装</div>';
+  htmlwrite += '<div class="wp_list_param">対空</div>';
+  htmlwrite += '<div class="wp_list_param">対潜</div>';
+  htmlwrite += '<div class="wp_list_param">索敵</div>';
+  htmlwrite += '<div class="wp_list_param">命中</div>';
+  htmlwrite += '<div class="wp_list_param">爆装</div>';
   htmlwrite += '<div class="wp_list_label_fooder"></div>';
   htmlwrite += '</div></li>';
   htmlwrite += '<div class="div_srcollbar">';
@@ -1809,6 +2467,7 @@ function htmlwrite_md_wp_content(friendid) {
   htmlwrite += '<div class="wp_list_param">対潜</div>';
   htmlwrite += '<div class="wp_list_param">索敵</div>';
   htmlwrite += '<div class="wp_list_param">命中</div>';
+  htmlwrite += '<div class="wp_list_param">爆装</div>';
   htmlwrite += '<div class="wp_list_label_fooder"></div>';
   htmlwrite += '</div></li>';
   htmlwrite += '<div class="div_srcollbar">';
@@ -1826,6 +2485,7 @@ function htmlwrite_md_wp_content(friendid) {
   htmlwrite += '<div class="wp_list_param">対潜</div>';
   htmlwrite += '<div class="wp_list_param">索敵</div>';
   htmlwrite += '<div class="wp_list_param">命中</div>';
+  htmlwrite += '<div class="wp_list_param">爆装</div>';
   htmlwrite += '<div class="wp_list_label_fooder"></div>';
   htmlwrite += '</div></li>';
   htmlwrite += '<div class="div_srcollbar">';
@@ -1843,6 +2503,7 @@ function htmlwrite_md_wp_content(friendid) {
   htmlwrite += '<div class="wp_list_param">対潜</div>';
   htmlwrite += '<div class="wp_list_param">索敵</div>';
   htmlwrite += '<div class="wp_list_param">命中</div>';
+  htmlwrite += '<div class="wp_list_param">爆装</div>';
   htmlwrite += '<div class="wp_list_label_fooder"></div>';
   htmlwrite += '</div></li>';
   htmlwrite += '<div class="div_srcollbar">';
@@ -1862,6 +2523,7 @@ function htmlwrite_md_wp_content(friendid) {
   htmlwrite += '<div class="wp_list_param">対潜</div>';
   htmlwrite += '<div class="wp_list_param">索敵</div>';
   htmlwrite += '<div class="wp_list_param">命中</div>';
+  htmlwrite += '<div class="wp_list_param">爆装</div>';
   htmlwrite += '<div class="wp_list_label_fooder"></div>';
   htmlwrite += '</div></li>';
   htmlwrite += '<div class="div_srcollbar">';
@@ -1896,6 +2558,7 @@ function htmlwrite_md_wp_content(friendid) {
   htmlwrite += '<div class="wp_list_param">対潜</div>';
   htmlwrite += '<div class="wp_list_param">索敵</div>';
   htmlwrite += '<div class="wp_list_param">命中</div>';
+  htmlwrite += '<div class="wp_list_param">爆装</div>';
   htmlwrite += '<div class="wp_list_label_fooder"></div>';
   htmlwrite += '</div></li>';
   htmlwrite += '<div class="div_srcollbar">';
@@ -1914,13 +2577,24 @@ function htmlwrite_md_wp_content(friendid) {
 function wp_slot_improve(param) {
   const result = param.split(":");
   //friendid値[0],スロット[1],改修値[2]
+  const base = document.getElementById("friend_" + result[0] + "_base_param").value.split(':');
+  //base_param [艦ID[0],艦カテゴリ[1],艦種[2],スロット数[3],火力[4],雷装[5],対空[6],対潜初期[7],対潜最大[8],回避初期[9],回避最大[10],索敵初期[11],索敵最大[12],運初期[13],運最大[14],射程[15]
   param = document.getElementById("friend_" + result[0] + "_slot" + result[1]).value;
   param = param.split(':');
   //武器id[0],カテゴリID[1],改修分類[2],改修値[3],火力[4],雷装[5],対空[6],対潜[7],索敵[8],命中[9],爆装[10],射程[11],火力ボーナス[12],雷装ボーナス[13],対空ボーナス[14],対潜ボーナス[15],索敵ボーナス[16],射程ボーナス[17]
   param[3] = result[2];
   document.getElementById("wp_" + result[0] + "_slot" + result[1] + "_improve").value = "★" + result[2];
   document.getElementById("friend_" + result[0] + "_slot" + result[1]).value = param[0] + ':' + param[1] + ':' + param[2] + ':' + param[3] + ':' + param[4] + ':' + param[5] + ':' + param[6] + ':' + param[7] + ':' + param[8] + ':' + param[9] + ':' + param[10] + ':' + param[11] + ':' + param[12] + ':' + param[13] + ':' + param[14] + ':' + param[15] + ':' + param[16] + ':' + param[17];
-  friend_status_update(result[0]);
+  //セットボーナスパラメータ処理
+  if (result[1] != "0") {
+    let wp_set = document.getElementById('friend_' + result[0] + '_set').value;
+    //Slot1武器id[0],Slot1武器改修[1],Slot2武器id[2],Slot2武器改修[3],Slot3武器id[4],Slot3武器改修[5],Slot4武器id[6],Slot4武器改修[7],Slot5武器id[8],Slot5武器改修[9]
+    wp_set = wp_set.split(':');
+    wp_set[Number(result[1]) * 2 - 1] = result[2];
+    document.getElementById('friend_' + result[0] + '_set').value = wp_set[0] + ':' + wp_set[1] + ':' + wp_set[2] + ':' + wp_set[3] + ':' + wp_set[4] + ':' + wp_set[5] + ':' + wp_set[6] + ':' + wp_set[7] + ':' + wp_set[8] + ':' + wp_set[9];
+  }
+  friend_status_update(result[0], result[1], param[0], result[2]);
+  //friendid値[0],スロット[1],武器id[2],改修値[3]
   $('#wp_' + result[0] + '_slot' + result[1] + '_improve').toolbar('hide');
 }
 
@@ -1965,6 +2639,7 @@ function ship_release(friendid) {
 //武器スロット[閉じる]ボタン選択時に動作
 function wp_slot_release(param) {
   //friendid値[0],スロット[1]
+  let wp_set;
   const result = param.split(":");
   document.getElementById("wp_" + result[0] + "_slot" + result[1] + "_img").src = "./img/weapon/0.png";
   document.getElementById("wp_" + result[0] + "_slot" + result[1] + "_name").innerHTML = "";
@@ -1972,8 +2647,22 @@ function wp_slot_release(param) {
   document.getElementById("wp_" + result[0] + "_slot" + result[1] + "_improve").disabled = true;
   document.getElementById("wp_" + result[0] + "_slot" + result[1] + "_improve").value = "★0";
   document.getElementById("friend_" + result[0] + "_slot" + result[1]).value = "";
+  wp_set = document.getElementById("friend_" + result[0] + "_set").value;
+  wp_set = wp_set.split(':');
+  wp_set[2 * (Number(result[1]) - 1)] = 0;
+  wp_set[2 * (Number(result[1]) - 1) + 1] = 0;
+  document.getElementById("friend_" + param[0] + "_set").value = wp_set[0] + ':' + wp_set[1] + ':' + wp_set[2] + ':' + wp_set[3] + ':' + wp_set[4] + ':' + wp_set[5] + ':' + wp_set[6] + ':' + wp_set[7] + ':' + wp_set[8] + ':' + wp_set[9];
   friend_status_update(result[0]);
 }
+
+//武器モーダルウインドウ上の[閉じる]ボタン選択時に動作
+function md_slot_release(friendid) {
+  //friendid値[0]
+  let slotid=document.getElementById("md_" + friendid + "_wp_slotid").value;
+  wp_slot_release(friendid+':'+slotid);
+  $('#ｍd_' + friendid + '_wp').modal('hide');
+}
+
 
 //武器スロット[全て閉じる]ボタン選択時に動作
 function wp_slotall_release(friendid) {
@@ -1985,6 +2674,8 @@ function wp_slotall_release(friendid) {
     document.getElementById("wp_" + friendid + "_slot" + String(i) + "_improve").disabled = true;
     document.getElementById("wp_" + friendid + "_slot" + String(i) + "_improve").value = "★0";
     document.getElementById("friend_" + friendid + "_slot" + String(i)).value = "";
+    document.getElementById("friend_" + friendid + "_set").value = "0:0:0:0:0:0:0:0:0:0";
+    document.getElementById("friend_" + friendid + "_setbonus").value = "0:0:0:0:0";
   }
   friend_status_update(friendid);
 }
@@ -2164,7 +2855,7 @@ function ship_dropdown_submit(param) {
   //friendid値[0],ドロップダウン操作パラメータ[1]
   param = document.getElementById("friend_" + result[0] + "_base_param").value;
   const status = param.split(':');
-  //艦ID[0],スロット数[1],火力[2],雷装[3],対空[4],対潜初期[5],対潜最大[6],回避初期[7],回避最大[8],索敵初期[9],索敵最大[10],運初期[11],運最大[12],射程[13]
+  //艦ID[0],艦カテゴリ[1],艦種[2],スロット数[3],火力[4],雷装[5],対空[6],対潜初期[7],対潜最大[8],回避初期[9],回避最大[10],索敵初期[11],索敵最大[12],運初期[13],運最大[14],射程[15]
   param = document.getElementById("friend_" + result[0] + "_base_as").value;
   const as = param.split(':');
 
@@ -2172,8 +2863,8 @@ function ship_dropdown_submit(param) {
   if (result[1] == "lv") {
     let lv = document.getElementById("ship_" + result[0] + "_lv_input").value;
     document.getElementById("ship_" + result[0] + "_lv").innerHTML = lv;
-    document.getElementById("friend_" + result[0] + "_base_search").value = Math.floor((Number(status[10]) - Number(status[9])) / 99 * lv + Number(status[9]));
-    document.getElementById("friend_" + result[0] + "_base_as").value = Math.floor((Number(status[6]) - Number(status[5])) / 99 * lv + Number(status[5])) + ':' + as[1];
+    document.getElementById("friend_" + result[0] + "_base_search").value = Math.floor((Number(status[12]) - Number(status[11])) / 99 * lv + Number(status[11]));
+    document.getElementById("friend_" + result[0] + "_base_as").value = Math.floor((Number(status[8]) - Number(status[7])) / 99 * lv + Number(status[7])) + ':' + as[1];
     friend_status_update(result[0]);
     $("#ship_" + result[0] + "_dropdown").collapse('toggle');
   }
