@@ -953,12 +953,12 @@ transform: scale(1.2, 1.2);
 }
 
 .wp_list_name {
-  width: 50%;
+  width: 44%;
   text-align: left;
 }
 
 .wp_list_label_name {
-  width: 49%;
+  width: 43%;
   text-align: left;
 }
 
@@ -968,7 +968,7 @@ transform: scale(1.2, 1.2);
 }
 
 .wp_list_param {
-  width: 7%;
+  width: 8%;
   text-align: center;
 }
 
