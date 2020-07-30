@@ -1037,7 +1037,6 @@ transform: scale(1.2, 1.2);
   padding-bottom: 4px;
   border: 1px solid #D3DBE2;
 }
-
 .wp_improve input[type="radio"] {
   display: none;
 }
@@ -1046,9 +1045,11 @@ transform: scale(1.2, 1.2);
   color: #225499;
   font-size: 0.8em;
   line-height: 1.1em;
+  font-family: 'Roboto';
 }
 
 .wp_bonus_param {
+  font-family: 'Roboto';
   color: #740A00;
   font-size: 0.8em;
   line-height: 1.1em;

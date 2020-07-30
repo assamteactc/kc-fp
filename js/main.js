@@ -453,14 +453,17 @@ function ship_open(param) {
   let equip_type = "";
   let htmlwrite = "";
   let htmlwrite2 = "";
-  let equip_search = "";
-  let shiptype_search = "";
+  let equip_search;
+  let shiptype_search;
+  let deny_search;
+  let subequip_search;
 
-  if (document.getElementById("#md_" + friendid + "_wppricheck") == null) {
+  if (document.getElementById("md_" + friendid + "_wppricheck") == null) {
     htmlwrite_md_wp_improvebar(friendid);
     htmlwrite_md_wp_content(friendid);
   } else {
     htmlwrite_md_wp_content_clear(friendid);
+    document.getElementById("md_" + friendid + "_wppricheck").checked = true;
   }
 
   $.get('./data/MY_WEAPON.csv', function(data) {
@@ -482,111 +485,118 @@ function ship_open(param) {
         shiptype_search = shiptype_search.indexOf(":" + result[0] + ":"); //艦種の絞り込み
         equip_search = ":" + this[16] + ":";
         equip_search = equip_search.indexOf(":" + result[1] + ":"); //例外装備(追加用)
-        if (shiptype_search != -1 || equip_search != -1) {
-          if (this[14] == "FALSE") {
-            htmlwrite += '<a href="javascript:weapon_open(\'' + friendid + ':' + this[0] + ':' + this[3] + ':' + this[4] + ':' + this[2] + ':' + this[5] + ':' + this[6] + ':' + this[7] + ':' + this[8] + ':' + this[9] + ':' + this[10] + ':' + this[11] + ':' + this[12] + ':' + this[13] + '\');" class="list-group-item list-group-item-action lists wp_' + friendid + '_' + this[0] + '_bonus notused">';
-            //friendid値[0],武器id[1],カテゴリID[2],アイコンID[3],武器名[4],改修分類[5],火力[6],雷装[7],対空[8],対潜[9],索敵[10],命中[11],爆装[12],射程[13]
-          } else {
-            htmlwrite += '<a href="javascript:weapon_open(\'' + friendid + ':' + this[0] + ':' + this[3] + ':' + this[4] + ':' + this[2] + ':' + this[5] + ':' + this[6] + ':' + this[7] + ':' + this[8] + ':' + this[9] + ':' + this[10] + ':' + this[11] + ':' + this[12] + ':' + this[13] + '\');" class="list-group-item list-group-item-action lists wp_' + friendid + '_' + this[0] + '_bonus used">';
-          }
-          htmlwrite += '<div class="d-flex flex-align_medium">';
-          htmlwrite += '<div class="d-flex wp_list_name"><div><img src="./img/weapon/' + this[4] + '.png"></div><div class="md_weapon_name">&nbsp;' + this[2] + '</div></div>';
-          htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
-          htmlwrite += '<div class="wp_list_initial">' + this[6] + '</div>&nbsp;';
-          htmlwrite += '<div class="d-flex flex-column">';
-          htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_fp"></div>';
-          htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_fp wp_improve_param"></div>';
-          htmlwrite += '</div></div>';
-          htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
-          htmlwrite += '<div class="wp_list_initial">' + this[7] + '</div>&nbsp;';
-          htmlwrite += '<div class="d-flex flex-column">';
-          htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_th"></div>';
-          htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_th wp_improve_param"></div>';
-          htmlwrite += '</div></div>';
-          htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
-          htmlwrite += '<div class="wp_list_initial">' + this[8] + '</div>&nbsp;';
-          htmlwrite += '<div class="d-flex flex-column">';
-          htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_aa"></div>';
-          htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_aa wp_improve_param"></div>';
-          htmlwrite += '</div></div>';
-          htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
-          htmlwrite += '<div class="wp_list_initial">' + this[9] + '</div>&nbsp;';
-          htmlwrite += '<div class="d-flex flex-column">';
-          htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_as"></div>';
-          htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_as wp_improve_param"></div>';
-          htmlwrite += '</div></div>';
-          htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
-          htmlwrite += '<div class="wp_list_initial">' + this[10] + '</div>&nbsp;';
-          htmlwrite += '<div class="d-flex flex-column">';
-          htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_search"></div>';
-          htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_search wp_improve_param"></div>';
-          htmlwrite += '</div></div>';
-          htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
-          htmlwrite += '<div class="wp_list_initial">' + this[11] + '</div>&nbsp;';
-          htmlwrite += '<div class="d-flex flex-column">';
-          htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_hit"></div>';
-          htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_hit wp_improve_param"></div>';
-          htmlwrite += '</div></div>';
-          htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
-          htmlwrite += '<div class="wp_list_initial">' + this[12] + '</div>&nbsp;';
-          htmlwrite += '<div class="d-flex flex-column">';
-          htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_bom"></div>';
-          htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_bom wp_improve_param"></div>';
-          htmlwrite += '</div></div>';
-          htmlwrite += '</div></a>';
+        deny_search = ":" + this[17] + ":";
+        deny_search = deny_search.indexOf(":" + result[1] + ":"); //例外装備不可
 
-          if (this[18] != "FALSE") {
+        if (deny_search == -1) {
+          if (shiptype_search != -1 || equip_search != -1) {
             if (this[14] == "FALSE") {
-              htmlwrite2 += '<a href="javascript:weapon_open(\'' + friendid + ':' + this[0] + ':' + this[3] + ':' + this[4] + ':' + this[2] + ':' + this[5] + ':' + this[6] + ':' + this[7] + ':' + this[8] + ':' + this[9] + ':' + this[10] + ':' + this[11] + ':' + this[12] + ':' + this[13] + '\');" class="list-group-item list-group-item-action lists wp_' + friendid + '_' + this[0] + '_bonus notused">';
+              htmlwrite += '<a href="javascript:weapon_open(\'' + friendid + ':' + this[0] + ':' + this[3] + ':' + this[4] + ':' + this[2] + ':' + this[5] + ':' + this[6] + ':' + this[7] + ':' + this[8] + ':' + this[9] + ':' + this[10] + ':' + this[11] + ':' + this[12] + ':' + this[13] + '\');" class="list-group-item list-group-item-action lists wp_' + friendid + '_' + this[0] + '_bonus notused">';
               //friendid値[0],武器id[1],カテゴリID[2],アイコンID[3],武器名[4],改修分類[5],火力[6],雷装[7],対空[8],対潜[9],索敵[10],命中[11],爆装[12],射程[13]
             } else {
-              htmlwrite2 += '<a href="javascript:weapon_open(\'' + friendid + ':' + this[0] + ':' + this[3] + ':' + this[4] + ':' + this[2] + ':' + this[5] + ':' + this[6] + ':' + this[7] + ':' + this[8] + ':' + this[9] + ':' + this[10] + ':' + this[11] + ':' + this[12] + ':' + this[13] + '\');" class="list-group-item list-group-item-action lists wp_' + friendid + '_' + this[0] + '_bonus  used">';
+              htmlwrite += '<a href="javascript:weapon_open(\'' + friendid + ':' + this[0] + ':' + this[3] + ':' + this[4] + ':' + this[2] + ':' + this[5] + ':' + this[6] + ':' + this[7] + ':' + this[8] + ':' + this[9] + ':' + this[10] + ':' + this[11] + ':' + this[12] + ':' + this[13] + '\');" class="list-group-item list-group-item-action lists wp_' + friendid + '_' + this[0] + '_bonus used">';
             }
-            htmlwrite2 += '<div class="d-flex flex-align_medium">';
-            htmlwrite2 += '<div class="d-flex wp_list_name"><div><img src="./img/weapon/' + this[4] + '.png"></div><div class="md_weapon_name">&nbsp;' + this[2] + '</div></div>';
-            htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
-            htmlwrite2 += '<div class="wp_list_initial">' + this[6] + '</div>&nbsp;';
-            htmlwrite2 += '<div class="d-flex flex-column">';
-            htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_fp"></div>';
-            htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_fp wp_improve_param"></div>';
-            htmlwrite2 += '</div></div>';
-            htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
-            htmlwrite2 += '<div class="wp_list_initial">' + this[7] + '</div>&nbsp;';
-            htmlwrite2 += '<div class="d-flex flex-column">';
-            htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_th"></div>';
-            htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_th wp_improve_param"></div>';
-            htmlwrite2 += '</div></div>';
-            htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
-            htmlwrite2 += '<div class="wp_list_initial">' + this[8] + '</div>&nbsp;';
-            htmlwrite2 += '<div class="d-flex flex-column">';
-            htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_aa"></div>';
-            htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_aa wp_improve_param"></div>';
-            htmlwrite2 += '</div></div>';
-            htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
-            htmlwrite2 += '<div class="wp_list_initial">' + this[9] + '</div>&nbsp;';
-            htmlwrite2 += '<div class="d-flex flex-column">';
-            htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_as"></div>';
-            htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_as wp_improve_param"></div>';
-            htmlwrite2 += '</div></div>';
-            htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
-            htmlwrite2 += '<div class="wp_list_initial">' + this[10] + '</div>&nbsp;';
-            htmlwrite2 += '<div class="d-flex flex-column">';
-            htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_search"></div>';
-            htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_search wp_improve_param"></div>';
-            htmlwrite2 += '</div></div>';
-            htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
-            htmlwrite2 += '<div class="wp_list_initial">' + this[11] + '</div>&nbsp;';
-            htmlwrite2 += '<div class="d-flex flex-column">';
-            htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_hit"></div>';
-            htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_hit wp_improve_param"></div>';
-            htmlwrite2 += '</div></div>';
-            htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
-            htmlwrite2 += '<div class="wp_list_initial">' + this[12] + '</div>&nbsp;';
-            htmlwrite2 += '<div class="d-flex flex-column">';
-            htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_bom"></div>';
-            htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_bom wp_improve_param"></div>';
-            htmlwrite2 += '</div></div>';
-            htmlwrite2 += '</div></a>';
+            htmlwrite += '<div class="d-flex flex-align_medium">';
+            htmlwrite += '<div class="d-flex wp_list_name"><div><img src="./img/weapon/' + this[4] + '.png"></div><div class="md_weapon_name">&nbsp;' + this[2] + '</div></div>';
+            htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
+            htmlwrite += '<div class="wp_list_initial">' + this[6] + '</div>&nbsp;';
+            htmlwrite += '<div class="d-flex flex-column">';
+            htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_fp"></div>';
+            htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_fp wp_improve_param"></div>';
+            htmlwrite += '</div></div>';
+            htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
+            htmlwrite += '<div class="wp_list_initial">' + this[7] + '</div>&nbsp;';
+            htmlwrite += '<div class="d-flex flex-column">';
+            htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_th"></div>';
+            htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_th wp_improve_param"></div>';
+            htmlwrite += '</div></div>';
+            htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
+            htmlwrite += '<div class="wp_list_initial">' + this[8] + '</div>&nbsp;';
+            htmlwrite += '<div class="d-flex flex-column">';
+            htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_aa"></div>';
+            htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_aa wp_improve_param"></div>';
+            htmlwrite += '</div></div>';
+            htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
+            htmlwrite += '<div class="wp_list_initial">' + this[9] + '</div>&nbsp;';
+            htmlwrite += '<div class="d-flex flex-column">';
+            htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_as"></div>';
+            htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_as wp_improve_param"></div>';
+            htmlwrite += '</div></div>';
+            htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
+            htmlwrite += '<div class="wp_list_initial">' + this[10] + '</div>&nbsp;';
+            htmlwrite += '<div class="d-flex flex-column">';
+            htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_rd"></div>';
+            htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_rd wp_improve_param"></div>';
+            htmlwrite += '</div></div>';
+            htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
+            htmlwrite += '<div class="wp_list_initial">' + this[11] + '</div>&nbsp;';
+            htmlwrite += '<div class="d-flex flex-column">';
+            htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_hit"></div>';
+            htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_hit wp_improve_param"></div>';
+            htmlwrite += '</div></div>';
+            htmlwrite += '<div class="d-flex wp_list_param align-items-center">';
+            htmlwrite += '<div class="wp_list_initial">' + this[12] + '</div>&nbsp;';
+            htmlwrite += '<div class="d-flex flex-column">';
+            htmlwrite += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_bom"></div>';
+            htmlwrite += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_bom wp_improve_param"></div>';
+            htmlwrite += '</div></div>';
+            htmlwrite += '</div></a>';
+
+            subequip_search = ":" + this[19] + ":";
+            subequip_search = subequip_search.indexOf(":" + result[1] + ":"); //補強増設例外装備可
+            if (this[18] != "FALSE" || subequip_search != -1) {
+              if (this[14] == "FALSE") {
+                htmlwrite2 += '<a href="javascript:weapon_open(\'' + friendid + ':' + this[0] + ':' + this[3] + ':' + this[4] + ':' + this[2] + ':' + this[5] + ':' + this[6] + ':' + this[7] + ':' + this[8] + ':' + this[9] + ':' + this[10] + ':' + this[11] + ':' + this[12] + ':' + this[13] + '\');" class="list-group-item list-group-item-action lists wp_' + friendid + '_' + this[0] + '_bonus notused">';
+                //friendid値[0],武器id[1],カテゴリID[2],アイコンID[3],武器名[4],改修分類[5],火力[6],雷装[7],対空[8],対潜[9],索敵[10],命中[11],爆装[12],射程[13]
+              } else {
+                htmlwrite2 += '<a href="javascript:weapon_open(\'' + friendid + ':' + this[0] + ':' + this[3] + ':' + this[4] + ':' + this[2] + ':' + this[5] + ':' + this[6] + ':' + this[7] + ':' + this[8] + ':' + this[9] + ':' + this[10] + ':' + this[11] + ':' + this[12] + ':' + this[13] + '\');" class="list-group-item list-group-item-action lists wp_' + friendid + '_' + this[0] + '_bonus  used">';
+              }
+              htmlwrite2 += '<div class="d-flex flex-align_medium">';
+              htmlwrite2 += '<div class="d-flex wp_list_name"><div><img src="./img/weapon/' + this[4] + '.png"></div><div class="md_weapon_name">&nbsp;' + this[2] + '</div></div>';
+              htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
+              htmlwrite2 += '<div class="wp_list_initial">' + this[6] + '</div>&nbsp;';
+              htmlwrite2 += '<div class="d-flex flex-column">';
+              htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_fp"></div>';
+              htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_fp wp_improve_param"></div>';
+              htmlwrite2 += '</div></div>';
+              htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
+              htmlwrite2 += '<div class="wp_list_initial">' + this[7] + '</div>&nbsp;';
+              htmlwrite2 += '<div class="d-flex flex-column">';
+              htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_th"></div>';
+              htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_th wp_improve_param"></div>';
+              htmlwrite2 += '</div></div>';
+              htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
+              htmlwrite2 += '<div class="wp_list_initial">' + this[8] + '</div>&nbsp;';
+              htmlwrite2 += '<div class="d-flex flex-column">';
+              htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_aa"></div>';
+              htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_aa wp_improve_param"></div>';
+              htmlwrite2 += '</div></div>';
+              htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
+              htmlwrite2 += '<div class="wp_list_initial">' + this[9] + '</div>&nbsp;';
+              htmlwrite2 += '<div class="d-flex flex-column">';
+              htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_as"></div>';
+              htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_as wp_improve_param"></div>';
+              htmlwrite2 += '</div></div>';
+              htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
+              htmlwrite2 += '<div class="wp_list_initial">' + this[10] + '</div>&nbsp;';
+              htmlwrite2 += '<div class="d-flex flex-column">';
+              htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_rd"></div>';
+              htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_rd wp_improve_param"></div>';
+              htmlwrite2 += '</div></div>';
+              htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
+              htmlwrite2 += '<div class="wp_list_initial">' + this[11] + '</div>&nbsp;';
+              htmlwrite2 += '<div class="d-flex flex-column">';
+              htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_hit"></div>';
+              htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_hit wp_improve_param"></div>';
+              htmlwrite2 += '</div></div>';
+              htmlwrite2 += '<div class="d-flex wp_list_param align-items-center">';
+              htmlwrite2 += '<div class="wp_list_initial">' + this[12] + '</div>&nbsp;';
+              htmlwrite2 += '<div class="d-flex flex-column">';
+              htmlwrite2 += '<div class="wp_list_param wp_bonus_param wp_' + friendid + '_' + this[0] + '_bonus_bom"></div>';
+              htmlwrite2 += '<div class="wp_list_param wp_' + friendid + '_improve_' + this[3] + ':' + this[5] + '_bom wp_improve_param"></div>';
+              htmlwrite2 += '</div></div>';
+              htmlwrite2 += '</div></a>';
+            }
           }
         }
       }
@@ -816,6 +826,7 @@ function md_wp_oepn(friendid, slotid, modal) {
     $('#wp_' + friendid + '_nav_main').hide();
     $('#wp_' + friendid + '_nav_sec').hide();
     $('#wp_' + friendid + '_nav_tor').hide();
+    $('#wp_' + friendid + '_nav_sp').hide();
     $('#wp_' + friendid + '_nav_as').hide();
     $('#wp_' + friendid + '_nav_rd').hide();
     $('#wp_' + friendid + '_nav_ag').hide();
@@ -825,6 +836,7 @@ function md_wp_oepn(friendid, slotid, modal) {
     $('#wp_' + friendid + '_content_main').removeClass("active");
     $('#wp_' + friendid + '_content_sec').removeClass("active");
     $('#wp_' + friendid + '_content_tor').removeClass("active");
+    $('#wp_' + friendid + '_content_sp').removeClass("active");
     $('#wp_' + friendid + '_content_as').removeClass("active");
     $('#wp_' + friendid + '_content_rd').removeClass("active");
     $('#wp_' + friendid + '_content_ag').removeClass("active");
@@ -833,7 +845,43 @@ function md_wp_oepn(friendid, slotid, modal) {
   } else {
     $('#wp_' + friendid + '_nav_main').show();
     $('#wp_' + friendid + '_nav_sec').show();
-    $('#wp_' + friendid + '_nav_tor').show();
+
+    //武器モーダルウィンドウ　艦カテゴリによる表示制御を行う
+    switch (result[1]) {
+      case "DE":
+        //海防艦は、魚雷・水上機を表示しない
+        if ($('#wp_' + friendid + '_nav_tor').hasClass("active")) {
+          $('#wp_' + friendid + '_nav_tor').removeClass("active");
+          $('#wp_' + friendid + '_content_main').addClass("active");
+          $('#wp_' + friendid + '_nav_main').addClass("active")
+        }
+        if ($('#wp_' + friendid + '_nav_sp').hasClass("active")) {
+          $('#wp_' + friendid + '_nav_sp').removeClass("active");
+          $('#wp_' + friendid + '_content_main').addClass("active");
+          $('#wp_' + friendid + '_nav_main').addClass("active")
+        }
+        $('#wp_' + friendid + '_nav_tor').hide();
+        $('#wp_' + friendid + '_content_tor').removeClass("active");
+        $('#wp_' + friendid + '_nav_sp').hide();
+        $('#wp_' + friendid + '_content_sp').removeClass("active");
+        break;
+      case "DD":
+        //駆逐艦は、水上機を表示しない
+        if ($('#wp_' + friendid + '_nav_sp').hasClass("active")) {
+          $('#wp_' + friendid + '_nav_sp').removeClass("active");
+          $('#wp_' + friendid + '_content_main').addClass("active");
+          $('#wp_' + friendid + '_nav_main').addClass("active")
+        }
+        $('#wp_' + friendid + '_nav_sp').hide();
+        $('#wp_' + friendid + '_content_sp').removeClass("active");
+        $('#wp_' + friendid + '_nav_tor').show();
+        break;
+      case "CL":
+        $('#wp_' + friendid + '_nav_tor').show();
+        $('#wp_' + friendid + '_nav_sp').show();
+        break;
+    }
+
     $('#wp_' + friendid + '_nav_as').show();
     $('#wp_' + friendid + '_nav_rd').show();
     $('#wp_' + friendid + '_nav_ag').show();
@@ -863,6 +911,7 @@ function md_wp_oepn(friendid, slotid, modal) {
       $('#wp_' + friendid + '_content_other').addClass("active");
     }
   }
+
 }
 
 function htmlwrite_md_wp_content_clear(friendid) {
@@ -917,7 +966,7 @@ function improve_check(param) {
 
   document.getElementById("md_" + result[3] + "_wp_improve").value = result[5];
   wp_bonus(result);
-  //小口径主砲・高角砲なし
+  //1:1 小口径主砲・高角砲なし
   let listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_1:1_fp');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -925,7 +974,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_1:1_hit');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -933,8 +982,8 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
-  })
-  //小口径主砲・高角砲あり
+  });
+  //1:2 小口径主砲・高角砲あり
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_1:2_fp');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -942,7 +991,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_1:2_aa');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -950,7 +999,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 70) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_1:2_hit');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -958,8 +1007,8 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
-  })
-  //中口径主砲・高角砲なし
+  });
+  //2:1 中口径主砲・高角砲なし
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_2:1_fp');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -967,7 +1016,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_2:1_hit');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -975,7 +1024,92 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
-  })
+  });
+  //4:1 副砲・高角砲あり
+  listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_4:1_fp');
+  $(listitem).each(function(index) {
+    if (result[5] == "0") {
+      this.innerHTML = "";
+    } else {
+      this.innerHTML = "+" + Math.round(0.2 * Number(result[5]) * 100) / 100;
+    }
+  });
+  listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_4:1_hit');
+  $(listitem).each(function(index) {
+    if (result[5] == "0") {
+      this.innerHTML = "";
+    } else {
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
+    }
+  });
+  listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_4:1_aa');
+  $(listitem).each(function(index) {
+    if (result[5] == "0") {
+      this.innerHTML = "";
+    } else {
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 70) / 100;
+    }
+  });
+  //4:2 副砲・高角砲なし
+  listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_4:2_fp');
+  $(listitem).each(function(index) {
+    if (result[5] == "0") {
+      this.innerHTML = "";
+    } else {
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
+    }
+  });
+  listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_4:2_hit');
+  $(listitem).each(function(index) {
+    if (result[5] == "0") {
+      this.innerHTML = "";
+    } else {
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
+    }
+  });
+  //4:3 高角砲
+  listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_4:3_fp');
+  $(listitem).each(function(index) {
+    if (result[5] == "0") {
+      this.innerHTML = "";
+    } else {
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
+    }
+  });
+  listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_4:3_hit');
+  $(listitem).each(function(index) {
+    if (result[5] == "0") {
+      this.innerHTML = "";
+    } else {
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
+    }
+  });
+  listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_4:3_aa');
+  $(listitem).each(function(index) {
+    if (result[5] == "0") {
+      this.innerHTML = "";
+    } else {
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 70) / 100;
+    }
+  });
+  //4:4 大和型副砲
+  listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_4:4_fp');
+  $(listitem).each(function(index) {
+    if (result[5] == "0") {
+      this.innerHTML = "";
+    } else {
+      this.innerHTML = "+" + (Number(result[5])) * 30 / 100;
+    }
+  });
+  listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_4:4_hit');
+  $(listitem).each(function(index) {
+    if (result[5] == "0") {
+      this.innerHTML = "";
+    } else {
+      this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
+    }
+  });
+
   //魚雷
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_5:1_th');
   $(listitem).each(function(index) {
@@ -984,7 +1118,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 120) / 100;
     }
-  })
+  });
   //機銃
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_21:1_fp');
   $(listitem).each(function(index) {
@@ -993,7 +1127,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_21:1_th');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -1001,7 +1135,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 120) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_21:1_aa');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -1009,7 +1143,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 70) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_36:1_fp');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -1017,7 +1151,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_36:1_aa');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -1025,7 +1159,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 70) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_36:1_hit');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -1033,7 +1167,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
-  })
+  });
   //ソナー
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_14:1_fp');
   $(listitem).each(function(index) {
@@ -1042,7 +1176,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 75) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_14:1_as');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -1050,7 +1184,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 200 / 3) / 100;
     }
-  })
+  });
   //爆雷
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_15:1_fp');
   $(listitem).each(function(index) {
@@ -1059,7 +1193,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 75) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_15:1_as');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -1067,7 +1201,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 200 / 3) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_15:2_as');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -1075,7 +1209,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 200 / 3) / 100;
     }
-  })
+  });
   //電探
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_12:1_hit');
   $(listitem).each(function(index) {
@@ -1084,7 +1218,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_12:2_hit');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -1092,7 +1226,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 170) / 100;
     }
-  })
+  });
   //探照灯
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_29:1_fp');
   $(listitem).each(function(index) {
@@ -1101,7 +1235,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
-  })
+  });
   //対地装備
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_24:1_fp');
   $(listitem).each(function(index) {
@@ -1110,7 +1244,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_37:1_fp');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -1118,7 +1252,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
-  })
+  });
   listitem = document.getElementsByClassName('wp_' + result[3] + '_improve_46:1_fp');
   $(listitem).each(function(index) {
     if (result[5] == "0") {
@@ -1126,7 +1260,7 @@ function improve_check(param) {
     } else {
       this.innerHTML = "+" + Math.round(Math.sqrt(Number(result[5])) * 100) / 100;
     }
-  })
+  });
 }
 //不用装備のフィルタ
 function filter_priweapon(friendid) {
@@ -1153,7 +1287,7 @@ function wp_bonus(result) {
   let bonus = "";
   let wp_param;
   let i;
-  let now;
+  let now = "";
   let lock = false;
   let search;
   let source;
@@ -1166,13 +1300,22 @@ function wp_bonus(result) {
   let set_aa = [];
   let set_as = [];
   let set_rd = [];
-  let set_offset;
+  bonus_label = ["fp", "th", "aa", "as", "rd"];
+  let set_offset_type = [];
+  let set_offset_fp = [];
+  let set_offset_th = [];
+  let set_offset_aa = [];
+  let set_offset_as = [];
+  let set_offset_rd = [];
+
+  let single_lock;
+  let offset_check = false;
   let setbonus_flag = false;
   let bonus_flag = false;
-  let set_bonus1_hit = false;
-  let set_bonus2_hit = false;
-  let set_bonus3_hit = false;
+  let set_bonus_hit = [false, false, false, false];
+  let set_bonus_check = false;
   let hit_count = 0;
+  let limit_bonus = 0;
 
   //セットボーナス計算　不要配列削除
   if (result[4] != "0") {
@@ -1210,260 +1353,212 @@ function wp_bonus(result) {
       if (this[0] != "id") {
         //ボーナス対象艦に合致するか検索
         if (set_lookup == false) {
-          search = ":" + this[15] + ":";
+          search = ":" + this[17] + ":";
           if (search.indexOf(":" + result[0] + ":") != -1) {
             set_lookup = true;
           } else {
-            if (this[14].indexOf(result[2]) != -1) {
+            if (this[16].indexOf(result[2]) != -1) {
               set_lookup = true;
             } else {
-              if (this[13].indexOf(result[1]) != -1) {
+              if (this[15].indexOf(result[1]) != -1) {
                 set_lookup = true;
               }
             }
           }
         }
+
         if (set_lookup == true) {
           //セットボーナス検索　①ウエポン1
+          set_lookup = false;
+          hit_count = 0;
           set_list = [].concat(wp_param);
+
           if (this[0] != "0") {
             for (i = 0; i < set_list.length; i++) {
               search = ":" + this[0] + ":";
               if (search.indexOf(":" + set_list[i * 2] + ":") != -1 && Number(set_list[i * 2 + 1]) >= Number(this[1])) {
                 set_list.splice(i * 2, 2);
-                set_bonus1_hit = true;
+                set_bonus_hit[0] = true;
                 hit_count++;
                 break;
               }
             }
           }
-          //セットボーナス検索　②ウェポン3
-          if (this[4] != "0") {
-            for (i = 0; i < set_list.length; i++) {
-              search = ":" + this[4] + ":";
-              if (search.indexOf(":" + set_list[i * 2] + ":") != -1 && Number(set_list[i * 2 + 1]) >= Number(this[5])) {
-                set_list.splice(i * 2, 2);
-                set_bonus3_hit = true;
-                hit_count++;
-                break;
-              }
-            }
-          }
-          //セットボーナス検索　③ウェポン2
+          //セットボーナス検索　④ウェポン2
           if (this[2] != "0") {
             for (i = 0; i < set_list.length; i++) {
               search = ":" + this[2] + ":";
               if (search.indexOf(":" + set_list[i * 2] + ":") != -1 && Number(set_list[i * 2 + 1]) >= Number(this[3])) {
                 set_list.splice(i * 2, 2);
-                set_bonus2_hit = true;
+                set_bonus_hit[1] = true;
+                hit_count++;
+                break;
+              }
+            }
+          }
+          // セットボーナス検索　③ウェポン3
+          if (this[4] != "0") {
+            for (i = 0; i < set_list.length; i++) {
+              search = ":" + this[4] + ":";
+              if (search.indexOf(":" + set_list[i * 2] + ":") != -1 && Number(set_list[i * 2 + 1]) >= Number(this[5])) {
+                set_list.splice(i * 2, 2);
+                set_bonus_hit[2] = true;
+                hit_count++;
+                break;
+              }
+            }
+          }
+          //セットボーナス検索　②ウェポン4
+          if (this[6] != "0") {
+            for (i = 0; i < set_list.length; i++) {
+              search = ":" + this[6] + ":";
+              if (search.indexOf(":" + set_list[i * 2] + ":") != -1 && Number(set_list[i * 2 + 1]) >= Number(this[7])) {
+                set_list.splice(i * 2, 2);
+                set_bonus_hit[3] = true;
                 hit_count++;
                 break;
               }
             }
           }
 
-          if (now != this[0] + ':' + this[6]) {
+          //既存セットボーナス配列作成(セットボーナス配列から減算を行う為の配列)
+          if (now != this[0] + ':' + this[8]) {
             set_offset = [0, 0, 0, 0, 0];
+            now = this[0] + ':' + this[8];
+            offset_check = false;
+            single_lock = false;
           }
-          //セットボーナス検索用の配列作成
-          if (this[4] == "0") {
-            if (hit_count == 1) {
-              set_type.push(this[0] + ':' + this[6]);
-              if (Math.sign(Number(this[7])) != -1 && Math.sign(Number(this[7]) - set_offset[0]) == -1) {
-                set_fp.push(0);
-              } else {
-                set_fp.push(Number(this[7]) - set_offset[0]);
-              }
-              if (Math.sign(Number(this[8])) != -1 && Math.sign(Number(this[8]) - set_offset[1]) == -1) {
-                set_th.push(0);
-              } else {
-                set_th.push(Number(this[8]) - set_offset[1]);
-              }
-              if (Math.sign(Number(this[9])) != -1 && Math.sign(Number(this[9]) - set_offset[2]) == -1) {
-                set_aa.push(0);
-              } else {
-                set_aa.push(Number(this[9]) - set_offset[2]);
-              }
-              if (Math.sign(Number(this[11])) != -1 && Math.sign(Number(this[11]) - set_offset[3]) == -1) {
-                set_as.push(0);
-              } else {
-                set_as.push(Number(this[11]) - set_offset[3]);
-              }
-              if (Math.sign(Number(this[12])) != -1 && Math.sign(Number(this[12]) - set_offset[4]) == -1) {
-                set_rd.push(0);
-              } else {
-                set_rd.push(Number(this[12]) - set_offset[4]);
-              }
-              if (set_bonus1_hit == false) {
-                set_id.push(this[0]);
-                set_improve.push(Number(this[1]));
-              } else {
-                set_id.push(this[2]);
-                set_improve.push(Number(this[3]));
-              }
+          if (offset_check == false) {
+            //2セットオフセット適合条件
+            if (hit_count == 2 && this[4] == "0") {
+              offset_check = true;
+            }
+            //3セットオフセット適合条件
+            if (hit_count == 3 && this[6] == "0") {
+              offset_check = true;
+            }
+            //4セットオフセット適合条件
+            if (hit_count == 4) {
+              offset_check = true;
+            }
+            if (offset_check == true) {
+              set_offset_type.push(this[0] + ':' + this[8]);
+              set_offset_fp.push(Number(this[9]));
+              set_offset_th.push(Number(this[10]));
+              set_offset_aa.push(Number(this[11]));
+              set_offset_as.push(Number(this[13]));
+              set_offset_rd.push(Number(this[14]));
+            }
+          }
 
-            } else {
-              if (hit_count == 2) {
-                //既に手持ちの装備でセットボーナスが発動している場合
-                set_offset[0] = Number(this[7]);
-                set_offset[1] = Number(this[8]);
-                set_offset[2] = Number(this[9]);
-                set_offset[3] = Number(this[11]);
-                set_offset[4] = Number(this[12]);
-                now = this[0] + ':' + this[6];
+          //セットボーナス検索用の配列作成
+          //1セット適合条件
+          if (hit_count == 0 && this[2] == "0" && Number(result[5]) >= Number(this[1])) {
+            set_bonus_check = true;
+          }
+          //2セット適合条件
+          if (hit_count == 1 && this[4] == "0" && Number(result[5]) >= Number(this[3])) {
+            set_bonus_check = true;
+          }
+          //3セット適合条件
+          if (hit_count == 2 && this[6] == "0" && Number(result[5]) >= Number(this[5])) {
+            set_bonus_check = true;
+          }
+          //4セット適合条件
+          if (hit_count == 3 && this[6] != "0" && Number(result[5]) >= Number(this[7])) {
+            set_bonus_check = true;
+          }
+          if (set_bonus_check == true && single_lock == false) {
+            set_type.push(this[0] + ':' + this[8]);
+            for (i = 0; i < hit_count + 1; i++) {
+              if (set_bonus_hit[i] == false) {
+                set_id.push(this[i * 2]);
+                set_improve.push(Number(this[i * 2 + 1]));
+                break;
               }
             }
-          } else {
-            if (hit_count == 2) {
-              set_type.push(this[0] + ':' + this[6]);
-              if (Math.sign(Number(this[7])) != -1 && Math.sign(Number(this[7]) - set_offset[0]) == -1) {
-                set_fp.push(0);
-              } else {
-                set_fp.push(Number(this[7]) - set_offset[0]);
-              }
-              if (Math.sign(Number(this[8])) != -1 && Math.sign(Number(this[8]) - set_offset[1]) == -1) {
-                set_th.push(0);
-              } else {
-                set_th.push(Number(this[8]) - set_offset[1]);
-              }
-              if (Math.sign(Number(this[9])) != -1 && Math.sign(Number(this[9]) - set_offset[2]) == -1) {
-                set_aa.push(0);
-              } else {
-                set_aa.push(Number(this[9]) - set_offset[2]);
-              }
-              if (Math.sign(Number(this[11])) != -1 && Math.sign(Number(this[11]) - set_offset[3]) == -1) {
-                set_as.push(0);
-              } else {
-                set_as.push(Number(this[11]) - set_offset[3]);
-              }
-              if (Math.sign(Number(this[12])) != -1 && Math.sign(Number(this[12]) - set_offset[4]) == -1) {
-                set_rd.push(0);
-              } else {
-                set_rd.push(Number(this[12]) - set_offset[4]);
-              }
-              if (set_bonus1_hit == false) {
-                set_id.push(this[0]);
-                set_improve.push(Number(this[1]));
-              } else {
-                if (set_bonus2_hit == false) {
-                  set_id.push(this[2]);
-                  set_improve.push(Number(this[3]));
-                } else {
-                  set_id.push(this[4]);
-                  set_improve.push(Number(this[5]));
-                }
-              }
-            } else {
-              if (hit_count == 3) {
-                //既に手持ちの装備でセットボーナスが発動している場合
-                set_offset[0] = Number(this[7]);
-                set_offset[1] = Number(this[8]);
-                set_offset[2] = Number(this[9]);
-                set_offset[3] = Number(this[11]);
-                set_offset[4] = Number(this[12]);
-                now = this[0] + ':' + this[6];
-              }
+            set_fp.push(Number(this[9]));
+            set_th.push(Number(this[10]));
+            set_aa.push(Number(this[11]));
+            set_as.push(Number(this[13]));
+            set_rd.push(Number(this[14]));
+            if (this[24] == "SINGLE") {
+              single_lock = true;
             }
           }
-          set_lookup = false;
-          hit_count = 0;
-          set_bonus1_hit = false;
-          set_bonus2_hit = false;
-          set_bonus3_hit = false;
+          set_bonus_check = false;
+          set_bonus_hit = [false, false, false, false];
         }
       }
     });
-    for (i = 0; i < set_id.length; i++) {
-      wp_param = set_id[i].split(':');
-      for (j = 0; j < wp_param.length; j++) {
-        if (wp_param != 0) {
-          if (set_fp[i] == 0) {
-            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_fp')).each(function(index) {
-              this.innerHTML = "";
-            });
+
+    //セットボーナスから、現在装備のセットボーナスを減算する
+    for (i = 0; i < set_type.length; i++) {
+      for (j = 0; j < set_offset_type.length; j++) {
+        if (set_type[i] == set_offset_type[j]) {
+          if (Math.sign(set_fp[i]) != -1 && Math.sign(set_fp[i] - set_offset_fp[j]) == -1) {
+            set_fp[i] = 0;
           } else {
-            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_fp')).each(function(index) {
-              if ($(this).hasClass('bonusch')) {
-                source = this.innerHTML;
-                //火力のみセットボーナスでマイナスが発生する可能性あるため、特殊な処理を行う。
-                if (Math.sign(Number(source) + set_fp[i]) == -1) {
-                  this.innerHTML = Number(source) + set_fp[i];
-                } else {
-                  this.innerHTML = "+" + (Number(source) + set_fp[i]);
-                }
-              } else {
-                if (Math.sign(set_fp[i]) == -1) {
-                  this.innerHTML = set_fp[i];
-                } else {
-                  this.innerHTML = "+" + set_fp[i];
-                }
-              }
-            });
-            $('.wp_' + result[3] + '_' + wp_param[j] + '_bonus_fp').addClass('setbonus bonusch');
+            set_fp[i] = set_fp[i] - set_offset_fp[j];
           }
-          if (set_th[i] <= 0) {
-            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_th')).each(function() {
-              this.innerHTML = "";
-            });
+          if (Math.sign(set_th[i]) != -1 && Math.sign(set_th[i] - set_offset_th[j]) == -1) {
+            set_th[i] = 0;
           } else {
-            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_th')).each(function() {
-              if ($(this).hasClass('bonusch')) {
-                source = this.innerHTML
-                this.innerHTML = "+" + (Number(source) + set_th[i]);
-              } else {
-                this.innerHTML = "+" + set_th[i];
-              }
-            });
-            $('.wp_' + result[3] + '_' + wp_param[j] + '_bonus_th').addClass('setbonus bonusch');
+            set_th[i] = set_th[i] - set_offset_th[j];
           }
-          if (set_aa[i] <= 0) {
-            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_aa')).each(function() {
-              this.innerHTML = "";
-            });
+          if (Math.sign(set_aa[i]) != -1 && Math.sign(set_aa[i] - set_offset_aa[j]) == -1) {
+            set_aa[i] = 0;
           } else {
-            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_aa')).each(function() {
-              if ($(this).hasClass('bonusch')) {
-                source = this.innerHTML
-                this.innerHTML = "+" + (Number(source) + set_aa[i]);
-              } else {
-                this.innerHTML = "+" + set_aa[i];
-              }
-            });
-            $('.wp_' + result[3] + '_' + wp_param[j] + '_bonus_aa').addClass('setbonus bonusch');
+            set_aa[i] = set_aa[i] - set_offset_aa[j];
           }
-          if (set_as[i] <= 0) {
-            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_as')).each(function() {
-              this.innerHTML = "";
-            });
+          if (Math.sign(set_as[i]) != -1 && Math.sign(set_as[i] - set_offset_as[j]) == -1) {
+            set_as[i] = 0;
           } else {
-            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_as')).each(function() {
-              if ($(this).hasClass('bonusch')) {
-                source = this.innerHTML
-                this.innerHTML = "+" + (Number(source) + set_as[i]);
-              } else {
-                this.innerHTML = "+" + set_as[i];
-              }
-            });
-            $('.wp_' + result[3] + '_' + wp_param[j] + '_bonus_as').addClass('setbonus bonusch');
+            set_as[i] = set_as[i] - set_offset_as[j];
           }
-          if (set_rd[i] <= 0) {
-            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_search')).each(function() {
-              this.innerHTML = "";
-            });
+          if (Math.sign(set_rd[i]) != -1 && Math.sign(set_rd[i] - set_offset_rd[j]) == -1) {
+            set_rd[i] = 0;
           } else {
-            $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_search')).each(function() {
-              if ($(this).hasClass('bonusch')) {
-                source = this.innerHTML
-                this.innerHTML = "+" + (Number(source) + set_rd[i]);
-              } else {
-                this.innerHTML = "+" + set_rd[i];
-              }
-            });
-            $('.wp_' + result[3] + '_' + wp_param[j] + '_bonus_search').addClass('setbonus bonusch');
+            set_rd[i] = set_rd[i] - set_offset_rd[j];
           }
         }
       }
     }
+
+    for (i = 0; i < set_id.length; i++) {
+      wp_param = set_id[i].split(':');
+      for (j = 0; j < wp_param.length; j++) {
+        if (wp_param != 0) {
+          set_list = [set_fp[i], set_th[i], set_aa[i], set_as[i], set_rd[i]];
+          for (k = 0; k < 5; k++) {
+            if (set_list[k] == 0) {
+              $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_' + bonus_label[k])).each(function(index) {
+                this.innerHTML = "";
+              });
+            } else {
+              $(document.getElementsByClassName('wp_' + result[3] + '_' + wp_param[j] + '_bonus_' + bonus_label[k])).each(function(index) {
+                if ($(this).hasClass('bonusch')) {
+                  source = this.innerHTML;
+                  if (Math.sign(Number(source) + set_list[k]) == -1) {
+                    this.innerHTML = Number(source) + set_list[k];
+                  } else {
+                    this.innerHTML = "+" + (Number(source) + set_list[k]);
+                  }
+                } else {
+                  if (Math.sign(set_list[k]) == -1) {
+                    this.innerHTML = set_list[k];
+                  } else {
+                    this.innerHTML = "+" + set_list[k];
+                  }
+                }
+              });
+              $('.wp_' + result[3] + '_' + wp_param[j] + '_bonus_' + bonus_label[k]).addClass('setbonus bonusch');
+            }
+          }
+        }
+      }
+    }
+
     $(document.getElementsByClassName('setbonus')).each(function() {
       if ($(this).hasClass('bonusch')) {
         $(this).removeClass('bonusch');
@@ -1473,6 +1568,7 @@ function wp_bonus(result) {
       }
     });
     lock = false;
+    wp_param = [0, 0, 0, 0, 0];
     //ボーナスパラメータ初期化
     $.get('./data/BONUS.csv', function(data) {
       csv = $.csv.toArrays(data);
@@ -1500,166 +1596,59 @@ function wp_bonus(result) {
             lock = true;
             now = this[0];
             lookup = false;
-            if (wp_param[0] == 0) {
-              $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_fp')).each(function(index) {
-                if ($(this).hasClass('setbonus') == false) {
-                  this.innerHTML = "";
-                }
-              });
-            } else {
-              if (Math.sign(wp_param[0]) != -1) {
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_fp')).each(function(index) {
-                  if ($(this).hasClass('setbonus')) {
-                    source = this.innerHTML;
-                    //火力のみセットボーナスでマイナスが発生する可能性あるため、特殊な処理を行う。
-                    if (source.indexOf("+") != -1) {
-                      this.innerHTML = "+" + (Number(source) + wp_param[0]);
-                    } else {
-                      if (Math.sign((Number(source) + wp_param[0])) != -1) {
-                        this.innerHTML = "+" + (Number(source) + wp_param[0]);
-                      } else {
-                        this.innerHTML = (Number(source) + wp_param[0]);
-                      }
-                    }
-                  } else {
-                    this.innerHTML = "+" + wp_param[0];
+            for (i = 0; i < 5; i++) {
+              if (wp_param[i] == 0) {
+                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_' + bonus_label[i])).each(function(index) {
+                  if ($(this).hasClass('setbonus') == false) {
+                    this.innerHTML = "";
                   }
                 });
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_fp')).addClass('bonus bonusch');
               } else {
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_fp')).each(function(index) {
-                  if ($(this).hasClass('setbonus')) {
-                    source = this.innerHTML;
-                    if (source.indexOf("+") != -1) {
-                      if (Math.sign((Number(source) + wp_param[0])) != -1) {
-                        this.innerHTML = "+" + (Number(source) + wp_param[0]);
+                if (Math.sign(wp_param[i]) != -1) {
+                  $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_' + bonus_label[i])).each(function(index) {
+                    if ($(this).hasClass('setbonus')) {
+                      source = this.innerHTML;
+                      if (source.indexOf("+") != -1) {
+                        this.innerHTML = "+" + (Number(source) + wp_param[i]);
                       } else {
-                        this.innerHTML = (Number(source) + wp_param[0]);
+                        if (Math.sign((Number(source) + wp_param[i])) != -1) {
+                          if (Number(source) + wp_param[i] == 0) {
+                            this.innerHTML = "";
+                          } else {
+                            this.innerHTML = "+" + (Number(source) + wp_param[i]);
+                          }
+                        } else {
+                          this.innerHTML = (Number(source) + wp_param[i]);
+                        }
                       }
                     } else {
-                      this.innerHTML = Number(source.slice(1)) + wp_param[0];
+                      this.innerHTML = "+" + wp_param[i];
                     }
-                  } else {
-                    this.innerHTML = wp_param[0];
-                  }
-                });
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_fp')).addClass('bonus bonusch');
-              }
-            }
-            if (wp_param[1] == 0) {
-              $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_th')).each(function() {
-                if ($(this).hasClass('setbonus') == false) {
-                  this.innerHTML = "";
+                  });
+                  $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_' + bonus_label[i])).addClass('bonus bonusch');
+                } else {
+                  $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_' + bonus_label[i])).each(function(index) {
+                    if ($(this).hasClass('setbonus')) {
+                      source = this.innerHTML;
+                      if (source.indexOf("+") != -1) {
+                        if (Math.sign((Number(source) + wp_param[i])) != -1) {
+                          if (Number(source) + wp_param[i] == 0) {
+                            this.innerHTML = "";
+                          } else {
+                            this.innerHTML = "+" + (Number(source) + wp_param[i]);
+                          }
+                        } else {
+                          this.innerHTML = (Number(source) + wp_param[i]);
+                        }
+                      } else {
+                        this.innerHTML = Number(source.slice(1)) + wp_param[i];
+                      }
+                    } else {
+                      this.innerHTML = wp_param[i];
+                    }
+                  });
+                  $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_' + bonus_label[i])).addClass('bonus bonusch');
                 }
-              });
-            } else {
-              if (Math.sign(wp_param[1]) != -1) {
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_th')).each(function() {
-                  if ($(this).hasClass('setbonus')) {
-                    source = this.innerHTML
-                    this.innerHTML = "+" + (Number(source.slice(1)) + wp_param[1]);
-                  } else {
-                    this.innerHTML = "+" + wp_param[1];
-                  }
-                });
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_th')).addClass('bonus bonusch');
-              } else {
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_th')).each(function() {
-                  if ($(this).hasClass('setbonus')) {
-                    source = this.innerHTML
-                    this.innerHTML = Number(source.slice(1)) + wp_param[1];
-                  } else {
-                    this.innerHTML = wp_param[1];
-                  }
-                });
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_th')).addClass('bonus bonusch');
-              }
-            }
-            if (wp_param[2] == 0) {
-              $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_aa')).each(function() {
-                if ($(this).hasClass('setbonus') == false) {
-                  this.innerHTML = "";
-                }
-              });
-            } else {
-              if (Math.sign(wp_param[2]) != -1) {
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_aa')).each(function() {
-                  if ($(this).hasClass('setbonus')) {
-                    source = this.innerHTML
-                    this.innerHTML = "+" + (Number(source.slice(1)) + wp_param[2]);
-                  } else {
-                    this.innerHTML = "+" + wp_param[2];
-                  }
-                });
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_aa')).addClass('bonus bonusch');
-              } else {
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_aa')).each(function() {
-                  if ($(this).hasClass('setbonus')) {
-                    source = this.innerHTML
-                    this.innerHTML = Number(source.slice(1)) + wp_param[0];
-                  } else {
-                    this.innerHTML = wp_param[2];
-                  }
-                });
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_aa')).addClass('bonus bonusch');
-              }
-            }
-            if (wp_param[3] == 0) {
-              $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_as')).each(function() {
-                if ($(this).hasClass('setbonus') == false) {
-                  this.innerHTML = "";
-                }
-              });
-            } else {
-              if (Math.sign(wp_param[3]) != -1) {
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_as')).each(function() {
-                  if ($(this).hasClass('setbonus')) {
-                    source = this.innerHTML
-                    this.innerHTML = "+" + (Number(source.slice(1)) + wp_param[3]);
-                  } else {
-                    this.innerHTML = "+" + wp_param[3];
-                  }
-                });
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_as')).addClass('bonus bonusch');
-              } else {
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_as')).each(function() {
-                  if ($(this).hasClass('setbonus')) {
-                    source = this.innerHTML
-                    this.innerHTML = Number(source.slice(1)) + wp_param[3];
-                  } else {
-                    this.innerHTML = wp_param[3];
-                  }
-                });
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_as')).addClass('bonus bonusch');
-              }
-            }
-            if (wp_param[4] == 0) {
-              $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_search')).each(function() {
-                if ($(this).hasClass('setbonus') == false) {
-                  this.innerHTML = "";
-                }
-              });
-            } else {
-              if (Math.sign(wp_param[4]) != -1) {
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_search')).each(function() {
-                  if ($(this).hasClass('setbonus')) {
-                    source = this.innerHTML
-                    this.innerHTML = "+" + (Number(source.slice(1)) + wp_param[4]);
-                  } else {
-                    this.innerHTML = "+" + wp_param[4];
-                  }
-                });
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_search')).addClass('bonus bonusch');
-              } else {
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_search')).each(function() {
-                  if ($(this).hasClass('setbonus')) {
-                    source = this.innerHTML
-                    this.innerHTML = Number(source.slice(1)) + wp_param[4];
-                  } else {
-                    this.innerHTML = wp_param[4];
-                  }
-                });
-                $(document.getElementsByClassName('wp_' + result[3] + '_' + this[0] + '_bonus_search')).addClass('bonus bonusch');
               }
             }
             //改修ボーナスを武器選択リンクへ付与
@@ -1807,20 +1796,20 @@ function friend_status_update(friendid, slotid, wpid, wpimprove) {
   $.get('./data/SETBONUS.csv', function(data) {
     csv = $.csv.toArrays(data);
     $(csv).each(function(index) {
-      if (this[0] + ':' + this[6] != now) {
+      if (this[0] + ':' + this[8] != now) {
         lock = false;
       }
       if (this[0] != "id") {
         //ボーナス対象艦に合致するか検索
         if (set_lookup == false) {
-          set_search = ":" + this[15] + ":";
+          set_search = ":" + this[17] + ":";
           if (set_search.indexOf(":" + base[0] + ":") != -1) {
             set_lookup = true;
           } else {
-            if (this[14].indexOf(base[2]) != -1) {
+            if (this[16].indexOf(base[2]) != -1) {
               set_lookup = true;
             } else {
-              if (this[13].indexOf(base[1]) != -1) {
+              if (this[15].indexOf(base[1]) != -1) {
                 set_lookup = true;
               }
             }
@@ -1839,18 +1828,7 @@ function friend_status_update(friendid, slotid, wpid, wpimprove) {
               }
             }
           }
-          //セットボーナス検索　②ウェポン3
-          if (this[4] != "0") {
-            for (i = 0; i < set_list.length; i++) {
-              set_search = ":" + this[4] + ":";
-              if (set_search.indexOf(":" + set_list[i * 2] + ":") != -1 && Number(set_list[i * 2 + 1]) >= Number(this[5])) {
-                set_list.splice(i * 2, 2);
-                hit_count++;
-                break;
-              }
-            }
-          }
-          //セットボーナス検索　③ウェポン2
+          //セットボーナス検索　④ウェポン2
           if (this[2] != "0") {
             for (i = 0; i < set_list.length; i++) {
               set_search = ":" + this[2] + ":";
@@ -1861,34 +1839,77 @@ function friend_status_update(friendid, slotid, wpid, wpimprove) {
               }
             }
           }
-
-          //ボーナス加算
-          if (this[4] == "0") {
-            if (hit_count == 2) {
-              //2セットボーナス計算
-              setbonus[0] += Number(this[16]);
-              setbonus[1] += Number(this[8]);
-              setbonus[2] += Number(this[9]);
-              setbonus[3] += Number(this[11]);
-              setbonus[4] += Number(this[12]);
-              lock = true;
-              now = this[0] + ':' + this[6];
-            }
-          } else {
-            if (hit_count==3) {
-              //3セットボーナス計算
-              setbonus[0] += Number(this[16]);
-              setbonus[1] += Number(this[8]);
-              setbonus[2] += Number(this[9]);
-              setbonus[3] += Number(this[11]);
-              setbonus[4] += Number(this[12]);
-              lock = true;
-              now = this[0] + ':' + this[6];
+          //セットボーナス検索　③ウェポン3
+          if (this[4] != "0") {
+            for (i = 0; i < set_list.length; i++) {
+              set_search = ":" + this[4] + ":";
+              if (set_search.indexOf(":" + set_list[i * 2] + ":") != -1 && Number(set_list[i * 2 + 1]) >= Number(this[5])) {
+                set_list.splice(i * 2, 2);
+                hit_count++;
+                break;
+              }
             }
           }
-          hit_count = 0;
-          set_lookup = false;
+          //セットボーナス検索　②ウェポン4
+          if (this[6] != "0") {
+            for (i = 0; i < set_list.length; i++) {
+              set_search = ":" + this[6] + ":";
+              if (set_search.indexOf(":" + set_list[i * 2] + ":") != -1 && Number(set_list[i * 2 + 1]) >= Number(this[7])) {
+                set_list.splice(i * 2, 2);
+                hit_count++;
+                break;
+              }
+            }
+          }
+
+          //ボーナス加算
+          if (this[2] == "0" && hit_count == 1) {
+            //2セットボーナス計算
+            setbonus[0] += Number(this[18]);
+            setbonus[1] += Number(this[19]);
+            setbonus[2] += Number(this[20]);
+            setbonus[3] += Number(this[22]);
+            setbonus[4] += Number(this[23]);
+            lock = true;
+            now = this[0] + ':' + this[8];
+          } else {
+            //ボーナス加算
+            if (this[4] == "0" && hit_count == 2) {
+              //2セットボーナス計算
+              setbonus[0] += Number(this[18]);
+              setbonus[1] += Number(this[19]);
+              setbonus[2] += Number(this[20]);
+              setbonus[3] += Number(this[22]);
+              setbonus[4] += Number(this[23]);
+              lock = true;
+              now = this[0] + ':' + this[8];
+            } else {
+              if (this[6] == "0" && hit_count == 3) {
+                //3セットボーナス計算
+                setbonus[0] += Number(this[18]);
+                setbonus[1] += Number(this[19]);
+                setbonus[2] += Number(this[20]);
+                setbonus[3] += Number(this[22]);
+                setbonus[4] += Number(this[23]);
+                lock = true;
+                now = this[0] + ':' + this[8];
+              } else {
+                if (this[6] != "0" && hit_count == 4) {
+                  //3セットボーナス計算
+                  setbonus[0] += Number(this[18]);
+                  setbonus[1] += Number(this[19]);
+                  setbonus[2] += Number(this[20]);
+                  setbonus[3] += Number(this[22]);
+                  setbonus[4] += Number(this[23]);
+                  lock = true;
+                  now = this[0] + ':' + this[8];
+                }
+              }
+            }
+          }
         }
+        hit_count = 0;
+        set_lookup = false;
       }
     });
     if (document.getElementById("friend_" + friendid + "_slot0").value != "") {
@@ -2012,7 +2033,7 @@ function friend_status_update(friendid, slotid, wpid, wpimprove) {
       //射程計算
       param[7] = Math.max(Number(base[15]), Number(slot0[11]), Number(slot1[11]), Number(slot2[11]), Number(slot3[11]), Number(slot4[11]), Number(slot5[11]), Number(slot0[17]), Number(slot1[17]), Number(slot2[17]), Number(slot3[17]), Number(slot4[17]), Number(slot5[17]));
       //砲撃攻撃力計算
-      param[8] = Number(setbonus[0])+Number(base[4]) + Number(slot0[4]) + Number(slot1[4]) + Number(slot2[4]) + Number(slot3[4]) + Number(slot4[4]) + Number(slot5[4]) + Number(slot0[12]) + Number(slot1[12]) + Number(slot2[12]) + Number(slot3[12]) + Number(slot4[12]) + Number(slot5[12]);
+      param[8] = Number(setbonus[0]) + Number(base[4]) + Number(slot0[4]) + Number(slot1[4]) + Number(slot2[4]) + Number(slot3[4]) + Number(slot4[4]) + Number(slot5[4]) + Number(slot0[12]) + Number(slot1[12]) + Number(slot2[12]) + Number(slot3[12]) + Number(slot4[12]) + Number(slot5[12]);
       fp = param[8];
       improve = get_fp_improve(slot0[1], slot0[2], slot0[3]) + get_fp_improve(slot1[1], slot1[2], slot1[3]) + get_fp_improve(slot2[1], slot2[2], slot2[3]) + get_fp_improve(slot3[1], slot3[2], slot3[3]) + get_fp_improve(slot4[1], slot4[2], slot4[3]) + get_fp_improve(slot5[1], slot5[2], slot5[3]);
       param[8] += 5 + improve;
@@ -2025,7 +2046,7 @@ function friend_status_update(friendid, slotid, wpid, wpimprove) {
       });
       param[8] = Math.floor(param[8] * 100) / 100;
       //雷装攻撃力計算
-      param[9] = Number(setbonus[1])+Number(base[5]) + Number(slot0[5]) + Number(slot1[5]) + Number(slot2[5]) + Number(slot3[5]) + Number(slot4[5]) + Number(slot5[5]) + Number(slot0[13]) + Number(slot1[13]) + Number(slot2[13]) + Number(slot3[13]) + Number(slot4[13]) + Number(slot5[13]);
+      param[9] = Number(setbonus[1]) + Number(base[5]) + Number(slot0[5]) + Number(slot1[5]) + Number(slot2[5]) + Number(slot3[5]) + Number(slot4[5]) + Number(slot5[5]) + Number(slot0[13]) + Number(slot1[13]) + Number(slot2[13]) + Number(slot3[13]) + Number(slot4[13]) + Number(slot5[13]);
       th = param[9];
       improve = get_th_improve(slot0[1], slot0[2], slot0[3]) + get_th_improve(slot1[1], slot1[2], slot1[3]) + get_th_improve(slot2[1], slot2[2], slot2[3]) + get_th_improve(slot3[1], slot3[2], slot3[3]) + get_th_improve(slot4[1], slot4[2], slot4[3]) + get_th_improve(slot5[1], slot5[2], slot5[3]);
       param[9] += 5 + improve;
@@ -2094,11 +2115,11 @@ function friend_status_update(friendid, slotid, wpid, wpimprove) {
       document.getElementById("ship_" + friendid + "_basenp").innerHTML = param[11] + '<img src="./img/util/tool.png" style="padding:0 1px 3px 2px;">';
     });
   });
-
 }
 
-
 function get_fp_improve(i, j, k) {
+  //改修ボーナス計算(計算時にのみ使用)
+
   let result = 0;
   if (k != 0) {
     let search = String(i) + ':' + String(j);
@@ -2112,8 +2133,17 @@ function get_fp_improve(i, j, k) {
       case "2:1":
         result = Math.sqrt(Number(k));
         break;
-      case "36:1":
+      case "4:1":
+        result = Number(k) * 2 / 10;
+        break;
+      case "4:2":
         result = Math.sqrt(Number(k));
+        break;
+      case "4:3":
+        result = Math.sqrt(Number(k));
+        break;
+      case "4:4":
+        result = Number(k) * 3 / 10;
         break;
       case "14:1":
         result = Math.sqrt(Number(k)) * 3 / 4;
@@ -2121,13 +2151,16 @@ function get_fp_improve(i, j, k) {
       case "15:1":
         result = Math.sqrt(Number(k)) * 3 / 4;
         break;
-      case "29:1":
-        result = Math.sqrt(Number(k));
-        break;
       case "21:1":
         result = Math.sqrt(Number(k));
         break;
       case "24:1":
+        result = Math.sqrt(Number(k));
+        break;
+      case "29:1":
+        result = Math.sqrt(Number(k));
+        break;
+      case "36:1":
         result = Math.sqrt(Number(k));
         break;
       case "37:1":
@@ -2169,6 +2202,18 @@ function get_hit_improve(i, j, k) {
         result = Math.sqrt(Number(k));
         break;
       case "2:1":
+        result = Math.sqrt(Number(k));
+        break;
+      case "4:1":
+        result = Math.sqrt(Number(k));
+        break;
+      case "4:2":
+        result = Math.sqrt(Number(k));
+        break;
+      case "4:3":
+        result = Math.sqrt(Number(k));
+        break;
+      case "4:4":
         result = Math.sqrt(Number(k));
         break;
       case "36:1":
@@ -2259,7 +2304,6 @@ function get_as_synergy(slot1, slot2, slot3, slot4) {
   return result;
 }
 
-
 function get_np_improve(i, j, k) {
   let result = 0;
   if (k != 0) {
@@ -2273,6 +2317,19 @@ function get_np_improve(i, j, k) {
         break;
       case "2:1":
         result = Math.sqrt(Number(k));
+        break;
+        //夜戦火力補正が 0.2 となるか SQRT となるかは、別途調査が必要
+      case "4:1":
+        result = Number(k) * 2 / 10;
+        break;
+      case "4:2":
+        result = Math.sqrt(Number(k));
+        break;
+      case "4:3":
+        result = Math.sqrt(Number(k));
+        break;
+      case "4:4":
+        result = Number(k) * 3 / 10;
         break;
       case "36:1":
         result = Math.sqrt(Number(k));
@@ -2338,6 +2395,7 @@ function htmlwrite_md_wp_improvebar(friendid) {
   htmlwrite += '<li class="nav-item"><a class="nav-link active" id="wp_' + friendid + '_nav_main" href="#wp_' + friendid + '_content_main" role="tab" data-toggle="tab">主砲</a></li>';
   htmlwrite += '<li class="nav-item"><a class="nav-link" id="wp_' + friendid + '_nav_sec" href="#wp_' + friendid + '_content_sec" role="tab" data-toggle="tab">副砲/機銃</a></li>';
   htmlwrite += '<li class="nav-item"><a class="nav-link" id="wp_' + friendid + '_nav_tor" href="#wp_' + friendid + '_content_tor" role="tab" data-toggle="tab">魚雷</a></li>';
+  htmlwrite += '<li class="nav-item"><a class="nav-link" id="wp_' + friendid + '_nav_sp" href="#wp_' + friendid + '_content_sp" role="tab" data-toggle="tab">水上機</a></li>';
   htmlwrite += '<li class="nav-item"><a class="nav-link" id="wp_' + friendid + '_nav_as" href="#wp_' + friendid + '_content_as" role="tab" data-toggle="tab">対潜</a></li>';
   htmlwrite += '<li class="nav-item"><a class="nav-link" id="wp_' + friendid + '_nav_rd" href="#wp_' + friendid + '_content_rd" role="tab" data-toggle="tab">電探</a></li>';
   htmlwrite += '<li class="nav-item"><a class="nav-link" id="wp_' + friendid + '_nav_ag" href="#wp_' + friendid + '_content_ag" role="tab" data-toggle="tab">対地</a></li>';
@@ -2452,9 +2510,9 @@ function htmlwrite_md_wp_content(friendid) {
   htmlwrite += '<div class="wp_list_label_fooder"></div>';
   htmlwrite += '</div></li>';
   htmlwrite += '<div class="div_srcollbar">';
-  htmlwrite += '<div id="wp_' + friendid + '_32"></div>';
-  htmlwrite += '<div id="wp_' + friendid + '_5"></div>';
-  htmlwrite += '<div id="wp_' + friendid + '_22"></div>';
+  htmlwrite += '<div id="wp_' + friendid + '_10"></div>';
+  htmlwrite += '<div id="wp_' + friendid + '_11"></div>';
+  htmlwrite += '<div id="wp_' + friendid + '_45"></div>';
   htmlwrite += '</div></div></div>';
 
   //対潜
@@ -2658,8 +2716,8 @@ function wp_slot_release(param) {
 //武器モーダルウインドウ上の[閉じる]ボタン選択時に動作
 function md_slot_release(friendid) {
   //friendid値[0]
-  let slotid=document.getElementById("md_" + friendid + "_wp_slotid").value;
-  wp_slot_release(friendid+':'+slotid);
+  let slotid = document.getElementById("md_" + friendid + "_wp_slotid").value;
+  wp_slot_release(friendid + ':' + slotid);
   $('#ｍd_' + friendid + '_wp').modal('hide');
 }
 
