@@ -898,6 +898,9 @@ function md_wp_oepn(friendid, slotid, modal) {
     if ($('#wp_' + friendid + '_nav_tor').hasClass("active")) {
       $('#wp_' + friendid + '_content_tor').addClass("active");
     }
+    if ($('#wp_' + friendid + '_nav_sp').hasClass("active")) {
+      $('#wp_' + friendid + '_content_sp').addClass("active");
+    }
     if ($('#wp_' + friendid + '_nav_as').hasClass("active")) {
       $('#wp_' + friendid + '_content_as').addClass("active");
     }
